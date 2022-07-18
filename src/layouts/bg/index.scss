@@ -1,0 +1,23 @@
+#bg {
+  z-index: -1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: 105vw auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  // filter: blur(3px);
+  transition: filter .3s;
+}
+
+#bgMask {
+  z-index: -999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+}

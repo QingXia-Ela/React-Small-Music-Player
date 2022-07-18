@@ -1,0 +1,13 @@
+.transparent_button {
+  padding: 1em;
+  font-size: 1.8em;
+  font-family: "SourceHanSansCN-Light";
+  color: #c6c9ce;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: color .3s ease;
+
+  &:hover {
+    color: #8f959f;
+  }
+}

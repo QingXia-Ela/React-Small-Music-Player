@@ -1,0 +1,50 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "postinstall": "umi generate tmp",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^6.5.0",
+    "@types/lodash": "^4.14.182",
+    "@types/react": "^18.0.15",
+    "@types/react-addons-css-transition-group": "^15.0.7",
+    "@umijs/plugin-sass": "^1.1.1",
+    "animate.css": "^4.1.1",
+    "lodash": "^4.17.21",
+    "node-sass": "^7.0.1",
+    "react": "17.x",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-dom": "17.x",
+    "react-transition-group": "^4.4.2",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "sass-loader": "^13.0.2",
+    "umi": "^3.5.28"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.5.28",
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.0",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0"
+  }
+}

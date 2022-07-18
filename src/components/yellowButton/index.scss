@@ -1,0 +1,38 @@
+.yellow_button {
+  font-family: SourceHanSans-Light;
+  padding: 1em;
+
+  &>button {
+    align-items: center;
+    background-color: #fdfd1f;
+    border: none;
+    border: 1px solid rgba(0, 0, 0, .5);
+    border-radius: 100vh;
+    box-shadow: 0 0 0 4px #fdfd1f;
+    box-sizing: border-box;
+    color: #4b4b4d;
+    cursor: pointer;
+    display: inline-flex;
+    font-weight: 700;
+    height: 2em;
+    justify-content: center;
+    outline: none;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    transition: color .3s, background-color .3s;
+    white-space: nowrap;
+    z-index: 1;
+
+    &:hover {
+      background-color: rgba(94, 94, 94, .6);
+      color: #fdfd1f;
+    }
+
+    .split_line {
+      margin: 0 1em;
+      opacity: .5;
+      width: 4.5em;
+    }
+  }
+}
