@@ -1,1 +1,18 @@
-.layout {}
+.layout {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 100vh;
+  background-color: transparent;
+
+  .header,
+  .footer {
+    height: 3em;
+  }
+
+  .middle_content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
