@@ -1,11 +1,12 @@
 .transparent_button {
-  font-size: 1.8em;
   font-family: "SourceHanSansCN-Light";
-  color: #c6c9ce;
+  position: relative;
   line-height: 1.2;
+  color: #c6c9ce;
+  font-size: 1.8em;
   text-decoration: none;
   transition: color .3s ease;
-  cursor: default;
+  margin: 0 1em;
 
   &:hover,
   &.disabled {

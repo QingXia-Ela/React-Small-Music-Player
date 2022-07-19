@@ -17,6 +17,10 @@ html {
   background-color: #191919;
 }
 
+body {
+  background-color: transparent !important;
+}
+
 @media only screen and (max-width: 1366px) {
   html {
     font-size: 15px;

@@ -1,0 +1,15 @@
+.right_nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: right;
+  align-items: center;
+  font-family: 'SourceHanSans-Light';
+  font-size: 0.7em;
+  text-shadow: 2px 1px .3em #000;
+  white-space: pre-wrap;
+  font-weight: 700;
+
+  .content {
+    cursor: pointer;
+  }
+}

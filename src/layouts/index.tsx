@@ -1,10 +1,12 @@
-import './index.scss';
 import { IRouteComponentProps } from 'umi';
 import { Provider } from 'react-redux';
 
 import store from '@/redux/index';
 import BG from './bg';
 import Header from './header';
+
+import 'antd/dist/antd.min.css';
+import './index.scss';
 
 export default function Layout({
   children,

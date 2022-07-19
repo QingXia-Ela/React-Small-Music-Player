@@ -18,7 +18,7 @@ class HeaderRouterButtons extends React.Component<
   HeaderRouterButtonsState
 > {
   state = {
-    historyPos: 1,
+    historyPos: history.length,
   };
   render() {
     return (

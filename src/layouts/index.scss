@@ -6,7 +6,10 @@
 
   .header,
   .footer {
-    height: 3em;
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 
   .middle_content {

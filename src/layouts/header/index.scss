@@ -1,8 +1,10 @@
-header {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1.2em;
-  color: #fff;
-  background-color: rgba(0, 0, 0, 0.6);
+.row_header {
+  width: 100%;
+  padding: .4em;
+
+  .ant-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
