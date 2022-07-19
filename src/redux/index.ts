@@ -1,14 +1,16 @@
-import { createStore, applyMiddleware, combineReducers } from "redux"
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 
-import BGPath from './modules/layouts/bg/reducer'
-
+import BG from './modules/layouts/bg/reducer';
 
 const combineReducer = combineReducers({
-  BGPath
-})
+  BG,
+});
 
-import reduxThunk from 'redux-thunk'
+import reduxThunk from 'redux-thunk';
 
-import { composeWithDevTools } from "redux-devtools-extension"
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-export default createStore(combineReducer, composeWithDevTools(applyMiddleware(reduxThunk)))
+export default createStore(
+  combineReducer,
+  composeWithDevTools(applyMiddleware(reduxThunk)),
+);

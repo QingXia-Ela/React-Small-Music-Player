@@ -8,8 +8,11 @@
   background-size: 105vw auto;
   background-position: center;
   background-repeat: no-repeat;
-  // filter: blur(3px);
   transition: filter .3s;
+
+  &.active {
+    filter: blur(3px);
+  }
 }
 
 #bgMask {
@@ -19,5 +22,11 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0);
+  opacity: 0.2;
+  transition: opacity .3s;
+
+  &.active {
+    opacity: 0.6;
+  }
 }

@@ -1,12 +1,30 @@
+const initState = {
+  bgPath: require('@/assets/images/bg/bg.jpg'),
+  filter: false,
+  mask: false,
+  pathChange: true,
+};
 
-const initBG = require('@/assets/images/bg/base_bg.jpg')
+export default function ChangeBG(
+  prevState = initState,
+  action: { [propName: string]: any },
+) {
+  const { type, data } = action;
+  let newState = { ...prevState };
+  newState.pathChange = false;
 
-export default function ChangeBG(path: string = initBG, action: { [propName: string]: any }) {
-  const { type, data } = action
   switch (type) {
     case 'ChangeBackground':
-      return data
+      newState.bgPath = data;
+      newState.pathChange = true;
+      return newState;
+    case 'SwitchFilter':
+      newState.filter = data;
+      return newState;
+    case 'SwitchMask':
+      newState.mask = data;
+      return newState;
     default:
-      return initBG
+      return initState;
   }
 }

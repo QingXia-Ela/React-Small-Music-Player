@@ -1,5 +1,7 @@
-
 /**
- * 背景切换 action
+ * 背景设置
  */
-export const CHANGEBG = 'ChangeBackground'
+
+export const CHANGEBG = 'ChangeBackground';
+export const SWITCHFILTER = 'SwitchFilter';
+export const SWITCHMASK = 'SwitchMask';
