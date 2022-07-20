@@ -14,17 +14,17 @@ let initAudio: songStructure = {
   isLoading: false,
   isPlay: false,
   isMuted: false,
-  volume: 100,
+  volume: 0.5,
   totalTime: 0,
   currentTime: 0,
   currentSong: {
     id: 0,
     isNull: false,
-    isCurrentSong: true,
-    name: 'bluish light',
+    name: 'light',
     img: '',
-    url: 'https://res01.hycdn.cn/62e6457b16747f1428145bdbb43e9fc0/62D7D5AA/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
+    url: 'https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3',
   },
+  currentSongIndex: 0,
   playQueue: [],
   /**
    * 0 持续播放
@@ -41,9 +41,13 @@ import {
   SWITCHPLAYSTATE,
   CHANGEVOLUME,
   SWITCHPLAYMODE,
+  NEXTSONG,
+  PREVSONG,
 } from '@/redux/constant';
 
-export default async function AudioReducer(
+audioObj.addEventListener('ended', (e) => {});
+
+export default function AudioReducer(
   prevState = initAudio,
   action: { [propName: string]: any },
 ) {
@@ -51,19 +55,41 @@ export default async function AudioReducer(
 
   let newState = { ...initAudio };
 
+  const changeSong = (index: number | undefined) => {
+    if (
+      typeof index === 'number' &&
+      index >= 0 &&
+      index <= newState.playQueue.length - 1
+    )
+      newState.currentSongIndex = index;
+    newState.currentSong = newState.playQueue[newState.currentSongIndex];
+    audioObj.src = newState.currentSong.url;
+  };
+
   switch (type) {
     case PLAY:
       newState.isLoading = true;
-      let change = false;
+
+      /**
+       * 如果有传入指定歌曲数据
+       */
       if (data) {
-        change = true;
+        let songIndex = -1;
+        newState.playQueue.forEach((val: singleSongStructure, i: number) => {
+          if (val.id == data.id) songIndex = i;
+        });
+        if (songIndex == -1) newState.playQueue.push({ ...data });
+
         newState.currentSong = { ...data };
-        newState.playQueue.push({ ...data });
+        songIndex != -1
+          ? changeSong(songIndex)
+          : changeSong(newState.playQueue.length - 1);
       }
-      if (change) audioObj.src = newState.currentSong.url;
-      await audioObj.play();
-      newState.isLoading = false;
+
       newState.isPlay = true;
+
+      audioObj.play();
+      newState.isLoading = false;
       break;
 
     case PAUSE:
@@ -92,8 +118,18 @@ export default async function AudioReducer(
     case SWITCHPLAYMODE:
       newState.playMode = data;
 
+    case NEXTSONG:
+      if (newState.currentSongIndex < newState.playQueue.length - 1)
+        changeSong(newState.currentSongIndex + 1);
+      break;
+    case PREVSONG:
+      if (newState.currentSongIndex > 0)
+        changeSong(newState.currentSongIndex - 1);
+      break;
+
     default:
       audioObj.src = newState.currentSong.url;
+      audioObj.volume = newState.volume;
       break;
   }
   initAudio = newState;

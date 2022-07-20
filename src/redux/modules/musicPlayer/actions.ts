@@ -3,7 +3,6 @@ import {
   SWITCHPLAYSTATE,
   PAUSE,
   CHANGEVOLUME,
-  CHANGESONG,
   SWITCHPLAYMODE,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
@@ -39,19 +38,19 @@ export const changeVolume = (data: number) => ({ type: CHANGEVOLUME, data });
  */
 export const changeSong = (
   id: number | null,
-  playImmediately: boolean = false,
+  playImmediately: boolean = true,
 ) => {
   return (dispatch: ThunkActionDispatch<any>) => {
     setTimeout(() => {
-      console.log('async');
+      console.log('async', id);
 
       if (playImmediately) {
         dispatch(
           play({
-            id: 1,
+            id: id ? id : 1,
             isNull: false,
-            name: 'flame',
-            url: 'https://res01.hycdn.cn/d167f1ef4a154ee90b74b67fe01deada/62D7E7D5/siren/audio/20220314/bb3fa6f24efaf63aaad76d0f6bafc0c2.mp3',
+            name: 'light',
+            url: 'https://res01.hycdn.cn/3dd573c01f661760145c9aa8d4915ef9/62D840AD/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
           }),
         );
       }

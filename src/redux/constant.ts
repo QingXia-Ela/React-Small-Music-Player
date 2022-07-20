@@ -16,3 +16,5 @@ export const SWITCHPLAYSTATE = 'SwitchPlayState';
 export const CHANGEVOLUME = 'ChangeVolume';
 export const CHANGESONG = 'ChangeSong';
 export const SWITCHPLAYMODE = 'SwitchPlayMode';
+export const NEXTSONG = 'NextSong';
+export const PREVSONG = 'PrevSong';

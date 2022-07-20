@@ -23,12 +23,16 @@ class BottomMusicState extends React.Component<
   BottomMusicStateState
 > {
   state = {};
+  playId: any = React.createRef();
   render() {
     return (
       <div className="bottom_music_state">
         <button onClick={this.play}>play</button>
-        <button onClick={this.switchPlayState}>Switch</button>
+        <button onClick={this.switchPlayState}>
+          {this.props.isPlay ? 'pause' : 'play'}
+        </button>
         <button onClick={this.changeSong}>change</button>
+        <input ref={this.playId} type="text" placeholder="test" />
       </div>
     );
   }
@@ -42,7 +46,11 @@ class BottomMusicState extends React.Component<
     console.log(this.props.isPlay);
   }
   changeSong = () => {
-    this.props.changeSong();
+    this.props.changeSong(
+      this.playId.current.value.length
+        ? parseInt(this.playId.current.value)
+        : undefined,
+    );
   };
 }
 
