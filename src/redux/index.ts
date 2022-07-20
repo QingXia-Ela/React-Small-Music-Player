@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
 import BG from './modules/layouts/bg/reducer';
+import MusicPlayer from './modules/musicPlayer/reducer';
 
 const combineReducer = combineReducers({
   BG,
+  MusicPlayer,
 });
 
 import reduxThunk from 'redux-thunk';

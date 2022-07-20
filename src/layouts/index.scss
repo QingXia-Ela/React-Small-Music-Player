@@ -10,6 +10,8 @@
     width: 100vw;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
   }
 
   .middle_content {
@@ -18,4 +20,8 @@
     justify-content: center;
     align-items: center;
   }
+}
+
+#mainAudio {
+  display: none;
 }

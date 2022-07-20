@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from '@/redux/index';
 import BG from './bg';
 import Header from './header';
+import BottomMusicState from '@/components/bottomMusicState';
 
 import 'antd/dist/antd.min.css';
 import './index.scss';
@@ -22,7 +23,9 @@ export default function Layout({
           <Header></Header>
         </div>
         <div className="middle_content">{children}</div>
-        <div className="footer">22</div>
+        <div className="footer">
+          <BottomMusicState />
+        </div>
       </div>
       <BG bgLink={require('@/assets/images/bg/base_bg.jpg')}></BG>
     </Provider>
