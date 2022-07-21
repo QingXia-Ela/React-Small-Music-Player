@@ -18,3 +18,5 @@ export const CHANGESONG = 'ChangeSong';
 export const SWITCHPLAYMODE = 'SwitchPlayMode';
 export const NEXTSONG = 'NextSong';
 export const PREVSONG = 'PrevSong';
+export const REMOVEFROMQUEUE = 'RemoveFromQueue';
+export const CLEARQUEUE = 'CleanQueue';

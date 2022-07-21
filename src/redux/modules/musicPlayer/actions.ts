@@ -4,6 +4,10 @@ import {
   PAUSE,
   CHANGEVOLUME,
   SWITCHPLAYMODE,
+  NEXTSONG,
+  PREVSONG,
+  REMOVEFROMQUEUE,
+  CLEARQUEUE,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
@@ -33,7 +37,7 @@ export const switchPlayState = (data: boolean | undefined) => ({
 export const changeVolume = (data: number) => ({ type: CHANGEVOLUME, data });
 /**
  * 改变正在播放的歌曲
- * @param id 歌曲id
+ * @param id 歌曲id，不传默认播放队列最后一首歌
  * @returns
  */
 export const changeSong = (
@@ -42,8 +46,6 @@ export const changeSong = (
 ) => {
   return (dispatch: ThunkActionDispatch<any>) => {
     setTimeout(() => {
-      console.log('async', id);
-
       if (playImmediately) {
         dispatch(
           play({
@@ -63,10 +65,31 @@ export const changeSong = (
  * 1 单曲循环
  * 2 全部循环
  * 3 随机播放
- * @param data 播放模式
+ * @param mode 播放模式
  * @returns
  */
 export const switchPlayMode = (mode: number) => ({
   type: SWITCHPLAYMODE,
   mode,
 });
+
+/**
+ * 下一首
+ */
+export const nextSong = () => ({ type: NEXTSONG });
+
+/**
+ * 上一首
+ */
+export const prevSong = () => ({ type: PREVSONG });
+
+/**
+ * 从队列中移除指定歌曲
+ * @param id 要移除歌曲的 id
+ */
+export const removeFromQueue = (id: number) => ({ type: REMOVEFROMQUEUE, id });
+
+/**
+ * 移除所有歌曲
+ */
+export const clearQueue = () => ({ type: CLEARQUEUE });
