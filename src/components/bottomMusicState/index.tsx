@@ -17,6 +17,7 @@ interface BottomMusicStateProps {
   prevSong: Function;
   audioEle: HTMLAudioElement;
   isPlay: boolean;
+  precent: number;
 }
 
 interface BottomMusicStateState {}
@@ -30,7 +31,7 @@ class BottomMusicState extends React.Component<
   render() {
     return (
       <div className="bottom_music_state">
-        <button onClick={this.play}>play</button>
+        <button onClick={this.ele}>play</button>
         <button onClick={this.switchPlayState}>
           {this.props.isPlay ? 'pause' : 'play'}
         </button>
@@ -38,11 +39,12 @@ class BottomMusicState extends React.Component<
         <input ref={this.playId} type="text" placeholder="test" />
         <button onClick={this.prevSong}>prev</button>
         <button onClick={this.nextSong}>next</button>
+        <div style={{ backgroundColor: 'white' }}>{this.props.precent}</div>
       </div>
     );
   }
-  play = (e: React.MouseEvent) => {
-    this.props.play();
+  ele = (e: React.MouseEvent) => {
+    console.log(this.props.audioEle);
   };
   switchPlayState = () => {
     this.props.switchPlayState();
@@ -52,7 +54,7 @@ class BottomMusicState extends React.Component<
     this.props.changeSong(
       this.playId.current.value.length
         ? parseInt(this.playId.current.value)
-        : undefined,
+        : 0,
     );
   };
   nextSong = () => {
@@ -66,6 +68,8 @@ class BottomMusicState extends React.Component<
 export default connect(
   (state: { [propName: string]: any }) => ({
     isPlay: state.MusicPlayer.isPlay,
+    audioEle: state.MusicPlayer.audioEle,
+    precent: state.MusicPlayer.currentPrecent,
   }),
   { play, switchPlayState, changeSong, prevSong, nextSong },
 )(BottomMusicState);

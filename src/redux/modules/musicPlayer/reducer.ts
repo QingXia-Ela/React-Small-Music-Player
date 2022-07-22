@@ -16,29 +16,10 @@ let initAudio: songStructure = {
   volume: 0.5,
   totalTime: 0,
   currentTime: 0,
+  currentPrecent: 0,
   currentSong: null,
   currentSongIndex: 0,
-  playQueue: [
-    // {
-    //   id: 0,
-    //   isNull: false,
-    //   name: 'flame',
-    //   url: 'https://res01.hycdn.cn/5cc35727539905c68f3ec7b7933e7368/62D9329D/siren/audio/20220314/bb3fa6f24efaf63aaad76d0f6bafc0c2.mp3'
-    // },
-    // {
-    //   id: 1,
-    //   isNull: false,
-    //   name: 'alice',
-    //   img: '',
-    //   url: 'https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3',
-    // },
-    // {
-    //   id: 2,
-    //   isNull: false,
-    //   name: 'light',
-    //   url: 'https://res01.hycdn.cn/fda8440a1d44d0819bd3afc3c48d8133/62D93364/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3'
-    // }
-  ],
+  playQueue: [],
   /**
    * 0 持续播放
    * 1 单曲循环
@@ -46,6 +27,7 @@ let initAudio: songStructure = {
    * 3 随机播放
    */
   playMode: 0,
+  audioEle: audioObj,
 };
 
 import {
@@ -58,30 +40,62 @@ import {
   PREVSONG,
   REMOVEFROMQUEUE,
   CLEARQUEUE,
+  CHANGEALLQUEUE,
+  CHANGECURRENTTIME,
 } from '@/redux/constant';
+
+/**
+ * 额外扩展
+ */
+import additionReducer from './additionReducer';
 
 /**
  * 监听播放结束触发 PlayEnd 事件
  */
 import store from '@/redux/index';
-import { random } from 'lodash';
+import { random, throttle } from 'lodash';
 audioObj.addEventListener('ended', (e) => {
   store.dispatch({ type: 'PlayEnd' });
 });
+// 允许跨域音频
+audioObj.crossOrigin = 'anonymous';
 
+/**
+ * 纯播放器控制模块
+ * @param play 控制是否进行播放
+ * @param url 设置播放器播放源
+ * @param callback 回调函数
+ * @returns
+ */
 const changePlayState = async (
   play: boolean = false,
   url?: string | undefined,
   callback?: Function,
 ) => {
-  if (url) audioObj.src = url;
+  if (url) {
+    audioObj.pause();
+    audioObj.src = url;
+  }
+
   if (play) {
     await audioObj.play();
     callback && callback();
     return;
   } else audioObj.pause();
+
   callback && callback();
 };
+
+// 开启时间轴变化监听
+audioObj.addEventListener(
+  'timeupdate',
+  throttle((e) => {
+    store.dispatch({
+      type: CHANGECURRENTTIME,
+      data: [audioObj.currentTime, audioObj.duration],
+    });
+  }, 1000),
+);
 
 export default function AudioReducer(
   prevState = initAudio,
@@ -113,7 +127,7 @@ export default function AudioReducer(
       if (newState.currentSong === null) {
         if (newState.playQueue.length) {
           newState.currentSong = { ...newState.playQueue[0] };
-        } else break;
+        }
       }
 
       /**
@@ -133,6 +147,7 @@ export default function AudioReducer(
       }
 
       changePlayState(true, newState.currentSong.url);
+      newState.totalTime = audioObj.duration;
       newState.isPlay = true;
       break;
 
@@ -180,7 +195,7 @@ export default function AudioReducer(
      * 播放结束
      */
     case 'PlayEnd':
-      console.log('end');
+      newState.isPlay = false;
       let couldPlay = true;
       switch (newState.playMode) {
         case 0:
@@ -210,7 +225,12 @@ export default function AudioReducer(
       if (data === newState.currentSong.id) {
         if (newState.playQueue.length != 1)
           changeSong(newState.currentSongIndex + 1);
-        else newState.currentSong = null;
+        else {
+          newState.currentSong = null;
+          newState.playQueue = [];
+          changePlayState(false);
+          break;
+        }
       }
       let temp = 0;
       newState.playQueue.forEach((val: singleSongStructure, i: number) => {
@@ -224,7 +244,45 @@ export default function AudioReducer(
       newState.currentSong = null;
       break;
 
+    /**
+     * 更新当前时间轴
+     */
+    case CHANGECURRENTTIME:
+      const [cur, total] = data;
+      newState.currentTime = cur;
+      newState.totalTime = total;
+      newState.currentPrecent = (cur / total).toFixed(2);
+      break;
+
+    /**
+     * 替换整个播放列表
+     */
+    case CHANGEALLQUEUE:
+      if (!data || data.length == 0) {
+        newState.playQueue = [];
+        newState.currentSong = null;
+        changePlayState(false);
+        break;
+      }
+      newState.playQueue = [...data];
+      newState.currentSong = { ...newState.playQueue[0] };
+      changePlayState(true, newState.currentSong.url);
+      break;
+
     default:
+      let trigger = false;
+      /**
+       * 额外添加事件
+       */
+      for (const i in additionReducer) {
+        if (type == i) {
+          trigger = true;
+          additionReducer[i](newState, changeSong, changePlayState);
+        }
+      }
+      if (trigger) break;
+
+      // 初始化
       audioObj.volume = newState.volume;
       break;
   }

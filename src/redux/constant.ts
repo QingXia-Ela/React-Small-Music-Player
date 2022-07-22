@@ -20,3 +20,5 @@ export const NEXTSONG = 'NextSong';
 export const PREVSONG = 'PrevSong';
 export const REMOVEFROMQUEUE = 'RemoveFromQueue';
 export const CLEARQUEUE = 'CleanQueue';
+export const CHANGEALLQUEUE = 'ChangeAllQueue';
+export const CHANGECURRENTTIME = 'ChangeCurrentTime';

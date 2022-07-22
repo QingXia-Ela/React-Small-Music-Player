@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "build": "umi build",
+    "build": "set NODE_ENV=build&&umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
@@ -26,7 +26,9 @@
     "@types/react-addons-css-transition-group": "^15.0.7",
     "@umijs/plugin-sass": "^1.1.1",
     "animate.css": "^4.1.1",
+    "axios": "^0.27.2",
     "lodash": "^4.17.21",
+    "mockjs": "^1.1.0",
     "node-sass": "^7.0.1",
     "react": "17.x",
     "react-addons-css-transition-group": "^15.6.2",

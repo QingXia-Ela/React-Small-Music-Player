@@ -18,7 +18,7 @@ $ yarn start
 
 背景图片变化
 
-音乐播放器方法：
+redux 音乐播放器方法：
 
 - `play` :  开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲并将其插入到播放队列尾部
 
@@ -30,3 +30,7 @@ $ yarn start
 - `nextSong` : 下一首
 - `prevSong` : 上一首
 - `removeFromQueue` : 删除队列中的某一首歌
+
+插入播放列表使用：`changeSong` 操作
+
+播放暂停使用：`switchPlayState` 操作

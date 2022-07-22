@@ -8,11 +8,14 @@ import {
   PREVSONG,
   REMOVEFROMQUEUE,
   CLEARQUEUE,
+  CHANGEALLQUEUE,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
+import { getSongByID } from '@/api/music';
+
 /**
- * 开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲
+ * 开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲，不请求服务器
  * @param data
  */
 export const play = (data: undefined | { [propName: string]: any }) => ({
@@ -37,26 +40,18 @@ export const switchPlayState = (data: boolean | undefined) => ({
 export const changeVolume = (data: number) => ({ type: CHANGEVOLUME, data });
 /**
  * 改变正在播放的歌曲
- * @param id 歌曲id，不传默认播放队列最后一首歌
+ * @param id 歌曲id，先向服务器发请求，成功后调用 Play action
  * @returns
  */
-export const changeSong = (
-  id: number | null,
-  playImmediately: boolean = true,
-) => {
+export const changeSong = (id: number | null) => {
   return (dispatch: ThunkActionDispatch<any>) => {
-    setTimeout(() => {
-      if (playImmediately) {
-        dispatch(
-          play({
-            id: id ? id : 1,
-            isNull: false,
-            name: 'light',
-            url: 'https://res01.hycdn.cn/3dd573c01f661760145c9aa8d4915ef9/62D840AD/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
-          }),
-        );
-      }
-    }, 1000);
+    if (typeof id === 'number') {
+      getSongByID(id).then((res) => {
+        if (res && 1) {
+          dispatch(play(res));
+        }
+      });
+    }
   };
 };
 
@@ -93,3 +88,13 @@ export const removeFromQueue = (id: number) => ({ type: REMOVEFROMQUEUE, id });
  * 移除所有歌曲
  */
 export const clearQueue = () => ({ type: CLEARQUEUE });
+
+/**
+ * 替换播放列表
+ * @param data 新的播放列表，传入空数组为清空播放列表，替换后从第一首歌开始播放
+ * @returns
+ */
+export const changeAllQueue = (data: object[]) => ({
+  type: CHANGEALLQUEUE,
+  data,
+});
