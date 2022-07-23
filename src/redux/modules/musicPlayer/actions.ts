@@ -9,6 +9,7 @@ import {
   REMOVEFROMQUEUE,
   CLEARQUEUE,
   CHANGEALLQUEUE,
+  SETCURRENTTIME,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
@@ -80,9 +81,12 @@ export const prevSong = () => ({ type: PREVSONG });
 
 /**
  * 从队列中移除指定歌曲
- * @param id 要移除歌曲的 id
+ * @param data 要移除歌曲的 id
  */
-export const removeFromQueue = (id: number) => ({ type: REMOVEFROMQUEUE, id });
+export const removeFromQueue = (data: number) => ({
+  type: REMOVEFROMQUEUE,
+  data,
+});
 
 /**
  * 移除所有歌曲
@@ -96,5 +100,12 @@ export const clearQueue = () => ({ type: CLEARQUEUE });
  */
 export const changeAllQueue = (data: object[]) => ({
   type: CHANGEALLQUEUE,
+  data,
+});
+/**
+ * 设置播放位置
+ */
+export const setCurrentTime = (data: number) => ({
+  type: SETCURRENTTIME,
   data,
 });

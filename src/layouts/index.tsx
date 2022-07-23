@@ -27,7 +27,7 @@ export default function Layout({
           <BottomMusicState />
         </div>
       </div>
-      <BG bgLink={require('@/assets/images/bg/base_bg.jpg')}></BG>
+      <BG></BG>
     </Provider>
   );
 }

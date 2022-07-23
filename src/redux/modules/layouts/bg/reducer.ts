@@ -25,6 +25,6 @@ export default function ChangeBG(
       newState.mask = data;
       return newState;
     default:
-      return initState;
+      return prevState;
   }
 }

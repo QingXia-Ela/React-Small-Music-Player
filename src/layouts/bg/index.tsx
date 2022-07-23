@@ -30,7 +30,6 @@ class BG extends React.Component<BGProps> {
       <Fragment>
         <div id="bgMask" className={this.props.mask ? 'active' : ''}></div>
         <div
-          key={+new Date()}
           id="bg"
           ref={this.bgRef}
           className={`animate__animated ${

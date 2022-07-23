@@ -8,12 +8,17 @@
   background-size: 105vw auto;
   background-position: center;
   background-repeat: no-repeat;
-  transition: filter .3s;
+  transition: filter .8s;
+
+  &.animate__animated {
+    animation-duration: 2s !important;
+  }
 
   &.active {
     filter: blur(3px);
   }
 }
+
 
 #bgMask {
   z-index: -999;
@@ -24,7 +29,7 @@
   height: 100vh;
   background-color: rgba(0, 0, 0);
   opacity: 0.2;
-  transition: opacity .3s;
+  transition: opacity .8s;
 
   &.active {
     opacity: 0.6;

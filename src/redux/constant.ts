@@ -9,7 +9,6 @@ export const SWITCHMASK = 'SwitchMask';
 /**
  * 音乐播放器操作方法
  */
-
 export const PLAY = 'Play';
 export const PAUSE = 'Pause';
 export const SWITCHPLAYSTATE = 'SwitchPlayState';
@@ -22,3 +21,6 @@ export const REMOVEFROMQUEUE = 'RemoveFromQueue';
 export const CLEARQUEUE = 'CleanQueue';
 export const CHANGEALLQUEUE = 'ChangeAllQueue';
 export const CHANGECURRENTTIME = 'ChangeCurrentTime';
+export const SETCURRENTTIME = 'SetCurrentTime';
+export const SUCCESSTOLOADSONG = 'SuccessToLoadSong';
+export const FAILTOLOADSONG = 'FailToLoadSong';
