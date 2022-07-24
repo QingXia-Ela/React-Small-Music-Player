@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from '@/redux/index';
 import BG from './bg';
 import Header from './header';
-import BottomMusicState from '@/components/bottomMusicState';
+import BottomMusicState from '@/layouts/bottomMusicState';
 
 import 'antd/dist/antd.min.css';
 import './index.scss';

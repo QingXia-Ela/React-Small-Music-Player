@@ -1,24 +1,29 @@
-#bg {
+.bg_container {
   z-index: -1000;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-size: 105vw auto;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: filter .8s;
 
   &.animate__animated {
     animation-duration: 2s !important;
   }
 
-  &.active {
-    filter: blur(3px);
+  #bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: 105vw auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: filter .8s;
+
+    &.active {
+      filter: blur(3px);
+    }
   }
 }
-
 
 #bgMask {
   z-index: -999;

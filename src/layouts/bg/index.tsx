@@ -30,28 +30,33 @@ class BG extends React.Component<BGProps> {
       <Fragment>
         <div id="bgMask" className={this.props.mask ? 'active' : ''}></div>
         <div
-          id="bg"
-          ref={this.bgRef}
-          className={`animate__animated ${
+          className={`bg_container animate__animated ${
             this.props.pathChange ? 'animate__fadeIn' : ''
-          } ${this.props.filter ? 'active' : ''}`}
-          style={{
-            backgroundImage: `url(${
-              this.props.path
-                ? this.props.path
-                : require('@/assets/images/bg/base_bg.jpg')
-            })`,
-          }}
-        ></div>
+          }`}
+        >
+          <div
+            id="bg"
+            ref={this.bgRef}
+            className={`${this.props.filter ? 'active' : ''}`}
+            style={{
+              backgroundImage: `url(${
+                this.props.path
+                  ? this.props.path
+                  : require('@/assets/images/bg/base_bg.jpg')
+              })`,
+            }}
+          ></div>
+        </div>
       </Fragment>
     );
   }
 
   listenMove = throttle((e: any) => {
+    const ele = this.bgRef.current;
     const x = parseFloat((e.clientX / window.innerWidth).toFixed(2)) * 20 + 40;
     const y = parseFloat((e.clientY / window.innerHeight).toFixed(2)) * 6 + 47;
-    document.getElementById('bg')!.style.backgroundPosition = `${x}% ${y}%`;
-  }, 10);
+    ele.style.backgroundPosition = `${x}% ${y}%`;
+  }, 15);
 }
 
 /**
