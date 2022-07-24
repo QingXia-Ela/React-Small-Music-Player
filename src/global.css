@@ -15,10 +15,12 @@
 
 html {
   background-color: #191919;
+  overflow: hidden;
 }
 
 body {
   background-color: transparent !important;
+  font-size: inherit !important;
 }
 
 @media only screen and (max-width: 1366px) {

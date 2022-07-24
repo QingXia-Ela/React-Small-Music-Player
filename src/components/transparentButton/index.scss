@@ -8,12 +8,14 @@
   transition: color .3s ease;
   margin: 0 1em;
 
-  &:hover,
-  &.disabled {
-    color: #8f959f;
+  &:hover {
+    color: #ffffff;
+    cursor: pointer;
   }
 
-  &.disabled .anticon {
+
+  &.disabled {
+    color: rgb(95, 88, 88);
     cursor: default !important;
   }
 }

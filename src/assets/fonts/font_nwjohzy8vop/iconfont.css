@@ -1,0 +1,101 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1658656020247') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-24gl-home:before {
+  content: "\e832";
+}
+
+.icon-24gl-minus:before {
+  content: "\e88f";
+}
+
+.icon-24gl-plus:before {
+  content: "\e890";
+}
+
+.icon-24gl-warningCircle:before {
+  content: "\e97e";
+}
+
+.icon-24gl-floppyDisk:before {
+  content: "\e9ba";
+}
+
+.icon-24gl-volumeMiddle:before {
+  content: "\ea0d";
+}
+
+.icon-24gl-next:before {
+  content: "\ea6b";
+}
+
+.icon-24gl-pause:before {
+  content: "\ea6d";
+}
+
+.icon-24gl-play:before {
+  content: "\ea6e";
+}
+
+.icon-24gl-playlist2:before {
+  content: "\ea6f";
+}
+
+.icon-24gl-previous:before {
+  content: "\ea73";
+}
+
+.icon-24gl-shuffle:before {
+  content: "\ea75";
+}
+
+.icon-24gl-repeat2:before {
+  content: "\ea76";
+}
+
+.icon-24gl-repeatOnce2:before {
+  content: "\ea77";
+}
+
+.icon-24gl-rename:before {
+  content: "\eb09";
+}
+
+.icon-24gl-trash2:before {
+  content: "\eb45";
+}
+
+.icon-24gl-arrowDown:before {
+  content: "\eb69";
+}
+
+.icon-24gl-arrowLeft:before {
+  content: "\eb6a";
+}
+
+.icon-24gl-arrowLeft2:before {
+  content: "\eb6b";
+}
+
+.icon-24gl-arrowRight:before {
+  content: "\eb6c";
+}
+
+.icon-24gl-arrowUp:before {
+  content: "\eb6d";
+}
+
+.icon-24gl-arrowRight2:before {
+  content: "\eb6e";
+}
+

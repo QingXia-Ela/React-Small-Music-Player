@@ -1,6 +1,6 @@
 const initState = {
   bgPath: require('@/assets/images/bg/bg.jpg'),
-  filter: false,
+  filter: true,
   mask: false,
   pathChange: true,
 };

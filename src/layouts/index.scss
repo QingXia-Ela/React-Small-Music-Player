@@ -1,4 +1,6 @@
 .layout {
+  z-index: 1;
+  position: relative;
   display: flex;
   flex-flow: column nowrap;
   height: 100vh;
@@ -6,6 +8,8 @@
 
   .header,
   .footer {
+    z-index: 1000;
+    position: relative;
     display: flex;
     width: 100vw;
     justify-content: center;

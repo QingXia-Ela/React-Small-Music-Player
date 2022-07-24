@@ -1,0 +1,20 @@
+  @import url(~@/assets/fonts/font_nwjohzy8vop/iconfont.css);
+
+  .music_controler {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .2em 3em;
+    color: #fff;
+
+    .transparent_button {
+      margin: 0;
+    }
+
+    .iconfont {
+      font-size: 1em;
+      font-weight: 700;
+    }
+  }

@@ -8,6 +8,7 @@ import BottomMusicState from '@/layouts/bottomMusicState';
 
 import 'antd/dist/antd.min.css';
 import './index.scss';
+import RightMusicState from './rightMusicState';
 
 export default function Layout({
   children,
@@ -26,6 +27,7 @@ export default function Layout({
         <div className="footer">
           <BottomMusicState />
         </div>
+        <RightMusicState></RightMusicState>
       </div>
       <BG></BG>
     </Provider>

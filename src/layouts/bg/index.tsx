@@ -11,7 +11,6 @@ import {
 import { connect } from 'react-redux';
 
 interface BGProps {
-  bgLink: string;
   changeBG: Function;
   switchMask: Function;
   switchFilter: Function;
@@ -55,7 +54,7 @@ class BG extends React.Component<BGProps> {
     const ele = this.bgRef.current;
     const x = parseFloat((e.clientX / window.innerWidth).toFixed(2)) * 20 + 40;
     const y = parseFloat((e.clientY / window.innerHeight).toFixed(2)) * 6 + 47;
-    ele.style.backgroundPosition = `${x}% ${y}%`;
+    if (ele) ele.style.backgroundPosition = `${x}% ${y}%`;
   }, 15);
 }
 
