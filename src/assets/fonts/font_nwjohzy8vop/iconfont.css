@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1658656020247') format('truetype');
+  src: url('iconfont.ttf?t=1658758515009') format('truetype');
 }
 
 .iconfont {
@@ -31,8 +31,12 @@
   content: "\e9ba";
 }
 
-.icon-24gl-volumeMiddle:before {
+.icon-24gl-volumeZero:before {
   content: "\ea0d";
+}
+
+.icon-24gl-volumeMiddle:before {
+  content: "\ea0e";
 }
 
 .icon-24gl-next:before {

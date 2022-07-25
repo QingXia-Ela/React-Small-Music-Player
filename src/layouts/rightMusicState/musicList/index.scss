@@ -1,0 +1,27 @@
+.right_music_list_lyric {
+  position: relative;
+
+  &.show_lyric {
+    .right_play_list {
+      filter: blur(5px);
+      opacity: 0.6;
+    }
+  }
+
+  // 歌词动画
+  .right_music_lyric_transition-exit-done {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .right_music_lyric_transition-exit-active {
+    visibility: visible;
+    opacity: 0;
+  }
+
+  .right_music_lyric_transition-enter-active,
+  .right_music_lyric_transition-enter-done {
+    visibility: visible;
+    opacity: 1;
+  }
+}

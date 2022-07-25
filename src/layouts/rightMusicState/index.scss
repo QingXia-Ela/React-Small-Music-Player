@@ -43,16 +43,24 @@
     }
 
     .music_state,
-    .music_list {
+    .right_music_list_lyric {
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-around;
       align-items: center;
       width: 100%;
+      color: #fff;
     }
 
-    .music_list {
+    .right_music_list_lyric {
       height: 60%;
     }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .right_music_state {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }

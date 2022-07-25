@@ -41,11 +41,18 @@
       "unicode_decimal": 59834
     },
     {
+      "icon_id": "7592566",
+      "name": "24gl-volumeZero",
+      "font_class": "24gl-volumeZero",
+      "unicode": "ea0d",
+      "unicode_decimal": 59917
+    },
+    {
       "icon_id": "7592568",
       "name": "24gl-volumeMiddle",
       "font_class": "24gl-volumeMiddle",
-      "unicode": "ea0d",
-      "unicode_decimal": 59917
+      "unicode": "ea0e",
+      "unicode_decimal": 59918
     },
     {
       "icon_id": "7594038",

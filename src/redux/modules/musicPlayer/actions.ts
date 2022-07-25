@@ -10,6 +10,8 @@ import {
   CLEARQUEUE,
   CHANGEALLQUEUE,
   SETCURRENTTIME,
+  SHOWLYRICS,
+  MUTEPLAYER,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
@@ -109,3 +111,13 @@ export const setCurrentTime = (data: number) => ({
   type: SETCURRENTTIME,
   data,
 });
+
+/**
+ * 展示歌词
+ */
+export const showLyrics = (data: boolean) => ({ type: SHOWLYRICS, data });
+
+/**
+ * 直接静音
+ */
+export const mutePlayer = (data: boolean) => ({ type: MUTEPLAYER, data });

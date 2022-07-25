@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "set MOCK_URL=http://localhost:8088&&umi dev",
     "build": "set NODE_ENV=build&&umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -24,6 +24,7 @@
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.15",
     "@types/react-addons-css-transition-group": "^15.0.7",
+    "@types/react-transition-group": "^4.4.5",
     "@umijs/plugin-sass": "^1.1.1",
     "animate.css": "^4.1.1",
     "axios": "^0.27.2",
@@ -32,6 +33,7 @@
     "node-sass": "^7.0.1",
     "react": "17.x",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "17.x",
     "react-transition-group": "^4.4.2",
     "redux-devtools-extension": "^2.13.9",

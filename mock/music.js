@@ -7,24 +7,24 @@ const dataList = [
   {
     id: 0,
     isNull: false,
-    name: 'flame',
+    name: 'STARSET - Infected',
     img: `https://zhiccc.net/images/parallax.png`,
-    url: 'https://res01.hycdn.cn/c85f5ac3f560dabae92802ad82cef409/62DE3585/siren/audio/20220314/bb3fa6f24efaf63aaad76d0f6bafc0c2.mp3',
+    url: process.env.MOCK_URL + '/public/infected.mp3',
   },
   {
     id: 1,
     isNull: false,
-    name: 'alice',
+    name: '【Animenz】怪物 - 动物狂想曲 第二季 钢琴改编',
     img: `https://www.ussjackdaw.com/usr/uploads/2020/05/856658260.png`,
-    url: 'https://bjetxgzv.cdn.bspapp.com/VKCEYUGU-hello-uniapp/2cc220e0-c27a-11ea-9dfb-6da8e309e0d8.mp3',
+    url: process.env.MOCK_URL + '/public/monster.mp3',
   },
   {
     id: 2,
     isNull: false,
-    name: 'light',
-    author: 'chen xue ran',
+    name: 'STARSET - Unbecoming',
+    author: 'XueRan Chen',
     img: `http://baiyun.work/img/background.jpg`,
-    url: 'https://res01.hycdn.cn/12666f98f5989256837b248f940ca7c1/62DE7D4C/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
+    url: process.env.MOCK_URL + '/public/unbecoming.mp3',
   },
 ];
 

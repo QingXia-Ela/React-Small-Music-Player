@@ -17,7 +17,7 @@ let initAudio: songStructure = {
   isPlay: false,
   isMuted: false,
   isLoading: false,
-  volume: 0.5,
+  volume: 0.3,
   totalTime: 0,
   currentTime: 0,
   currentPrecent: 0,
@@ -33,6 +33,7 @@ let initAudio: songStructure = {
   playMode: 0,
   audioEle: audioObj,
   canPlay: false,
+  showLyrics: false,
 };
 
 import {
@@ -51,6 +52,8 @@ import {
   CHANGEBG,
   SUCCESSTOLOADSONG,
   FAILTOLOADSONG,
+  SHOWLYRICS,
+  MUTEPLAYER,
 } from '@/redux/constant';
 
 /**
@@ -415,6 +418,17 @@ export default function AudioReducer(
       newState.currentSong = { ...newState.playQueue[0] };
       changePlayState(true, newState.currentSong);
       newState.isPlay = true;
+      break;
+    case SHOWLYRICS:
+      typeof data != 'undefined'
+        ? (newState.showLyrics = data)
+        : (newState.showLyrics = !newState.showLyrics);
+      break;
+    case MUTEPLAYER:
+      typeof data != 'undefined'
+        ? (newState.isMuted = data)
+        : (newState.isMuted = !newState.isMuted);
+      audioObj.muted = newState.isMuted;
       break;
 
     default:

@@ -8,15 +8,21 @@ import {
   prevSong,
   nextSong,
   changeVolume,
+  showLyrics,
+  mutePlayer,
 } from '@/redux/modules/musicPlayer/actions';
 import { connect } from 'react-redux';
 
 interface MusicControlerProps {
   name: string;
   isPlay: boolean;
+  lyricsState: boolean;
+  isMuted: boolean;
+  showLyrics: Function;
   prevSong: Function;
   nextSong: Function;
   switchPlayState: Function;
+  mutePlayer: Function;
 }
 
 interface MusicControlerState {}
@@ -41,10 +47,19 @@ class MusicControler extends React.Component<
               onMouseLeave={() => this.switchVolumeSlider(false)}
             >
               <RightMusicVolumeControler />
-              <i
-                className="iconfont icon-24gl-volumeMiddle"
-                onMouseEnter={() => this.switchVolumeSlider(true)}
-              ></i>
+              <div onMouseEnter={() => this.switchVolumeSlider(true)}>
+                {this.props.isMuted ? (
+                  <i
+                    className="iconfont icon-24gl-volumeZero"
+                    onClick={() => this.props.mutePlayer()}
+                  ></i>
+                ) : (
+                  <i
+                    className="iconfont icon-24gl-volumeMiddle"
+                    onClick={() => this.props.mutePlayer()}
+                  ></i>
+                )}
+              </div>
             </div>
           </TransparentButton>
           <TransparentButton>
@@ -68,7 +83,14 @@ class MusicControler extends React.Component<
               onClick={() => this.props.nextSong()}
             ></i>
           </TransparentButton>
-          <TransparentButton>词</TransparentButton>
+          <TransparentButton>
+            <div
+              className="iconfont"
+              onClick={() => this.props.showLyrics(!this.props.lyricsState)}
+            >
+              词
+            </div>
+          </TransparentButton>
         </div>
       </Fragment>
     );
@@ -86,11 +108,15 @@ export default connect(
   (state: { [propName: string]: any }) => ({
     isPlay: state.MusicPlayer.isPlay,
     name: state.MusicPlayer.currentSong?.name,
+    lyricsState: state.MusicPlayer.showLyrics,
+    isMuted: state.MusicPlayer.isMuted,
   }),
   {
     switchPlayState,
     prevSong,
     nextSong,
     changeVolume,
+    showLyrics,
+    mutePlayer,
   },
 )(MusicControler);

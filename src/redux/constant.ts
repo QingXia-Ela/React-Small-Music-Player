@@ -24,3 +24,5 @@ export const CHANGECURRENTTIME = 'ChangeCurrentTime';
 export const SETCURRENTTIME = 'SetCurrentTime';
 export const SUCCESSTOLOADSONG = 'SuccessToLoadSong';
 export const FAILTOLOADSONG = 'FailToLoadSong';
+export const SHOWLYRICS = 'ShowLyrics';
+export const MUTEPLAYER = 'MutePlayer';

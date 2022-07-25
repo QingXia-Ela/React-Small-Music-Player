@@ -1,7 +1,7 @@
   @import url(~@/assets/fonts/font_nwjohzy8vop/iconfont.css);
 
   .song_name {
-    font-family: 'SourceHanSans-Light';
+    font-family: 'Microsoft Yahei';
     margin-top: .5em;
     margin-bottom: 0;
     color: #fff;
@@ -24,16 +24,21 @@
     }
 
     .iconfont {
+      position: relative;
+      left: 0.06em;
       font-size: 1em;
-      font-weight: 700;
+      // font-weight: 700;
     }
 
     .right_music_volume_container {
       display: flex;
       flex-flow: column nowrap;
       justify-content: center;
-      align-items: end;
+      align-items: center;
       height: 5em;
+      padding: .08em;
+      border-radius: 5px;
+      transition: background-color .5s;
 
       .iconfont {
         cursor: pointer;
@@ -49,9 +54,13 @@
         }
       }
 
-      &.active .right_music_volume_controler {
-        pointer-events: inherit;
-        opacity: 1;
+      &.active {
+        background-color: #000;
+
+        .right_music_volume_controler {
+          pointer-events: inherit;
+          opacity: 1;
+        }
       }
     }
   }

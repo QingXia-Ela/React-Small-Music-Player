@@ -1,0 +1,9 @@
+.right_music_lyric {
+  visibility: hidden;
+  z-index: 200;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .6s;
+}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './index.scss';
-import MusicList from './musicList';
 import MusicState from './musicState';
+import MusicList from './musicList';
 
 class RightMusicState extends React.Component {
   state = {};
