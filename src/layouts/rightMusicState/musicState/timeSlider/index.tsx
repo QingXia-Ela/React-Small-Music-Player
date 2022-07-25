@@ -23,7 +23,9 @@ class TimeSlider extends React.Component<TimeSliderProps> {
       <div className="time_slider">
         <span className="time_text">
           {this.currentTimeDisplay()} /{' '}
-          {this.props.totalTime ? this.formatTime(this.props.totalTime) : '--'}
+          {this.props.totalTime
+            ? this.formatTime(this.props.totalTime)
+            : '--:--'}
         </span>
         <WhiteSlider
           tipFormatter={null}
@@ -58,7 +60,7 @@ class TimeSlider extends React.Component<TimeSliderProps> {
     if (this.changingTime) return this.formatTime(this.state.tempTimeMark);
     return this.props.currentTime
       ? this.formatTime(this.props.currentTime)
-      : '--';
+      : '--:--';
   };
 
   componentDidMount() {

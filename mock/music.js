@@ -24,7 +24,7 @@ const dataList = [
     name: 'light',
     author: 'chen xue ran',
     img: `http://baiyun.work/img/background.jpg`,
-    url: 'https://res01.hycdn.cn/89233ecbae9be8838ecf4b6ed2f9458f/62DE356A/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
+    url: 'https://res01.hycdn.cn/12666f98f5989256837b248f940ca7c1/62DE7D4C/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
   },
 ];
 

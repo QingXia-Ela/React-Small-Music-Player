@@ -8,7 +8,7 @@
   transition: color .3s ease;
   margin: 0 1em;
 
-  &:hover {
+  &:hover.hover_pointer {
     color: #ffffff;
     cursor: pointer;
   }

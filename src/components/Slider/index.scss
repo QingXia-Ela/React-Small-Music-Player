@@ -1,5 +1,8 @@
 // 二次封装样式
 .white_slider {
+  width: 100%;
+  height: 100%;
+
   .ant-slider-rail {
     height: 6px;
     border-radius: 0;
@@ -28,6 +31,21 @@
 
     .ant-slider-track {
       background-color: #eee;
+    }
+  }
+
+  // 垂直
+  .ant-slider-vertical {
+    .ant-slider-rail {
+      width: 6px;
+      height: 100%;
+    }
+
+    .ant-slider-handle {
+      top: unset;
+      right: 3px;
+      width: 6px;
+      height: 10px;
     }
   }
 }

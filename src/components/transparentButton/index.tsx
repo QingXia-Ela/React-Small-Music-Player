@@ -5,7 +5,11 @@ import './index.scss';
  */
 function TransparentButton(props: { [propName: string]: any }) {
   return (
-    <div className={`transparent_button ${props.disabled ? 'disabled' : ''}`}>
+    <div
+      className={`transparent_button ${props.disabled ? 'disabled' : ''} ${
+        props.closeHoverPointer ? '' : 'hover_pointer'
+      }`}
+    >
       {props.children}
     </div>
   );

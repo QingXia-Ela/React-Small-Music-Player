@@ -10,6 +10,8 @@ interface WhiteSliderProps {
   onChange?: Function;
   onAfterChange?: Function;
   mount?: Function;
+  vertical?: boolean;
+  step?: number;
 }
 
 interface WhiteSliderState {
@@ -29,8 +31,10 @@ class WhiteSlider extends React.Component<WhiteSliderProps, WhiteSliderState> {
           min={this.props.min}
           max={this.props.max}
           value={this.state.timeMark}
+          vertical={this.props.vertical}
           onChange={this.onChange}
           onAfterChange={this.onAfterChange}
+          step={this.props.step}
         ></Slider>
       </div>
     );
