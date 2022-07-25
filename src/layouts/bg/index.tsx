@@ -17,7 +17,7 @@ interface BGProps {
   path: string;
   mask: boolean;
   filter: boolean;
-  pathChange: boolean;
+  pathChangeId: number;
 }
 
 class BG extends React.Component<BGProps> {
@@ -29,9 +29,8 @@ class BG extends React.Component<BGProps> {
       <Fragment>
         <div id="bgMask" className={this.props.mask ? 'active' : ''}></div>
         <div
-          className={`bg_container animate__animated ${
-            this.props.pathChange ? 'animate__fadeIn' : ''
-          }`}
+          key={this.props.pathChangeId}
+          className={`bg_container animate__animated animate__fadeIn`}
         >
           <div
             id="bg"
@@ -67,7 +66,7 @@ class BG extends React.Component<BGProps> {
 export default connect(
   (state: any) => ({
     path: state.BG.bgPath,
-    pathChange: state.BG.pathChange,
+    pathChangeId: state.BG.pathChangeId,
     mask: state.BG.mask,
     filter: state.BG.filter,
   }),

@@ -1,8 +1,8 @@
 const initState = {
   bgPath: require('@/assets/images/bg/bg.jpg'),
-  filter: true,
+  filter: false,
   mask: false,
-  pathChange: true,
+  pathChangeId: 0,
 };
 
 export default function ChangeBG(
@@ -11,12 +11,13 @@ export default function ChangeBG(
 ) {
   const { type, data } = action;
   let newState = { ...prevState };
-  newState.pathChange = false;
 
   switch (type) {
     case 'ChangeBackground':
-      newState.bgPath = data;
-      newState.pathChange = true;
+      if (prevState.bgPath != data) {
+        newState.bgPath = data;
+        newState.pathChangeId = +new Date();
+      }
       return newState;
     case 'SwitchFilter':
       newState.filter = data;

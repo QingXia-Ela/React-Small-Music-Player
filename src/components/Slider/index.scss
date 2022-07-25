@@ -1,0 +1,33 @@
+// 二次封装样式
+.white_slider {
+  .ant-slider-rail {
+    height: 6px;
+    border-radius: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .ant-slider-track {
+    height: 6px;
+    border-radius: 0;
+    background-color: #ddd;
+  }
+
+  .ant-slider-handle {
+    height: 8px;
+    border: 0;
+    border-radius: 0;
+    top: 8px;
+    box-shadow: 0 0 5px 1px #fff;
+    border-radius: 1px;
+  }
+
+  &:hover {
+    .ant-slider-rail {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ant-slider-track {
+      background-color: #eee;
+    }
+  }
+}

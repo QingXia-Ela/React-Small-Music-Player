@@ -69,8 +69,8 @@ audioObj.addEventListener('ended', (e) => {
       if (initAudio.currentSongIndex < initAudio.playQueue.length - 1)
         store.dispatch({ type: NEXTSONG });
       else {
-        initAudio.currentSongIndex = -1;
-        initAudio.currentSong = null;
+        // initAudio.currentSongIndex = -1;
+        store.dispatch({ type: SWITCHPLAYSTATE, data: false });
       }
       break;
     case 1:
@@ -138,7 +138,7 @@ audioObj.addEventListener(
       type: CHANGECURRENTTIME,
       data: [audioObj.currentTime, audioObj.duration],
     });
-  }, 1000),
+  }, 500),
 );
 
 export default function AudioReducer(
@@ -236,8 +236,10 @@ export default function AudioReducer(
       break;
 
     case SWITCHPLAYSTATE:
+      console.log(newState.currentSong !== null, newState.canPlay);
+
       if (newState.currentSong !== null && newState.canPlay) {
-        if (data) {
+        if (typeof data != 'undefined') {
           changePlayState(data);
           newState.isPlay = data;
         } else {

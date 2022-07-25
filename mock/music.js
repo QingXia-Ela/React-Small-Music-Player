@@ -9,7 +9,7 @@ const dataList = [
     isNull: false,
     name: 'flame',
     img: `https://zhiccc.net/images/parallax.png`,
-    url: 'https://res01.hycdn.cn/4cc56d77374fc40895b456d82047b5c3/62DA793D/siren/audio/20220314/bb3fa6f24efaf63aaad76d0f6bafc0c2.mp3',
+    url: 'https://res01.hycdn.cn/c85f5ac3f560dabae92802ad82cef409/62DE3585/siren/audio/20220314/bb3fa6f24efaf63aaad76d0f6bafc0c2.mp3',
   },
   {
     id: 1,
@@ -24,7 +24,7 @@ const dataList = [
     name: 'light',
     author: 'chen xue ran',
     img: `http://baiyun.work/img/background.jpg`,
-    url: 'https://res01.hycdn.cn/fc7befa43148b3cad18db52913bab766/62DBF34A/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
+    url: 'https://res01.hycdn.cn/89233ecbae9be8838ecf4b6ed2f9458f/62DE356A/siren/audio/20220503/ae991b9f7fab14be9a7b1043512bb1d4.mp3',
   },
 ];
 
