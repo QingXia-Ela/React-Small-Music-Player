@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Popconfirm } from 'antd';
 import './index.scss';
 import {
   DragDropContext,
@@ -10,13 +11,19 @@ import {
 
 import TransparentButton from '@/components/transparentButton';
 
-import { changeSong } from '@/redux/modules/musicPlayer/actions';
+import {
+  changeSong,
+  changeAllQueue,
+  removeFromQueue,
+} from '@/redux/modules/musicPlayer/actions';
 import { connect } from 'react-redux';
 
 interface RightPlayListProps {
+  changeAllQueue: Function;
   changeSong: Function;
+  removeFromQueue: Function;
   playQueue: any;
-  currentSongIndex: number;
+  currentSong: { [propName: string]: any };
 }
 
 interface RightPlayListState {}
@@ -46,7 +53,7 @@ class RightPlayList extends React.Component<
                         {...provided.dragHandleProps}
                         onDoubleClick={() => this.props.changeSong(val.id)}
                         className={`right_play_list_item ${
-                          i == this.props.currentSongIndex ? 'active' : ''
+                          val.id == this.props.currentSong.id ? 'active' : ''
                         } ${val.invalid ? 'invalid' : ''}`}
                       >
                         <span className="song_title">{val.name}</span>
@@ -58,7 +65,18 @@ class RightPlayList extends React.Component<
                             ></i>
                           </TransparentButton>
                           <TransparentButton>
-                            <i className="button iconfont icon-24gl-trash2"></i>
+                            <Popconfirm
+                              placement="left"
+                              title="确认移除吗？"
+                              onConfirm={() => this.removeFromQueue(val.id)}
+                              okText="YES"
+                              cancelText="NO"
+                              icon={
+                                <i className="iconfont icon-24gl-warningCircle" />
+                              }
+                            >
+                              <i className="button iconfont icon-24gl-trash2"></i>
+                            </Popconfirm>
                           </TransparentButton>
                         </div>
                       </li>
@@ -75,16 +93,28 @@ class RightPlayList extends React.Component<
   }
 
   onDragEnd = (result: DropResult, provided: ResponderProvided) => {
-    console.log(result, provided);
+    const source = result.source.index,
+      end = result.destination?.index;
+    if (typeof end != 'undefined') {
+      let newPlayQueue = [...this.props.playQueue];
+      newPlayQueue.splice(end, 0, ...newPlayQueue.splice(source, 1));
+      this.props.changeAllQueue(newPlayQueue);
+    }
+  };
+
+  removeFromQueue = (n: number) => {
+    this.props.removeFromQueue(n);
   };
 }
 
 export default connect(
   (state: { [propName: string]: any }) => ({
     playQueue: state.MusicPlayer.playQueue,
-    currentSongIndex: state.MusicPlayer.currentSongIndex,
+    currentSong: state.MusicPlayer.currentSong,
   }),
   {
     changeSong,
+    changeAllQueue,
+    removeFromQueue,
   },
 )(RightPlayList);

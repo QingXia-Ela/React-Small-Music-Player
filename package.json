@@ -36,6 +36,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-dom": "17.x",
+    "react-lrc": "^2.1.5",
     "react-transition-group": "^4.4.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1",

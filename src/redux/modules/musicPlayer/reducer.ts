@@ -457,10 +457,10 @@ export default function AudioReducer(
         changePlayState(true, newState.currentSong);
         newState.isPlay = true;
       } else if (typeof action.newList != 'undefined') {
-      /**
-       * 调整了播放顺序，没更新列表
-       */
-        newState.playQueue = data;
+        /**
+         * 调整了播放顺序，没更新列表
+         */
+        newState.playQueue = [...data];
       }
       break;
     case SHOWLYRICS:
