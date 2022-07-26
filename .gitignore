@@ -6,7 +6,10 @@
 /yarn-error.log
 /yarn.lock
 /package-lock.json
+
+# static source
 /NodeServer
+serverShell.bat
 
 # production
 /dist

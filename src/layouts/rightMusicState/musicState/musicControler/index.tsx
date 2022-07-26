@@ -10,6 +10,7 @@ import {
   changeVolume,
   showLyrics,
   mutePlayer,
+  switchPlayMode,
 } from '@/redux/modules/musicPlayer/actions';
 import { connect } from 'react-redux';
 
@@ -18,11 +19,13 @@ interface MusicControlerProps {
   isPlay: boolean;
   lyricsState: boolean;
   isMuted: boolean;
+  playMode: number;
   showLyrics: Function;
   prevSong: Function;
   nextSong: Function;
   switchPlayState: Function;
   mutePlayer: Function;
+  switchPlayMode: Function;
 }
 
 interface MusicControlerState {}
@@ -40,6 +43,9 @@ class MusicControler extends React.Component<
           {this.props.name ? this.props.name : '_(:з」∠)_'}
         </p>
         <div className="music_controler">
+          {/* <TransparentButton>
+            <i className="iconfont icon-24gl-playlist2 "></i>
+          </TransparentButton> */}
           <TransparentButton closeHoverPointer={true}>
             <div
               className="right_music_volume_container"
@@ -47,7 +53,7 @@ class MusicControler extends React.Component<
               onMouseLeave={() => this.switchVolumeSlider(false)}
             >
               <RightMusicVolumeControler />
-              <div onMouseEnter={() => this.switchVolumeSlider(true)}>
+              <span onMouseEnter={() => this.switchVolumeSlider(true)}>
                 {this.props.isMuted ? (
                   <i
                     className="iconfont icon-24gl-volumeZero"
@@ -59,7 +65,7 @@ class MusicControler extends React.Component<
                     onClick={() => this.props.mutePlayer()}
                   ></i>
                 )}
-              </div>
+              </span>
             </div>
           </TransparentButton>
           <TransparentButton>
@@ -84,17 +90,41 @@ class MusicControler extends React.Component<
             ></i>
           </TransparentButton>
           <TransparentButton>
+            <div onClick={this.switchPlayMode}>{this.judgePlayMode()}</div>
+          </TransparentButton>
+          {/* <TransparentButton
+            active={this.props.lyricsState}
+          >
             <div
               className="iconfont"
               onClick={() => this.props.showLyrics(!this.props.lyricsState)}
             >
               词
             </div>
-          </TransparentButton>
+          </TransparentButton> */}
         </div>
       </Fragment>
     );
   }
+
+  judgePlayMode = () => {
+    switch (this.props.playMode) {
+      case 0:
+        return <i className="iconfont icon-24gl-arrowRight"></i>;
+      case 1:
+        return <i className="iconfont icon-24gl-repeatOnce2"></i>;
+      case 2:
+        return <i className="iconfont icon-24gl-repeat2"></i>;
+      default:
+        return <i className="iconfont icon-24gl-shuffle"></i>;
+    }
+  };
+
+  switchPlayMode = () => {
+    this.props.playMode == 3
+      ? this.props.switchPlayMode(0)
+      : this.props.switchPlayMode(this.props.playMode + 1);
+  };
 
   switchVolumeSlider = (mark: boolean) => {
     const ele = this.volEle.current;
@@ -110,6 +140,7 @@ export default connect(
     name: state.MusicPlayer.currentSong?.name,
     lyricsState: state.MusicPlayer.showLyrics,
     isMuted: state.MusicPlayer.isMuted,
+    playMode: state.MusicPlayer.playMode,
   }),
   {
     switchPlayState,
@@ -118,5 +149,6 @@ export default connect(
     changeVolume,
     showLyrics,
     mutePlayer,
+    switchPlayMode,
   },
 )(MusicControler);

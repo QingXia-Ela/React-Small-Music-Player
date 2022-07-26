@@ -87,6 +87,7 @@ audioObj.addEventListener('ended', (e) => {
         type: PLAY,
         data: initAudio.playQueue[random(0, initAudio.playQueue.length - 1)],
       });
+      break;
 
     default:
       store.dispatch({ type: NEXTSONG });
@@ -239,8 +240,6 @@ export default function AudioReducer(
       break;
 
     case SWITCHPLAYSTATE:
-      console.log(newState.currentSong !== null, newState.canPlay);
-
       if (newState.currentSong !== null && newState.canPlay) {
         if (typeof data != 'undefined') {
           changePlayState(data);
@@ -260,9 +259,26 @@ export default function AudioReducer(
 
     case SWITCHPLAYMODE:
       newState.playMode = data;
+      break;
 
     case NEXTSONG:
       if (newState.playQueue.length && newState.currentSong) {
+        // 随机模式
+        if (newState.playMode == 3) {
+          let info = null;
+          if (newState.playQueue.length == 1)
+            info = { ...newState.playQueue[0] };
+          else {
+            while (!info || info.id == newState.currentSong.id)
+              info = {
+                ...newState.playQueue[random(0, newState.playQueue.length - 1)],
+              };
+          }
+          newState.currentSong = info;
+          changePlayState(true, info);
+          break;
+        }
+
         let allInvalid = true;
         let changeSongIndex = -1;
         let nextTempSongIndex = -1;

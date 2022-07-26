@@ -13,6 +13,9 @@
     cursor: pointer;
   }
 
+  &.active {
+    color: #ffffff;
+  }
 
   &.disabled {
     color: rgb(95, 88, 88);

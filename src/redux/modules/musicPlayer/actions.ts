@@ -63,12 +63,12 @@ export const changeSong = (id: number | null) => {
  * 1 单曲循环
  * 2 全部循环
  * 3 随机播放
- * @param mode 播放模式
+ * @param data 播放模式
  * @returns
  */
-export const switchPlayMode = (mode: number) => ({
+export const switchPlayMode = (data: number) => ({
   type: SWITCHPLAYMODE,
-  mode,
+  data,
 });
 
 /**

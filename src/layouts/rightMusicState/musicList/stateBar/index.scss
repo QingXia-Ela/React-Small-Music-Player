@@ -1,0 +1,24 @@
+.right_music_state_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  padding: 1.2em 3em;
+
+  .left_title {
+    font-family: 'Orbitron';
+    font-size: 1.4em;
+  }
+
+  .right_switch {
+    vertical-align: top;
+
+    .iconfont {
+      font-size: 1em;
+    }
+
+    span {
+      font-size: 1em;
+    }
+  }
+}

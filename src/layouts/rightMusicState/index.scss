@@ -3,7 +3,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 30em;
+  width: 35em;
   height: 100%;
 
   .hover_light {
@@ -42,18 +42,13 @@
       transform: none;
     }
 
-    .music_state,
-    .right_music_list_lyric {
+    .music_state {
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-around;
       align-items: center;
       width: 100%;
       color: #fff;
-    }
-
-    .right_music_list_lyric {
-      height: 60%;
     }
   }
 }

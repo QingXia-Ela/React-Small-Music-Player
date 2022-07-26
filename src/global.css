@@ -23,6 +23,14 @@ body {
   font-size: inherit !important;
 }
 
+.f1 {
+  flex: 1;
+}
+
+.por {
+  position: relative;
+}
+
 @media only screen and (max-width: 1366px) {
   html {
     font-size: 15px;
