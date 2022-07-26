@@ -8,10 +8,7 @@
 
   .state_show_area {
     flex: 1;
-    display: flex;
     position: relative;
-    justify-content: center;
-    align-items: center;
 
     &.show_lyric {
       .right_play_list {

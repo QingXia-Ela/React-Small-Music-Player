@@ -83,9 +83,17 @@ audioObj.addEventListener('ended', (e) => {
       store.dispatch({ type: NEXTSONG });
       break;
     case 3:
+      let info = null;
+      if (initAudio.playQueue.length == 1) info = { ...initAudio.playQueue[0] };
+      else {
+        while (!info || info.id == initAudio.currentSong.id)
+          info = {
+            ...initAudio.playQueue[random(0, initAudio.playQueue.length - 1)],
+          };
+      }
       store.dispatch({
         type: PLAY,
-        data: initAudio.playQueue[random(0, initAudio.playQueue.length - 1)],
+        data: info,
       });
       break;
 
@@ -93,6 +101,16 @@ audioObj.addEventListener('ended', (e) => {
       store.dispatch({ type: NEXTSONG });
       break;
   }
+});
+
+/**
+ * 监听播放器 开始暂停 事件，修复通过耳机控制播放器播放时状态未改变的情况
+ */
+audioObj.addEventListener('play', (e) => {
+  store.dispatch({ type: SWITCHPLAYSTATE, data: true });
+});
+audioObj.addEventListener('pause', (e) => {
+  store.dispatch({ type: SWITCHPLAYSTATE, data: false });
 });
 
 /**
@@ -424,16 +442,26 @@ export default function AudioReducer(
      * 替换整个播放列表
      */
     case CHANGEALLQUEUE:
-      if (!data || data.length == 0) {
-        newState.playQueue = [];
-        newState.currentSong = null;
-        changePlayState(false);
-        break;
+      /**
+       * 全新播放列表
+       */
+      if (action.newList) {
+        if (!data || data.length == 0) {
+          newState.playQueue = [];
+          newState.currentSong = null;
+          changePlayState(false);
+          break;
+        }
+        newState.playQueue = [...data];
+        newState.currentSong = { ...newState.playQueue[0] };
+        changePlayState(true, newState.currentSong);
+        newState.isPlay = true;
+      } else if (typeof action.newList != 'undefined') {
+      /**
+       * 调整了播放顺序，没更新列表
+       */
+        newState.playQueue = data;
       }
-      newState.playQueue = [...data];
-      newState.currentSong = { ...newState.playQueue[0] };
-      changePlayState(true, newState.currentSong);
-      newState.isPlay = true;
       break;
     case SHOWLYRICS:
       typeof data != 'undefined'
@@ -464,6 +492,7 @@ export default function AudioReducer(
       audioObj.volume = newState.volume;
       break;
   }
+  newState.playQueue = [...newState.playQueue];
   initAudio = newState;
 
   return newState;

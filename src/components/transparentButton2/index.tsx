@@ -12,7 +12,7 @@ class TransparentButton2 extends React.Component<
 > {
   state = {};
   render() {
-    return <div className="transparent_button2"></div>;
+    return <div className="transparent_button2">11</div>;
   }
 }
 

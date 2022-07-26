@@ -13,7 +13,7 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
         onClick={() => props.showLyrics(!props.lyrics)}
       >
         <TransparentButton>
-          {props.lyrics ? (
+          {!props.lyrics ? (
             <span>词</span>
           ) : (
             <i className="iconfont icon-24gl-playlist2"></i>

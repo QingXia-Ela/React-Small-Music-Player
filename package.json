@@ -24,6 +24,7 @@
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.15",
     "@types/react-addons-css-transition-group": "^15.0.7",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-transition-group": "^4.4.5",
     "@umijs/plugin-sass": "^1.1.1",
     "animate.css": "^4.1.1",

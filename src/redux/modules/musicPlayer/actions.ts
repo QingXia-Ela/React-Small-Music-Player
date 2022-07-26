@@ -18,7 +18,7 @@ import { ThunkActionDispatch } from 'redux-thunk';
 import { getSongByID } from '@/api/music';
 
 /**
- * 开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲，不请求服务器
+ * 开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲
  * @param data
  */
 export const play = (data: undefined | { [propName: string]: any }) => ({
@@ -98,14 +98,17 @@ export const clearQueue = () => ({ type: CLEARQUEUE });
 /**
  * 替换播放列表
  * @param data 新的播放列表，传入空数组为清空播放列表，替换后从第一首歌开始播放
+ * @param newList 是否是新的播放列表标记，用于控制播放器是否在替换后从头开始播放歌曲，默认关闭
  * @returns
  */
-export const changeAllQueue = (data: object[]) => ({
+export const changeAllQueue = (data: object[], newList: boolean = false) => ({
   type: CHANGEALLQUEUE,
   data,
+  newList,
 });
 /**
  * 设置播放位置
+ * @param data 时间戳
  */
 export const setCurrentTime = (data: number) => ({
   type: SETCURRENTTIME,

@@ -1,5 +1,86 @@
 .right_play_list {
   z-index: 100;
   position: relative;
+  padding: 1em 0;
+  height: 100%;
   transition: filter .6s, opacity .6s;
+
+  .right_play_list_container {
+    width: 100%;
+    height: 100%;
+
+    .right_play_list_item {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .5em 3em;
+      transition: background-color .3s;
+      cursor: default;
+
+      .song_title {
+        flex: 1;
+        font-family: 'SourceHanSans-Light';
+        font-size: 1.2em;
+        font-weight: 700;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+      }
+
+      .function_button {
+        display: flex;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s;
+
+        .transparent_button {
+          margin-left: .5em;
+        }
+
+        .button {
+          font-size: 1em;
+        }
+      }
+
+      &:hover {
+        background-color: #ffffff16;
+
+        .function_button {
+          opacity: 1;
+          pointer-events: inherit;
+        }
+      }
+
+      &.active {
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 3px;
+          height: 100%;
+          background-color: #fff;
+          box-shadow: 0 0 6px #fff;
+        }
+      }
+
+      &.invalid {
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 3px;
+          height: 100%;
+          background-color: red;
+          box-shadow: 0 0 6px red;
+        }
+      }
+    }
+  }
 }
