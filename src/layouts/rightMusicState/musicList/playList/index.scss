@@ -15,6 +15,7 @@
       justify-content: space-between;
       align-items: center;
       padding: .5em 3em;
+      background-color: #00000022;
       transition: background-color .3s;
       cursor: default;
 
@@ -48,7 +49,7 @@
       }
 
       &:hover {
-        background-color: #ffffff16;
+        background-color: #ffffff22;
 
         .function_button {
           opacity: 1;

@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "set MOCK_URL=http://localhost:8088&&umi dev",
+    "start": "set MOCK_URL=http://localhost:8088/public&&umi dev",
     "build": "set NODE_ENV=build&&umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",

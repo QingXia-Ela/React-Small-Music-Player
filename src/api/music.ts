@@ -7,3 +7,10 @@ export function getSongByID(id: number) {
     params: { id },
   });
 }
+
+export function getLyricByLink(url: string) {
+  return request({
+    method: 'GET',
+    url,
+  });
+}

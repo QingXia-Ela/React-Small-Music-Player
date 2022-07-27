@@ -26,3 +26,4 @@ export const SUCCESSTOLOADSONG = 'SuccessToLoadSong';
 export const FAILTOLOADSONG = 'FailToLoadSong';
 export const SHOWLYRICS = 'ShowLyrics';
 export const MUTEPLAYER = 'MutePlayer';
+export const SETLYRIC = 'SetLyric';

@@ -34,6 +34,13 @@ let initAudio: songStructure = {
   audioEle: audioObj,
   canPlay: false,
   showLyrics: false,
+  /**
+   * -1 获取中
+   * 0 无歌词信息
+   * 1 纯音乐
+   * 其他为正常歌词
+   */
+  lyricContent: 0,
 };
 
 import {
@@ -54,6 +61,7 @@ import {
   FAILTOLOADSONG,
   SHOWLYRICS,
   MUTEPLAYER,
+  SETLYRIC,
 } from '@/redux/constant';
 
 /**
@@ -475,6 +483,17 @@ export default function AudioReducer(
       audioObj.muted = newState.isMuted;
       break;
 
+    /**
+     * 设置歌词内容
+     * 0 无歌词信息
+     * 1 纯音乐
+     * 其他为正常歌词
+     */
+    case SETLYRIC:
+      if (data == 0) newState.lyricContent = 0;
+      else if (data == 1) newState.lyricContent = 1;
+      else newState.lyricContent = data;
+      break;
     default:
       let trigger = false;
       /**

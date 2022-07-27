@@ -12,10 +12,11 @@ import {
   SETCURRENTTIME,
   SHOWLYRICS,
   MUTEPLAYER,
+  SETLYRIC,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
-import { getSongByID } from '@/api/music';
+import { getLyricByLink, getSongByID } from '@/api/music';
 
 /**
  * 开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲
@@ -49,11 +50,17 @@ export const changeVolume = (data: number) => ({ type: CHANGEVOLUME, data });
 export const changeSong = (id: number | null) => {
   return (dispatch: ThunkActionDispatch<any>) => {
     if (typeof id === 'number') {
-      getSongByID(id).then((res) => {
-        if (res && 1) {
-          dispatch(play(res));
-        }
-      });
+      getSongByID(id)
+        .then((res) => {
+          if (res && 1) {
+            dispatch(play(res));
+            return Promise.resolve(res);
+          }
+        })
+        .then((res: any) => {
+          // 成功后获取歌词
+          getLyric(res.lyric)(dispatch);
+        });
     }
   };
 };
@@ -124,3 +131,22 @@ export const showLyrics = (data: boolean) => ({ type: SHOWLYRICS, data });
  * 直接静音
  */
 export const mutePlayer = (data: boolean) => ({ type: MUTEPLAYER, data });
+
+/**
+ * 单独获取歌词
+ */
+export const getLyric = (link: string | undefined) => {
+  return async (dispatch: ThunkActionDispatch<any>) => {
+    if (typeof link != 'undefined') {
+      getLyricByLink(link).then(
+        (res) => {
+          dispatch({ type: SETLYRIC, data: res.data.lyric });
+        },
+        (err) => {
+          console.log(err);
+          dispatch({ type: SETLYRIC, data: 0 });
+        },
+      );
+    } else dispatch({ type: SETLYRIC, data: 0 });
+  };
+};
