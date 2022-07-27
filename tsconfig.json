@@ -15,7 +15,7 @@
       "@@/*": ["src/.umi/*"]
     },
     "allowSyntheticDefaultImports": true,
-    "types": ["react-lrc"]
+    "types": ["react-beautiful-dnd"]
   },
   "include": [
     "mock/**/*",

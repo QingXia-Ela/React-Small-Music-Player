@@ -14,3 +14,11 @@ export function getLyricByLink(url: string) {
     url,
   });
 }
+
+export function addPlayList(data: object) {
+  return request({
+    method: 'POST',
+    url: '/api/addPlayList',
+    data,
+  });
+}

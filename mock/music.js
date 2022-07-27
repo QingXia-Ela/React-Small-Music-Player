@@ -6,7 +6,6 @@ import path from 'path';
 const dataList = [
   {
     id: 0,
-    isNull: false,
     name: 'STARSET - Infected',
     avatar: process.env.MOCK_URL + '/infected/avatar.png',
     img: process.env.MOCK_URL + '/infected/img.jpg',
@@ -15,7 +14,6 @@ const dataList = [
   },
   {
     id: 1,
-    isNull: false,
     name: '【Animenz】怪物 - 动物狂想曲 第二季 钢琴改编',
     avatar: process.env.MOCK_URL + '/monster/avatar.webp',
     img: process.env.MOCK_URL + '/monster/img.jpg',
@@ -24,7 +22,6 @@ const dataList = [
   },
   {
     id: 2,
-    isNull: false,
     name: 'STARSET - Unbecoming',
     author: 'XueRan Chen',
     avatar: process.env.MOCK_URL + '/unbecoming/avatar.jpg',
@@ -44,5 +41,13 @@ export default {
         res.send('Not Found');
       }
     }, 1000);
+  },
+  'POST /api/addPlayList': (req, res) => {
+    setTimeout(() => {
+      res.send({
+        code: 200,
+        data: req.body,
+      });
+    }, 3000);
   },
 };

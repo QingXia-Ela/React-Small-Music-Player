@@ -143,7 +143,7 @@ export const getLyric = (link: string | undefined) => {
       dispatch({ type: SETLYRIC, data: -1 });
       getLyricByLink(link).then(
         (res) => {
-          dispatch({ type: SETLYRIC, data: res.data.lyric });
+          dispatch({ type: SETLYRIC, data: res?.data.lyric });
         },
         (err) => {
           console.log(err);
