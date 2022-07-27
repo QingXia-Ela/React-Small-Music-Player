@@ -28,7 +28,7 @@ class RightMusicVolumeControler extends React.Component<
           max={1}
           step={0.01}
           value={this.state.vol}
-          onChange={this.onChange}
+          onChange={(n: number) => this.onChange(n)(n)}
           vertical={true}
           tipFormatter={null}
         />
@@ -36,10 +36,15 @@ class RightMusicVolumeControler extends React.Component<
     );
   }
 
-  onChange = throttle((n: number) => {
+  onChange = (n: number) => {
     this.setState({ vol: n });
+
+    return this.throttleVol;
+  };
+
+  throttleVol = throttle((n: number) => {
     this.props.changeVolume(n);
-  }, 20);
+  }, 100);
 }
 
 export default connect(

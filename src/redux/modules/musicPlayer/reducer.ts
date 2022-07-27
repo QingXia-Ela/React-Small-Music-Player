@@ -279,6 +279,8 @@ export default function AudioReducer(
       break;
 
     case CHANGEVOLUME:
+      audioObj.muted = false;
+      newState.isMuted = false;
       newState.volume = data;
       audioObj.volume = data;
       break;

@@ -20,7 +20,7 @@ const dataList = [
     avatar: process.env.MOCK_URL + '/monster/avatar.webp',
     img: process.env.MOCK_URL + '/monster/img.jpg',
     url: process.env.MOCK_URL + '/monster/song.mp3',
-    // lyric: process.env.MOCK_URL + '/monster/lyric.json'
+    lyric: 1,
   },
   {
     id: 2,

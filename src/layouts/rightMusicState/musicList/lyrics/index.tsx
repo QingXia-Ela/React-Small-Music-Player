@@ -77,7 +77,7 @@ class RightMusicLyric extends React.Component<
     if (typeof content == 'number') {
       switch (content) {
         case -1:
-          return <div className="empty_lyric">获取中</div>;
+          return <div className="empty_lyric">获取中...</div>;
         case 0:
           return <div className="empty_lyric">无歌词信息</div>;
         case 1:

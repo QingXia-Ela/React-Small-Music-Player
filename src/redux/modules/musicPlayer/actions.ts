@@ -59,7 +59,9 @@ export const changeSong = (id: number | null) => {
         })
         .then((res: any) => {
           // 成功后获取歌词
-          getLyric(res.lyric)(dispatch);
+          if (typeof res.lyric == 'number')
+            dispatch({ type: SETLYRIC, data: res.lyric });
+          else getLyric(res.lyric)(dispatch);
         });
     }
   };
@@ -138,6 +140,7 @@ export const mutePlayer = (data: boolean) => ({ type: MUTEPLAYER, data });
 export const getLyric = (link: string | undefined) => {
   return async (dispatch: ThunkActionDispatch<any>) => {
     if (typeof link != 'undefined') {
+      dispatch({ type: SETLYRIC, data: -1 });
       getLyricByLink(link).then(
         (res) => {
           dispatch({ type: SETLYRIC, data: res.data.lyric });
