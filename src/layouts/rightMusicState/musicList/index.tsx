@@ -2,8 +2,8 @@ import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import './index.scss';
 import RightMusicStateBar from './stateBar';
-import RightPlayList from './playList';
-import RightMusicLyric from './lyrics';
+import RightPlayList from '../../../components/MusicPlayer/playList';
+import RightMusicLyric from '../../../components/MusicPlayer/lyrics';
 
 import { connect } from 'react-redux';
 

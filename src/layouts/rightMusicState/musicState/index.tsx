@@ -1,6 +1,6 @@
-import SongImg from './songImg';
-import MusicControler from './musicControler';
-import TimeSlider from './timeSlider';
+import SongImg from '@/components/MusicPlayer/songImg';
+import MusicControler from '@/components/MusicPlayer/Control/musicControler';
+import TimeSlider from '@/components/MusicPlayer/Control/timeSlider';
 
 import './index.scss';
 
