@@ -27,7 +27,7 @@ class RightMusicLyric extends React.Component<
       switch (content) {
         case -1:
           return <div className="empty_lyric">获取中...</div>;
-        case 0:
+        case 0 || undefined:
           return <div className="empty_lyric">无歌词信息</div>;
         case 1:
           return <div className="empty_lyric">纯音乐，请欣赏</div>;
@@ -55,6 +55,8 @@ class RightMusicLyric extends React.Component<
           className="lrc"
         />
       );
+    } else {
+      return <div className="empty_lyric">无歌词信息</div>;
     }
   };
 }
@@ -62,7 +64,9 @@ class RightMusicLyric extends React.Component<
 export default connect(
   (state: { [propName: string]: any }) => ({
     currentTime: state.MusicPlayer.audioEle?.currentTime,
-    lyric: state.MusicPlayer.lyricContent,
+    lyric:
+      state.MusicPlayer.playQueue[state.MusicPlayer.currentSongIndex]
+        ?.lyricContent,
     songID: state.MusicPlayer.currentSongIndex,
   }),
   {},

@@ -5,6 +5,7 @@
     margin-top: .5em;
     margin-bottom: 0;
     color: #fff;
+    font-size: 1.4rem;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -16,8 +17,9 @@
     display: flex;
     justify-content: space-between;
     align-items: end;
-    padding: .2em 3em;
+    padding: .2rem 3.3rem .2em 2.3rem;
     color: #fff;
+    font-size: 1.5rem;
 
     .transparent_button {
       margin: 0;

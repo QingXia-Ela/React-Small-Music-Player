@@ -59,9 +59,9 @@ export const changeSong = (id: number | null) => {
         })
         .then((res: any) => {
           // 成功后获取歌词
-          if (typeof res.lyric == 'number')
-            dispatch({ type: SETLYRIC, data: res.lyric });
-          else getLyric(res.lyric)(dispatch);
+          if (res && typeof res.lyric == 'number')
+            dispatch({ type: SETLYRIC, data: { lyric: res.lyric, id } });
+          else getLyric({ lyric: res.lyric, id })(dispatch);
         });
     }
   };
@@ -137,19 +137,22 @@ export const mutePlayer = (data: boolean) => ({ type: MUTEPLAYER, data });
 /**
  * 单独获取歌词
  */
-export const getLyric = (link: string | undefined) => {
+export const getLyric = (link: { lyric: string | undefined; id: number }) => {
   return async (dispatch: ThunkActionDispatch<any>) => {
-    if (typeof link != 'undefined') {
-      dispatch({ type: SETLYRIC, data: -1 });
-      getLyricByLink(link).then(
+    if (typeof link.lyric != 'undefined') {
+      dispatch({ type: SETLYRIC, data: { lyric: -1, id: link.id } });
+      getLyricByLink(link.lyric).then(
         (res) => {
-          dispatch({ type: SETLYRIC, data: res?.data.lyric });
+          dispatch({
+            type: SETLYRIC,
+            data: { lyric: res?.data.lyric, id: link.id },
+          });
         },
         (err) => {
           console.log(err);
-          dispatch({ type: SETLYRIC, data: 0 });
+          dispatch({ type: SETLYRIC, data: { lyric: 0, id: link.id } });
         },
       );
-    } else dispatch({ type: SETLYRIC, data: 0 });
+    } else dispatch({ type: SETLYRIC, data: { lyric: 0, id: link.id } });
   };
 };

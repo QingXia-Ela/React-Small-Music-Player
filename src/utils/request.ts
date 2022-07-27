@@ -32,7 +32,7 @@ axios.interceptors.response.use(
     let { response } = error;
     // 如果有返回结果
     if (response) {
-      message.error('工口发生' + response.status);
+      message.error('工口发生，可能是网络问题');
       switch (response.status) {
         //这里面根据公司需求进行写
         case 404:
@@ -45,7 +45,7 @@ axios.interceptors.response.use(
         //断网处理：跳转到断网页面
         return;
       }
-      message.error('工口发生' + error);
+      message.error('工口发生，可能是网络问题');
 
       return Promise.reject(error);
     }

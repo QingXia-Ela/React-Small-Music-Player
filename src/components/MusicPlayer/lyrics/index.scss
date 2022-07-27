@@ -16,7 +16,7 @@
 
     .lyric_item {
       margin: 1em 0;
-      font-size: 1.2em;
+      font-size: 1.2rem;
       text-align: center;
       opacity: .6;
       transition: opacity .5s, transform .5s;
@@ -32,7 +32,7 @@
     position: absolute;
     top: 40%;
     left: 50%;
-    font-size: 1.4em;
+    font-size: 1.4rem;
     transform: translateX(-50%);
   }
 }

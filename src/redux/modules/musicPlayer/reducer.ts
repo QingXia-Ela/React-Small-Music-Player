@@ -229,7 +229,9 @@ export default function AudioReducer(
           : changeSong(newState.playQueue.length - 1);
       }
       if (!newState.currentSong.invalid)
-        changePlayState(true, newState.currentSong);
+        changePlayState(true, newState.currentSong).catch((res) => {
+          console.log(res);
+        });
       // 找一首能播的进行播放
       else {
         for (let i = 0; i < newState.playQueue.length; i++) {
@@ -492,9 +494,20 @@ export default function AudioReducer(
      * 其他为正常歌词
      */
     case SETLYRIC:
-      if (data == 0) newState.lyricContent = 0;
-      else if (data == 1) newState.lyricContent = 1;
-      else newState.lyricContent = data;
+      const { lyric, id } = data;
+      let i = -1;
+      newState.playQueue.forEach((val: singleSongStructure, index: number) => {
+        if (val.id == id) i = index;
+      });
+      if (i == -1) break;
+
+      if (lyric == 0) newState.playQueue[i].lyricContent = 0;
+      else if (lyric == 1) newState.playQueue[i].lyricContent = 1;
+      else {
+        newState.playQueue[i].lyricContent = lyric;
+        newState.playQueue[i].lyricContent = lyric;
+      }
+
       break;
     default:
       let trigger = false;

@@ -14,7 +14,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: .5em 3em;
+      padding: .5rem 3rem;
       background-color: #00000022;
       transition: background-color .3s;
       cursor: default;
@@ -22,7 +22,7 @@
       .song_title {
         flex: 1;
         font-family: 'SourceHanSans-Light';
-        font-size: 1.2em;
+        font-size: 1.2rem;
         font-weight: 700;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -44,7 +44,7 @@
         }
 
         .button {
-          font-size: 1em;
+          font-size: 1.4rem;
         }
       }
 

@@ -1,6 +1,10 @@
 .time_slider {
   font-family: 'Orbitron';
   width: 100%;
-  padding: .2em 3em;
+  padding: .2rem 3rem;
   color: #fff;
+
+  .time_text {
+    font-size: 1rem;
+  }
 }
