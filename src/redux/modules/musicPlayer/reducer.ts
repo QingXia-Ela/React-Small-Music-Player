@@ -34,13 +34,6 @@ let initAudio: songStructure = {
   audioEle: audioObj,
   canPlay: false,
   showLyrics: false,
-  /**
-   * -1 获取中
-   * 0 无歌词信息
-   * 1 纯音乐
-   * 其他为正常歌词
-   */
-  lyricContent: 0,
 };
 
 import {
@@ -488,7 +481,7 @@ export default function AudioReducer(
       break;
 
     /**
-     * 设置歌词内容
+     * -1 获取中
      * 0 无歌词信息
      * 1 纯音乐
      * 其他为正常歌词
