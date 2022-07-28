@@ -34,6 +34,8 @@ let initAudio: songStructure = {
   audioEle: audioObj,
   canPlay: false,
   showLyrics: false,
+  // 右侧播放器是否展示
+  rightStateShow: false,
 };
 
 import {

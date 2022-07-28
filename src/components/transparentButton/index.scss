@@ -16,7 +16,7 @@
   }
 
   &.disabled {
-    color: rgb(95, 88, 88);
+    color: rgb(95, 88, 88) !important;
     cursor: default !important;
   }
 }

@@ -2,12 +2,15 @@
 
   .song_name {
     font-family: 'Microsoft Yahei';
+    width: 100%;
     margin-top: .5em;
     margin-bottom: 0;
+    padding: 0 2.4rem;
     color: #fff;
     font-size: 1.4rem;
     white-space: nowrap;
     text-overflow: ellipsis;
+    text-align: center;
     overflow: hidden;
   }
 

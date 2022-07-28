@@ -40,7 +40,7 @@ class BG extends React.Component<BGProps> {
               backgroundImage: `url(${
                 this.props.path
                   ? this.props.path
-                  : require('@/assets/images/bg/base_bg.jpg')
+                  : require('@/assets/images/bg/bg.jpg')
               })`,
             }}
           ></div>

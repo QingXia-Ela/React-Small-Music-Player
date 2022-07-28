@@ -43,9 +43,6 @@ class MusicControler extends React.Component<
           {this.props.name ? this.props.name : '_(:з」∠)_'}
         </p>
         <div className="music_controler">
-          {/* <TransparentButton>
-            <i className="iconfont icon-24gl-playlist2 "></i>
-          </TransparentButton> */}
           <TransparentButton closeHoverPointer={true}>
             <div
               className="right_music_volume_container"
@@ -92,16 +89,6 @@ class MusicControler extends React.Component<
           <TransparentButton>
             <div onClick={this.switchPlayMode}>{this.judgePlayMode()}</div>
           </TransparentButton>
-          {/* <TransparentButton
-            active={this.props.lyricsState}
-          >
-            <div
-              className="iconfont"
-              onClick={() => this.props.showLyrics(!this.props.lyricsState)}
-            >
-              词
-            </div>
-          </TransparentButton> */}
         </div>
       </Fragment>
     );

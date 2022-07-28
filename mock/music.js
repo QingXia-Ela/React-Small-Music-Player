@@ -29,6 +29,14 @@ const dataList = [
     url: process.env.MOCK_URL + '/unbecoming/song.mp3',
     lyric: process.env.MOCK_URL + '/unbecoming/lyric.json',
   },
+  {
+    id: 3,
+    name: '【Animenz】人生的旋转木马 - 哈尔的移动城堡 钢琴改编 - Merry-go-round of life',
+    author: 'Animenzzz',
+    avatar: process.env.MOCK_URL + '/muma/avatar.webp',
+    url: process.env.MOCK_URL + '/muma/song.mp3',
+    lyric: process.env.MOCK_URL + '/muma/lyric.json',
+  },
 ];
 
 export default {

@@ -24,7 +24,7 @@ class HeaderRouterButtons extends React.Component<
     return (
       <div className="router_button">
         <TransparentButton disabled={this.state.historyPos <= 1}>
-          <LeftOutlined onClick={this.back} />
+          <LeftOutlined size={20} onClick={this.back} />
         </TransparentButton>
         <TransparentButton disabled={this.state.historyPos >= history.length}>
           <RightOutlined onClick={this.go} />
