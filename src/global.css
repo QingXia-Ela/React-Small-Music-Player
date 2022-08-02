@@ -48,6 +48,10 @@
   border-top: 2px solid #c8c8c8;
   padding: 1em 1.4em;
 }
+.black_modal .text_only {
+  color: #fff;
+  font-size: 1.5rem;
+}
 .yellow_button {
   padding: 1em;
   font-family: SourceHanSans-Light;
@@ -165,6 +169,13 @@ body {
 }
 .por {
   position: relative;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+}
+input[type='number'] {
+  -webkit-appearance: none !important;
 }
 @media only screen and (max-width: 1366px) {
   html {

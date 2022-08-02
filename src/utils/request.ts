@@ -8,7 +8,7 @@ switch (process.env.NODE_ENV) {
     break;
 
   default:
-    axios.defaults.baseURL = 'http://localhost:8000';
+    axios.defaults.baseURL = 'http://localhost:3000';
     break;
 }
 
@@ -33,10 +33,14 @@ axios.interceptors.response.use(
     // 如果有返回结果
     if (response) {
       message.error('工口发生，可能是网络问题');
-      switch (response.status) {
+      console.log(error);
+
+      switch (response.code) {
         //这里面根据公司需求进行写
         case 404:
           //进行错误跳转之类
+          break;
+        default:
           break;
       }
     } else {

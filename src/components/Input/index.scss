@@ -1,13 +1,49 @@
 .black_input {
   width: 80%;
-  height: 3em;
+  height: 2.4em;
   border: none;
+  margin: .6em 0;
   color: #adadad;
   background-color: transparent;
   font-size: 1.2em;
   caret-color: #a2a6ae;
   text-align: center;
-  box-shadow: 0 0 5px 1px #fff;
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
   box-sizing: border-box;
   outline: 0;
+
+  &:focus {
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.6);
+  }
+}
+
+// 保证其下所有的 input 也是统一样式，解决增加左右按钮时背景问题
+.black_input_son {
+  width: 80%;
+  height: 2.4em;
+  margin: .6em 0;
+  text-align: center;
+
+  input {
+    height: 100%;
+    border: none;
+    color: #adadad;
+    background-color: transparent;
+    font-size: 1.2em;
+    caret-color: #a2a6ae;
+    text-align: center;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
+    box-sizing: border-box;
+    outline: 0;
+
+
+    &:focus {
+      box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .ant-input-group-addon {
+    background-color: transparent;
+    border: none;
+  }
 }

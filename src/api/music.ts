@@ -22,3 +22,10 @@ export function addPlayList(data: object) {
     data,
   });
 }
+
+export function getInfo() {
+  return request({
+    method: 'GET',
+    url: '/user/subcount',
+  });
+}

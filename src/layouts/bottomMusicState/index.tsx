@@ -60,11 +60,8 @@ class BottomMusicState extends React.Component<
           onAfterChange={this.onAfterChange}
         ></Slider>
 
-        <Link to={'/'}>toIndex</Link>
-        <Link to={'/list'}>toList</Link>
-
-        {/* <button onClick={() => history.push('/')}>gotoIndex</button>
-        <button onClick={() => history.push('/list')}>gotoList</button> */}
+        {/* <Link to={'/'}>toIndex</Link>
+        <Link to={'/list'}>toList</Link> */}
       </div>
     );
   }

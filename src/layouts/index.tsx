@@ -12,6 +12,8 @@ import 'antd/dist/antd.min.css';
 import './index.scss';
 import RightMusicState from './rightMusicState';
 
+import NeteaseLogin from '@/components/Login';
+
 const ANIMATION_MAP: any = {
   PUSH: 'forward',
   POP: 'back',
@@ -47,6 +49,8 @@ export default function Layout({
         <RightMusicState></RightMusicState>
       </div>
       <BG></BG>
+      {/* 登录框 */}
+      <NeteaseLogin></NeteaseLogin>
     </Provider>
   );
 }

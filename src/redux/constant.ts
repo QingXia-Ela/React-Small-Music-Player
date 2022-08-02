@@ -1,7 +1,6 @@
 /**
  * 背景设置
  */
-
 export const CHANGEBG = 'ChangeBackground';
 export const SWITCHFILTER = 'SwitchFilter';
 export const SWITCHMASK = 'SwitchMask';
@@ -27,3 +26,9 @@ export const FAILTOLOADSONG = 'FailToLoadSong';
 export const SHOWLYRICS = 'ShowLyrics';
 export const MUTEPLAYER = 'MutePlayer';
 export const SETLYRIC = 'SetLyric';
+
+/**
+ * 网易云登陆操作方法
+ */
+export const CHANGELOGINSTATE = 'ChangeLoginState';
+export const SHOWLOGINMODAL = 'ShowLoginModal';
