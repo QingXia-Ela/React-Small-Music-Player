@@ -10,6 +10,9 @@ class RightNav extends React.Component {
     return (
       <div className="right_nav">
         <TransparentButton>
+          <span className="content">主页</span>
+        </TransparentButton>
+        <TransparentButton>
           <span className="content">音乐</span>
         </TransparentButton>
         <TransparentButton>

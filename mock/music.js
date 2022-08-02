@@ -37,6 +37,15 @@ const dataList = [
     url: process.env.MOCK_URL + '/muma/song.mp3',
     lyric: process.env.MOCK_URL + '/muma/lyric.json',
   },
+  {
+    id: 4,
+    name: '【冰兔】One Last Kiss 翻唱',
+    author: '宇多田ヒカル',
+    avatar: process.env.MOCK_URL + '/olk/avatar.jpg',
+    url: process.env.MOCK_URL + '/olk/song.mp3',
+    lyric: process.env.MOCK_URL + '/olk/lyric.json',
+    img: process.env.MOCK_URL + '/olk/img.webp',
+  },
 ];
 
 export default {

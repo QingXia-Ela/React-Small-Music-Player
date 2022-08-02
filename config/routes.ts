@@ -7,8 +7,13 @@ export default [
       {
         exact: true,
         path: '/',
-        component: '@/pages/index'
-      }
-    ]
-  }
-]
+        component: '@/pages/IndexPage',
+      },
+      // {
+      //   exact: true,
+      //   path: '/list',
+      //   component: '@/pages/ListPage'
+      // }
+    ],
+  },
+];

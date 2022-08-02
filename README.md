@@ -34,3 +34,36 @@ redux 音乐播放器方法：
 插入播放列表使用：`changeSong` 操作
 
 播放暂停使用：`switchPlayState` 操作
+
+动画转场：
+
+入场：
+
+```
+page-enter # 可以在这里写 transition 执行时间
+page-enter-active
+page-enter-done
+```
+
+离场：
+```
+page-exit # 可以在这里写 transition 执行时间
+page-exit-active
+```
+
+通过同级选择器来区分不同的动画
+
+```scss
+// 主页动画
+.index_page.page-enter-active {
+  // ...
+}
+
+.index_page.page-enter-done {
+  // ...
+}
+
+.index_page.page-exit-active {
+  // ...
+}
+```

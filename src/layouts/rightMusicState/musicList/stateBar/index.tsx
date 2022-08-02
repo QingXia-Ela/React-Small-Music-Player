@@ -44,7 +44,7 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
 
   return (
     <div className="right_music_state_bar">
-      <span className="left_title">PLAYLIST</span>
+      <span className="left_title">{props.lyrics ? 'LYRICS' : 'PLAYLIST'}</span>
       <div className="right_switch">
         <TransparentButton>
           <i onClick={showModal} className="iconfont icon-24gl-floppyDisk"></i>

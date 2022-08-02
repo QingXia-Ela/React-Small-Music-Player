@@ -12,6 +12,8 @@ import {
 import { connect } from 'react-redux';
 import { throttle } from 'lodash';
 
+import { history, Link } from 'umi';
+
 interface BottomMusicStateProps {
   play: Function;
   switchPlayState: Function;
@@ -57,9 +59,16 @@ class BottomMusicState extends React.Component<
           onChange={this.onChange}
           onAfterChange={this.onAfterChange}
         ></Slider>
+
+        <Link to={'/'}>toIndex</Link>
+        <Link to={'/list'}>toList</Link>
+
+        {/* <button onClick={() => history.push('/')}>gotoIndex</button>
+        <button onClick={() => history.push('/list')}>gotoList</button> */}
       </div>
     );
   }
+  // 路由跳转
 
   switchPlayState = () => {
     this.props.switchPlayState();

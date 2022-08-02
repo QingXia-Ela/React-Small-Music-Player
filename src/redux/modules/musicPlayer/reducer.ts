@@ -130,6 +130,7 @@ const changePlayState = async (
 ) => {
   try {
     if (songInfo) {
+      audioObj.currentTime = 0;
       audioObj.pause();
       audioObj.src = songInfo.url;
     }
@@ -150,7 +151,9 @@ const changePlayState = async (
     } else audioObj.pause();
   } catch (error) {
     store.dispatch({ type: FAILTOLOADSONG });
-    return Promise.reject(error);
+    return Promise.reject(error).catch((err) => {
+      message.error('工口发生，请检查网络是否存在问题');
+    });
   }
   callback && callback();
 };
@@ -411,6 +414,9 @@ export default function AudioReducer(
           newState.currentSong = null;
           newState.playQueue = [];
           changePlayState(false);
+          audioObj.src = '';
+          newState.canPlay = false;
+          newState.isPlay = false;
           break;
         }
       }

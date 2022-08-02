@@ -2,7 +2,6 @@ import { defineConfig } from 'umi';
 import routes from './routes';
 
 export default defineConfig({
-  base: '/docs/',
   publicPath: '/static/',
   hash: true,
   history: {
@@ -13,5 +12,5 @@ export default defineConfig({
     loading: '@/components/loading',
   },
   fastRefresh: {},
-  antd: false
-})
+  antd: false,
+});
