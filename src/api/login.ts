@@ -22,3 +22,10 @@ export function logout() {
     url: '/logout',
   });
 }
+
+export function getLoginState() {
+  return request({
+    method: 'GET',
+    url: '/login/status',
+  });
+}

@@ -17,6 +17,7 @@ axios.defaults.withCredentials = false; //例如：登录校验session和cookie
 
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'; //声明请求格式
 axios.defaults.transformRequest = (data) => qs.stringify(data); //qs是第三方库，转换为x-www-form-urlencoded
+axios.defaults.withCredentials = true; // 跨域
 
 /**
  * 设置响应拦截器

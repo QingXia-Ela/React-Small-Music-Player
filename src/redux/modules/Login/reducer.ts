@@ -2,7 +2,7 @@ import { CHANGELOGINSTATE, SHOWLOGINMODAL } from '@/redux/constant';
 
 let initState = {
   showLoginModal: false,
-  isLogin: Boolean(localStorage.getItem('isLogin')),
+  isLogin: false,
 };
 
 export default function LoginReducer(

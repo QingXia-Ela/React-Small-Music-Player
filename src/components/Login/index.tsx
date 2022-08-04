@@ -5,8 +5,12 @@ import { connect } from 'react-redux';
 
 import BlackInput from '@/components/Input';
 import { showLoginModal, changeLoginState } from '@/redux/modules/Login/action';
-import { getCaptchaCode, loginByCaptcha } from '@/api/login';
+import { getCaptchaCode, getLoginState, loginByCaptcha } from '@/api/login';
 import { getInfo } from '@/api/music';
+import { ISLOGIN } from '@/constant/LocalStorage';
+
+// 声明
+// import {LoginStatus} from '@/declare/login'
 
 interface NeteaseLoginProps {
   showLoginModal: Function;
@@ -26,14 +30,17 @@ class NeteaseLogin extends React.Component<
     cCode: '',
     confirmloading: false,
     cCodeLoading: false,
+    sendMsgDisabled: false,
+    sendMsgText: '获取验证码',
   };
   sendMsgButton = () => (
     <Button
       className="yellow_button"
       onClick={this.getVerifyCode}
       loading={this.state.cCodeLoading}
+      disabled={this.state.sendMsgDisabled}
     >
-      获取验证码
+      {this.state.sendMsgText}
     </Button>
   );
   render() {
@@ -93,14 +100,31 @@ class NeteaseLogin extends React.Component<
     }
   };
 
+  oneMinDisabled = () => {
+    this.setState({
+      sendMsgDisabled: true,
+      sendMsgText: '获取验证码(60)',
+    });
+
+    let timer = setTimeout(() => {
+      this.setState({
+        sendMsgDisabled: false,
+        sendMsgText: '获取验证码',
+      });
+      clearTimeout(timer);
+    }, 60000);
+  };
+
   getVerifyCode = () => {
     if (this.state.phone) {
       this.setState({ cCodeLoading: true });
       getCaptchaCode(this.state.phone)
         .then(
           (res: any) => {
-            if (res.data) message.success('验证码已发送！，请注意查收');
-            else message.error('错误：' + res.message);
+            if (res.data) {
+              message.success('验证码已发送！，请注意查收');
+              this.oneMinDisabled();
+            } else message.error('错误：' + res.message);
           },
           (err) => {},
         )
@@ -112,7 +136,7 @@ class NeteaseLogin extends React.Component<
     }
   };
 
-  verifyLogin = () => {
+  verifyLogin = async () => {
     if (!(this.state.phone + '').length || !this.state.cCode) {
       message.error('请输入完整信息');
       return;
@@ -121,6 +145,22 @@ class NeteaseLogin extends React.Component<
       confirmloading: true,
     });
 
+    let isLogin = false;
+    await getLoginState()
+      .then((res: any) => {
+        if (res.account) localStorage.setItem(ISLOGIN, 'true');
+        message.error('错误：账号已登录');
+        isLogin = true;
+      })
+      .catch((err) => {
+        localStorage.setItem(ISLOGIN, 'false');
+        message.error(err);
+      })
+      .finally(() => {
+        this.props.changeLoginState(Boolean(localStorage.getItem(ISLOGIN)));
+      });
+    if (isLogin) return;
+
     loginByCaptcha({ phone: this.state.phone, captcha: this.state.cCode })
       .then(
         (res) => {
@@ -128,6 +168,8 @@ class NeteaseLogin extends React.Component<
           this.props.changeLoginState(true);
           this.props.showLoginModal(false);
           localStorage.setItem('isLogin', 'true');
+          this.props.changeLoginState(Boolean(localStorage.getItem(ISLOGIN)));
+
           getInfo().then((res) => {
             console.log(res);
           });
@@ -140,6 +182,22 @@ class NeteaseLogin extends React.Component<
         });
       });
   };
+
+  componentDidMount() {
+    // 初始化登陆状态
+    getLoginState()
+      .then((res: any) => {
+        if (res.account) localStorage.setItem(ISLOGIN, 'true');
+        console.log(res);
+      })
+      .catch((err) => {
+        localStorage.setItem(ISLOGIN, 'false');
+        message.error(err);
+      })
+      .finally(() => {
+        this.props.changeLoginState(Boolean(localStorage.getItem(ISLOGIN)));
+      });
+  }
 }
 
 export default connect(

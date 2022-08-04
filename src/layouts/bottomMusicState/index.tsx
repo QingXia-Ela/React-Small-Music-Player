@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import { throttle } from 'lodash';
 
 import { history, Link } from 'umi';
+import { getInfo } from '@/api/music';
+import { getLoginState } from '@/api/login';
 
 interface BottomMusicStateProps {
   play: Function;
@@ -59,9 +61,21 @@ class BottomMusicState extends React.Component<
           onChange={this.onChange}
           onAfterChange={this.onAfterChange}
         ></Slider>
-
-        {/* <Link to={'/'}>toIndex</Link>
-        <Link to={'/list'}>toList</Link> */}
+        <button
+          onClick={() => {
+            getLoginState()
+              .then((res) => {
+                console.log(res);
+              })
+              .finally(() => {
+                getInfo().then((res) => {
+                  console.log(res);
+                });
+              });
+          }}
+        >
+          getloginmsg
+        </button>
       </div>
     );
   }
