@@ -77,7 +77,8 @@
   z-index: 1;
   margin-left: 2em !important;
 }
-.yellow_button:hover {
+.yellow_button:hover,
+.yellow_button:focus {
   border-color: rgba(94, 94, 94, 0.6);
   background-color: rgba(94, 94, 94, 0.6) !important;
   color: #fdfd1f;
@@ -159,6 +160,7 @@
 html {
   background-color: #191919;
   overflow: hidden;
+  min-width: 1024px;
 }
 body {
   background-color: transparent !important;
@@ -169,6 +171,36 @@ body {
 }
 .por {
   position: relative;
+}
+.h100 {
+  height: 100%;
+}
+.h90 {
+  height: 90%;
+}
+.h80 {
+  height: 80%;
+}
+.h70 {
+  height: 70%;
+}
+.h60 {
+  height: 60%;
+}
+.h50 {
+  height: 50%;
+}
+.h40 {
+  height: 40%;
+}
+.h30 {
+  height: 30%;
+}
+.h20 {
+  height: 20%;
+}
+.h10 {
+  height: 10%;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

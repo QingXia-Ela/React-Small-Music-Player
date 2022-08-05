@@ -88,7 +88,7 @@ class BottomMusicState extends React.Component<
     this.props.changeSong(
       this.playId.current.value.length
         ? parseInt(this.playId.current.value)
-        : 0,
+        : 490182455,
     );
   };
   nextSong = () => {
@@ -106,7 +106,7 @@ class BottomMusicState extends React.Component<
     this.props.removeFromQueue(
       this.playId.current.value.length
         ? parseInt(this.playId.current.value)
-        : 0,
+        : 490182455,
     );
   };
 

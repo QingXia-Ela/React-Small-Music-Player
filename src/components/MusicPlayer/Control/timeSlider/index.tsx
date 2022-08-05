@@ -76,8 +76,6 @@ class TimeSlider extends React.Component<TimeSliderProps> {
   formatTime = (n: number) => {
     let min: string | number = Math.floor(parseInt(n / 60 + ''));
     let sec: string | number = Math.floor(parseInt(n.toFixed(0)) % 60);
-    console.log(sec);
-
     if (min < 10) min = '0' + min;
     if (sec < 10) sec = '0' + sec;
     return min + ':' + sec;

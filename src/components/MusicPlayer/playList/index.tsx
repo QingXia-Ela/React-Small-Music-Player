@@ -26,6 +26,7 @@ interface RightPlayListProps {
   removeFromQueue: Function;
   playQueue: any;
   currentSong: { [propName: string]: any };
+  hideButton?: boolean;
 }
 
 interface RightPlayListState {}
@@ -38,18 +39,6 @@ class RightPlayList extends React.Component<
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className="right_play_list" id="rightPlayList">
-          {/* <Scrollbars
-            renderTrackVertical={(props) => (
-              <div {...props} className="white_scroll_track-vertical" />
-            )}
-            renderThumbVertical={(props) => (
-              <div {...props} className="white_scroll_thumb-vertical" />
-            )}
-            style={{ width: '100%', height: '100%' }}
-            className="white_scroll"
-          >
-
-          </Scrollbars> */}
           <Droppable droppableId="rightPlayListDrop" direction="vertical">
             {(provided) => (
               <ul
@@ -71,28 +60,30 @@ class RightPlayList extends React.Component<
                         } ${val.invalid ? 'invalid' : ''}`}
                       >
                         <span className="song_title">{val.name}</span>
-                        <div className="function_button">
-                          <TransparentButton>
-                            <i
-                              onClick={() => this.props.changeSong(val.id)}
-                              className="button iconfont icon-24gl-play"
-                            ></i>
-                          </TransparentButton>
-                          <TransparentButton>
-                            <Popconfirm
-                              placement="left"
-                              title="确认移除吗？"
-                              onConfirm={() => this.removeFromQueue(val.id)}
-                              okText="YES"
-                              cancelText="NO"
-                              icon={
-                                <i className="iconfont icon-24gl-warningCircle" />
-                              }
-                            >
-                              <i className="button iconfont icon-24gl-trash2"></i>
-                            </Popconfirm>
-                          </TransparentButton>
-                        </div>
+                        {this.props.hideButton ? null : (
+                          <div className="function_button">
+                            <TransparentButton>
+                              <i
+                                onClick={() => this.props.changeSong(val.id)}
+                                className="button iconfont icon-24gl-play"
+                              ></i>
+                            </TransparentButton>
+                            <TransparentButton>
+                              <Popconfirm
+                                placement="left"
+                                title="确认移除吗？"
+                                onConfirm={() => this.removeFromQueue(val.id)}
+                                okText="YES"
+                                cancelText="NO"
+                                icon={
+                                  <i className="iconfont icon-24gl-warningCircle" />
+                                }
+                              >
+                                <i className="button iconfont icon-24gl-trash2"></i>
+                              </Popconfirm>
+                            </TransparentButton>
+                          </div>
+                        )}
                       </li>
                     )}
                   </Draggable>

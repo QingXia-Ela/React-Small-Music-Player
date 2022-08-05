@@ -1,0 +1,46 @@
+.transparent_box1 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    font-family: 'SourceHanSans-Light';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    width: 90%;
+    height: 90%;
+    color: #fff;
+    background-image: linear-gradient(90deg, rgba(99, 99, 99, 0.1), rgba(99, 99, 99, 0.1) 1px, transparent 0, transparent), linear-gradient(90deg, hsla(0deg, 0%, 100%, 0.1) -20%, transparent 15%), linear-gradient(0deg, hsla(0deg, 0%, 100%, 0.1), transparent 25%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid #ffffff7e;
+    border-left: 1px solid #ffffff7e;
+    border-radius: 30px;
+    box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.15);
+    // -webkit-backdrop-filter: blur(3px);
+    // backdrop-filter: blur(3px);
+    transition: background-color 0.5s, box-shadow 0.5s;
+    overflow: hidden;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
+    }
+
+    .title {
+      width: 100%;
+      height: 10%;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    .real_content {
+      width: 100%;
+      height: 80%;
+      text-align: center;
+    }
+  }
+}

@@ -7,9 +7,12 @@ interface singleSongStructure {
   id: number;
   isNull: boolean;
   name: string;
+  author: string;
+  avatar: string;
   img: string;
   url: string;
   invalid: boolean;
+  lyric: string;
 }
 
 let audioObj = new Audio();

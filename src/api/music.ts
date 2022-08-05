@@ -1,17 +1,26 @@
 import request from '@/utils/request';
 
-export function getSongByID(id: number) {
+export function getSongByID(ids: number) {
   return request({
     method: 'GET',
-    url: '/api/getMusic',
+    url: '/song/detail',
+    params: { ids },
+  });
+}
+
+export function getSongFileUrl(id: number) {
+  return request({
+    method: 'GET',
+    url: '/song/url',
     params: { id },
   });
 }
 
-export function getLyricByLink(url: string) {
+export function getLyricByLink(id: number) {
   return request({
     method: 'GET',
-    url,
+    url: '/lyric',
+    params: { id },
   });
 }
 
