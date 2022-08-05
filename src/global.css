@@ -136,7 +136,7 @@
   background-color: transparent;
 }
 .white_scroll .white_scroll_track-vertical {
-  right: 0;
+  right: 0.5rem;
   width: 8px !important;
   height: 100%;
   background-color: transparent;

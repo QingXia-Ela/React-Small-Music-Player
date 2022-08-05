@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { createRef, Fragment } from 'react';
 import { Popconfirm } from 'antd';
 import './index.scss';
 import {
@@ -35,10 +35,20 @@ class RightPlayList extends React.Component<
   RightPlayListProps,
   RightPlayListState
 > {
+  scrollEle = createRef<HTMLDivElement>();
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className="right_play_list" id="rightPlayList">
+        <Scrollbars
+          renderTrackVertical={(props) => (
+            <div {...props} className="white_scroll_track-vertical" />
+          )}
+          renderThumbVertical={(props) => (
+            <div {...props} className="white_scroll_thumb-vertical" />
+          )}
+          className="right_play_list white_scroll"
+        >
           <Droppable droppableId="rightPlayListDrop" direction="vertical">
             {(provided) => (
               <ul
@@ -92,13 +102,13 @@ class RightPlayList extends React.Component<
               </ul>
             )}
           </Droppable>
-        </div>
+        </Scrollbars>
       </DragDropContext>
     );
   }
 
   componentDidMount() {
-    const wrapper = document.getElementById('rightPlayList');
+    // const wrapper = document.getElementById('rightPlayList');
   }
 
   onDragEnd = (result: DropResult, provided: ResponderProvided) => {
