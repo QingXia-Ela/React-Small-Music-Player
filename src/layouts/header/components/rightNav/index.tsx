@@ -7,6 +7,7 @@ import TransparentButton from '@/components/transparentButton';
 
 import { showLoginModal, changeLoginState } from '@/redux/modules/Login/action';
 import { logout } from '@/api/login';
+import { ISLOGIN } from '@/constant/LocalStorage';
 
 interface RightNavProps {
   showLoginModal: Function;
@@ -68,7 +69,7 @@ class RightNav extends React.Component<RightNavProps, RightNavState> {
       .then((res) => {
         message.success('退出成功！');
         this.props.changeLoginState(false);
-        localStorage.setItem('isLogin', 'false');
+        localStorage.setItem(ISLOGIN, '0');
       })
       .finally(() => {
         this.setState({ visible: false });
@@ -77,6 +78,10 @@ class RightNav extends React.Component<RightNavProps, RightNavState> {
   };
 
   judgeLoginMode = () => {
+    if (!window.navigator.onLine) {
+      message.error('网络错误，请检查网络是否正常！');
+      return;
+    }
     if (this.props.isLogin) this.setState({ visible: true });
     else this.props.showLoginModal(true);
   };

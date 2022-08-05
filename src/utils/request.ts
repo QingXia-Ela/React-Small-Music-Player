@@ -13,7 +13,7 @@ switch (process.env.NODE_ENV) {
 }
 
 axios.defaults.timeout = 10000;
-axios.defaults.withCredentials = false; //例如：登录校验session和cookie
+// axios.defaults.withCredentials = false; //例如：登录校验session和cookie
 
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'; //声明请求格式
 axios.defaults.transformRequest = (data) => qs.stringify(data); //qs是第三方库，转换为x-www-form-urlencoded
@@ -26,14 +26,16 @@ axios.defaults.withCredentials = true; // 跨域
  * data：相应数据,status:响应状态码,statusText：响应状态信息,headers：响应头,config：响应提供的配置信息,request
  */
 axios.interceptors.response.use(
-  (response) => {
-    return response.data; //将主体内容返回  axios.get().then(result=>{拿到的就是响应主体})
+  ({ data }) => {
+    if (data)
+      return data; //将主体内容返回  axios.get().then(result=>{拿到的就是响应主体})
+    else return Promise.reject(data);
   },
   (error) => {
     let { response } = error;
     // 如果有返回结果
     if (response) {
-      message.error('工口发生，可能是网络问题');
+      message.error(`工口发生，错误信息：${error.message}`);
       console.log(error);
 
       switch (response.code) {

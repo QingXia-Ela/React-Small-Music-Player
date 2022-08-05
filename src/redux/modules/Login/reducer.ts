@@ -1,8 +1,13 @@
-import { CHANGELOGINSTATE, SHOWLOGINMODAL } from '@/redux/constant';
+import {
+  CHANGELOGINSTATE,
+  SETUSERINFO,
+  SHOWLOGINMODAL,
+} from '@/redux/constant';
 
 let initState = {
   showLoginModal: false,
   isLogin: false,
+  userInfo: null,
 };
 
 export default function LoginReducer(
@@ -22,6 +27,10 @@ export default function LoginReducer(
     case CHANGELOGINSTATE:
       if (typeof data == 'undefined') newState.isLogin = !newState.isLogin;
       else newState.isLogin = data;
+      break;
+
+    case SETUSERINFO:
+      newState.userInfo = { ...data };
       break;
 
     default:

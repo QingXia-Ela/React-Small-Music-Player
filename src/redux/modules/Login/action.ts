@@ -1,5 +1,9 @@
 import { getLoginState } from '@/api/login';
-import { CHANGELOGINSTATE, SHOWLOGINMODAL } from '@/redux/constant';
+import {
+  CHANGELOGINSTATE,
+  SHOWLOGINMODAL,
+  SETUSERINFO,
+} from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
 /**
@@ -17,3 +21,8 @@ export const showLoginModal = (data: boolean | undefined) => ({
   type: SHOWLOGINMODAL,
   data,
 });
+
+/**
+ * 设置当前账户信息
+ */
+export const setUserInfo = (data: object) => ({ type: SETUSERINFO, data });

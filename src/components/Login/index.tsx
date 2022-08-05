@@ -4,7 +4,11 @@ import { Modal, message, Button } from 'antd';
 import { connect } from 'react-redux';
 
 import BlackInput from '@/components/Input';
-import { showLoginModal, changeLoginState } from '@/redux/modules/Login/action';
+import {
+  showLoginModal,
+  changeLoginState,
+  setUserInfo,
+} from '@/redux/modules/Login/action';
 import { getCaptchaCode, getLoginState, loginByCaptcha } from '@/api/login';
 import { getInfo } from '@/api/music';
 import { ISLOGIN } from '@/constant/LocalStorage';
@@ -15,6 +19,7 @@ import { ISLOGIN } from '@/constant/LocalStorage';
 interface NeteaseLoginProps {
   showLoginModal: Function;
   changeLoginState: Function;
+  setUserInfo: Function;
   showModal: boolean;
   isLogin: boolean;
 }
@@ -121,12 +126,12 @@ class NeteaseLogin extends React.Component<
       getCaptchaCode(this.state.phone)
         .then(
           (res: any) => {
-            if (res.data) {
+            if (res && res.data) {
               message.success('验证码已发送！，请注意查收');
               this.oneMinDisabled();
-            } else message.error('错误：' + res.message);
+            }
           },
-          (err) => {},
+          () => {},
         )
         .finally(() => {
           this.setState({ cCodeLoading: false });
@@ -151,10 +156,10 @@ class NeteaseLogin extends React.Component<
         if (res.account) localStorage.setItem(ISLOGIN, 'true');
         message.error('错误：账号已登录');
         isLogin = true;
+        this.setState({ confirmloading: false });
       })
       .catch((err) => {
         localStorage.setItem(ISLOGIN, 'false');
-        message.error(err);
       })
       .finally(() => {
         this.props.changeLoginState(Boolean(localStorage.getItem(ISLOGIN)));
@@ -187,15 +192,18 @@ class NeteaseLogin extends React.Component<
     // 初始化登陆状态
     getLoginState()
       .then((res: any) => {
-        if (res.account) localStorage.setItem(ISLOGIN, 'true');
-        console.log(res);
+        if (res.data.account) {
+          localStorage.setItem(ISLOGIN, '1');
+          this.props.setUserInfo(res.data);
+        } else localStorage.setItem(ISLOGIN, '0');
       })
       .catch((err) => {
-        localStorage.setItem(ISLOGIN, 'false');
-        message.error(err);
+        localStorage.setItem(ISLOGIN, '0');
       })
       .finally(() => {
-        this.props.changeLoginState(Boolean(localStorage.getItem(ISLOGIN)));
+        this.props.changeLoginState(
+          Boolean(parseInt(localStorage.getItem(ISLOGIN)!)),
+        );
       });
   }
 }
@@ -208,5 +216,6 @@ export default connect(
   {
     showLoginModal,
     changeLoginState,
+    setUserInfo,
   },
 )(NeteaseLogin);
