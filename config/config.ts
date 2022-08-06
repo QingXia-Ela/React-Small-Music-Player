@@ -11,6 +11,5 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/loading',
   },
-  fastRefresh: {},
   antd: false,
 });

@@ -4,13 +4,19 @@ import { connect } from 'react-redux';
 import { Modal, message } from 'antd';
 
 import TransparentButton from '@/components/transparentButton';
+import Logout from '@/components/Logout';
 
-import { showLoginModal, changeLoginState } from '@/redux/modules/Login/action';
+import {
+  showLoginModal,
+  changeLoginState,
+  showLogoutModal,
+} from '@/redux/modules/Login/action';
 import { logout } from '@/api/login';
 import { ISLOGIN } from '@/constant/LocalStorage';
 
 interface RightNavProps {
   showLoginModal: Function;
+  showLogoutModal: Function;
   changeLoginState: Function;
   isLogin: boolean;
 }
@@ -18,10 +24,6 @@ interface RightNavProps {
 interface RightNavState {}
 
 class RightNav extends React.Component<RightNavProps, RightNavState> {
-  state = {
-    visible: false,
-    confirmloading: false,
-  };
   render() {
     return (
       <div className="right_nav">
@@ -39,50 +41,17 @@ class RightNav extends React.Component<RightNavProps, RightNavState> {
             {this.props.isLogin ? '退出登录' : '登陆'}
           </span>
         </TransparentButton>
-        <Modal
-          className="black_modal"
-          visible={this.state.visible}
-          title="确认操作"
-          onCancel={() => this.setState({ visible: false })}
-          onOk={this.logout}
-          okButtonProps={{
-            className: 'yellow_button',
-            type: 'text',
-          }}
-          cancelButtonProps={{
-            className: 'yellow_button negative',
-            type: 'text',
-          }}
-          okText="确定"
-          cancelText="取消"
-          confirmLoading={this.state.confirmloading}
-        >
-          <span className="text_only">确认退出登录吗</span>
-        </Modal>
+        <Logout />
       </div>
     );
   }
-
-  logout = () => {
-    this.setState({ confirmloading: true });
-    logout()
-      .then((res) => {
-        message.success('退出成功！');
-        this.props.changeLoginState(false);
-        localStorage.setItem(ISLOGIN, '0');
-      })
-      .finally(() => {
-        this.setState({ visible: false });
-        this.setState({ confirmloading: false });
-      });
-  };
 
   judgeLoginMode = () => {
     if (!window.navigator.onLine) {
       message.error('网络错误，请检查网络是否正常！');
       return;
     }
-    if (this.props.isLogin) this.setState({ visible: true });
+    if (this.props.isLogin) this.props.showLogoutModal(true);
     else this.props.showLoginModal(true);
   };
 }
@@ -92,6 +61,7 @@ export default connect(
     isLogin: state.Login.isLogin,
   }),
   {
+    showLogoutModal,
     showLoginModal,
     changeLoginState,
   },

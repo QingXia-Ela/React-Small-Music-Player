@@ -33,3 +33,4 @@ export const SETLYRIC = 'SetLyric';
 export const CHANGELOGINSTATE = 'ChangeLoginState';
 export const SHOWLOGINMODAL = 'ShowLoginModal';
 export const SETUSERINFO = 'SetUserInfo';
+export const SHOWLOGOUTMODAL = 'ShowLogoutModal';

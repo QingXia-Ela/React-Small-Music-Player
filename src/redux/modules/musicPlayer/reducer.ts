@@ -16,6 +16,7 @@ interface singleSongStructure {
 }
 
 let audioObj = new Audio();
+audioObj.volume = 0.3;
 let initAudio: songStructure = {
   isPlay: false,
   isMuted: false,
@@ -295,7 +296,7 @@ export default function AudioReducer(
     case NEXTSONG:
       if (newState.playQueue.length && newState.currentSong) {
         // 随机模式
-        if (newState.playMode == 3) {
+        if (newState.playMode == 3 || data) {
           let info = null;
           if (newState.playQueue.length == 1)
             info = { ...newState.playQueue[0] };
@@ -525,9 +526,6 @@ export default function AudioReducer(
         }
       }
       if (trigger) break;
-
-      // 初始化
-      audioObj.volume = newState.volume;
       break;
   }
   newState.playQueue = [...newState.playQueue];

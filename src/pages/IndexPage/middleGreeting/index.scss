@@ -1,0 +1,25 @@
+.middle_greeting {
+  height: 100%;
+  text-align: center;
+
+  .greeting {
+    height: 15%;
+    font-size: 2rem;
+  }
+
+  .random_song {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 25%;
+    font-size: 1.4em;
+  }
+
+  .control_box {
+    height: 60%;
+
+    .music_controler {
+      height: 30%;
+    }
+  }
+}

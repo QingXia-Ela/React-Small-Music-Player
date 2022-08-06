@@ -150,8 +150,8 @@
   transition: background-color 0.5s, box-shadow 0.5s;
 }
 .white_scroll .white_scroll_thumb-vertical:hover {
-  box-shadow: 0 0 5px 1px #fff;
-  background-color: #fff;
+  box-shadow: 0 0 5px 1px #ffffff4f;
+  background-color: #ffffff7e;
 }
 * {
   margin: 0;
@@ -165,6 +165,13 @@ html {
 body {
   background-color: transparent !important;
   font-size: inherit !important;
+}
+.underline_button {
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+.underline_button:hover {
+  cursor: pointer;
 }
 .f1 {
   flex: 1;

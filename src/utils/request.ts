@@ -35,13 +35,14 @@ axios.interceptors.response.use(
     let { response } = error;
     // 如果有返回结果
     if (response) {
-      message.error(`工口发生，错误信息：${error.message}`);
-      console.log(error);
-
-      switch (response.code) {
+      const { data } = response;
+      message.error(`工口发生，错误信息：${data.message}`);
+      switch (data.code) {
         //这里面根据公司需求进行写
-        case 404:
+        case 503:
           //进行错误跳转之类
+          break;
+        case 301:
           break;
         default:
           break;

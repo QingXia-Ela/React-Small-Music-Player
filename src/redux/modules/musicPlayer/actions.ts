@@ -106,8 +106,9 @@ export const switchPlayMode = (data: number) => ({
 
 /**
  * 下一首
+ * @param data 随机播放 flag
  */
-export const nextSong = () => ({ type: NEXTSONG });
+export const nextSong = (data: boolean) => ({ type: NEXTSONG, data });
 
 /**
  * 上一首

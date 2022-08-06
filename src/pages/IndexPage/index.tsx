@@ -3,6 +3,8 @@ import './index.scss';
 
 import TransparentBox1 from '@/components/pages/transparentBox1';
 import LeftList from './leftList';
+import MiddleGreeting from './middleGreeting';
+import RightFunctionList from './rightFunctionList';
 
 export default function IndexPage() {
   return (
@@ -12,10 +14,10 @@ export default function IndexPage() {
           <LeftList />
         </Col>
         <Col lg={12} xl={12} xxl={12} className="transparent_box1">
-          <TransparentBox1>test</TransparentBox1>
+          <MiddleGreeting />
         </Col>
         <Col lg={6} xl={6} xxl={6} className="transparent_box1">
-          <TransparentBox1 title="功能按键">te</TransparentBox1>
+          <RightFunctionList />
         </Col>
       </Row>
       <Row className="h20 spectrum">

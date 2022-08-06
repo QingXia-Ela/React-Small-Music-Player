@@ -152,11 +152,15 @@ class NeteaseLogin extends React.Component<
 
     let isLogin = false;
     await getLoginState()
-      .then((res: any) => {
-        if (res.account) localStorage.setItem(ISLOGIN, 'true');
-        message.error('错误：账号已登录');
-        isLogin = true;
-        this.setState({ confirmloading: false });
+      .then(({ data }) => {
+        console.log(data);
+
+        if (data.account) {
+          localStorage.setItem(ISLOGIN, 'true');
+          message.error('错误：账号已登录');
+          isLogin = true;
+          this.setState({ confirmloading: false });
+        }
       })
       .catch((err) => {
         localStorage.setItem(ISLOGIN, 'false');
@@ -169,6 +173,8 @@ class NeteaseLogin extends React.Component<
     loginByCaptcha({ phone: this.state.phone, captcha: this.state.cCode })
       .then(
         (res) => {
+          if (!res) return;
+
           message.success('登陆成功！');
           this.props.changeLoginState(true);
           this.props.showLoginModal(false);

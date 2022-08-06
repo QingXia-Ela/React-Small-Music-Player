@@ -8,9 +8,12 @@ import { throttle } from 'lodash';
 
 interface RightMusicVolumeControlerProps {
   changeVolume: Function;
+  volume: number;
 }
 
-interface RightMusicVolumeControlerState {}
+interface RightMusicVolumeControlerState {
+  vol: number;
+}
 
 class RightMusicVolumeControler extends React.Component<
   RightMusicVolumeControlerProps,
@@ -19,6 +22,17 @@ class RightMusicVolumeControler extends React.Component<
   state = {
     vol: 0.3,
   };
+
+  static getDerivedStateFromProps(
+    props: RightMusicVolumeControlerProps,
+    state: RightMusicVolumeControlerState,
+  ) {
+    return state.vol != props.volume
+      ? {
+          vol: props.volume,
+        }
+      : null;
+  }
 
   render() {
     return (
@@ -44,7 +58,7 @@ class RightMusicVolumeControler extends React.Component<
 
   throttleVol = throttle((n: number) => {
     this.props.changeVolume(n);
-  }, 100);
+  }, 50);
 }
 
 export default connect(

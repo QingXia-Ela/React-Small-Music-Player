@@ -3,6 +3,7 @@ import {
   CHANGELOGINSTATE,
   SHOWLOGINMODAL,
   SETUSERINFO,
+  SHOWLOGOUTMODAL,
 } from '@/redux/constant';
 import { ThunkActionDispatch } from 'redux-thunk';
 
@@ -26,3 +27,11 @@ export const showLoginModal = (data: boolean | undefined) => ({
  * 设置当前账户信息
  */
 export const setUserInfo = (data: object) => ({ type: SETUSERINFO, data });
+
+/**
+ * 展示退出登录框
+ */
+export const showLogoutModal = (data: boolean) => ({
+  type: SHOWLOGOUTMODAL,
+  data,
+});
