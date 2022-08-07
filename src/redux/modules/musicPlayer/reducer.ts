@@ -478,6 +478,13 @@ export default function AudioReducer(
          * 调整了播放顺序，没更新列表
          */
         newState.playQueue = [...data];
+        let newIndex = -1;
+        data.forEach((val: any, i: number) => {
+          if (val.id == newState.currentSong.id) {
+            newIndex = i;
+          }
+        });
+        newState.currentSongIndex = newIndex;
       }
       break;
     case SHOWLYRICS:
