@@ -34,3 +34,8 @@ export const CHANGELOGINSTATE = 'ChangeLoginState';
 export const SHOWLOGINMODAL = 'ShowLoginModal';
 export const SETUSERINFO = 'SetUserInfo';
 export const SHOWLOGOUTMODAL = 'ShowLogoutModal';
+
+/**
+ * 获取天气操作方法
+ */
+export const GETWEATHER = 'GetWeather';

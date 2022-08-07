@@ -1,10 +1,11 @@
 import { Row, Col } from 'antd';
 import './index.scss';
 
-import TransparentBox1 from '@/components/pages/transparentBox1';
 import LeftList from './leftList';
 import MiddleGreeting from './middleGreeting';
 import RightFunctionList from './rightFunctionList';
+import BottomWeather from './bottomWeather';
+import BottomSpectrum from './bottomSpectrum';
 
 export default function IndexPage() {
   return (
@@ -13,15 +14,20 @@ export default function IndexPage() {
         <Col lg={6} xl={6} xxl={6}>
           <LeftList />
         </Col>
-        <Col lg={12} xl={12} xxl={12} className="transparent_box1">
+        <Col lg={12} xl={12} xxl={12}>
           <MiddleGreeting />
         </Col>
-        <Col lg={6} xl={6} xxl={6} className="transparent_box1">
+        <Col lg={6} xl={6} xxl={6}>
           <RightFunctionList />
         </Col>
       </Row>
       <Row className="h20 spectrum">
-        <TransparentBox1>频谱</TransparentBox1>
+        <Col lg={12} xl={12} xxl={12}>
+          <BottomSpectrum />
+        </Col>
+        <Col lg={12} xl={12} xxl={12}>
+          <BottomWeather />
+        </Col>
       </Row>
     </div>
   );

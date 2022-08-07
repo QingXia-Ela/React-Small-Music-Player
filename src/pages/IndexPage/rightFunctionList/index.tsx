@@ -14,7 +14,7 @@ function RightFunctionList(props: { [propName: string]: any }) {
           随机播放一曲
         </TransparentButton>
         <TransparentButton>浏览当前播放列表</TransparentButton>
-        <TransparentButton>选择播放列表</TransparentButton>
+        <TransparentButton>查看所有歌曲</TransparentButton>
         <TransparentButton>当前播放歌曲详情</TransparentButton>
         <TransparentButton>切换背景图</TransparentButton>
       </div>

@@ -36,16 +36,18 @@ axios.interceptors.response.use(
     // 如果有返回结果
     if (response) {
       const { data } = response;
-      message.error(`工口发生，错误信息：${data.message}`);
-      switch (data.code) {
-        //这里面根据公司需求进行写
-        case 503:
-          //进行错误跳转之类
-          break;
-        case 301:
-          break;
-        default:
-          break;
+      if (data) {
+        message.error(`工口发生，错误信息：${data.message}`);
+        switch (data.code) {
+          //这里面根据公司需求进行写
+          case 503:
+            //进行错误跳转之类
+            break;
+          case 301:
+            break;
+          default:
+            break;
+        }
       }
     } else {
       //服务器没有返回结果 分两种情况 断网  服务器崩了
