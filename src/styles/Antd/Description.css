@@ -1,4 +1,5 @@
 .ant-descriptions.transparent_description {
+  height: 100%;
   padding: 0 2rem;
 }
 .ant-descriptions.transparent_description .ant-descriptions-item-container .ant-descriptions-item-label {
