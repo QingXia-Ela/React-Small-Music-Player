@@ -8,6 +8,7 @@ switch (process.env.NODE_ENV) {
     break;
 
   default:
+    // development
     axios.defaults.baseURL = 'http://localhost:3000';
     break;
 }

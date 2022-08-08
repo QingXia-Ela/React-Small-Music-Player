@@ -15,8 +15,10 @@ interface singleSongStructure {
   lyric: string;
 }
 
-let audioObj = new Audio();
+let audioObj = new Audio('');
 audioObj.volume = 0.3;
+audioObj.crossOrigin = 'anonymous';
+
 let initAudio: songStructure = {
   isPlay: false,
   isMuted: false,
