@@ -1,1 +1,14 @@
-.topleft_spectrum {}
+.topleft_spectrum {
+  display: flex;
+  height: 100%;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+
+  .index_canvas {
+    width: 85%;
+    height: 5em;
+    cursor: pointer;
+  }
+}
