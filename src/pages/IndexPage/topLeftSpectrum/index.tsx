@@ -100,7 +100,7 @@ class TopLeftSpectrum extends React.Component<
       let x = 0;
 
       for (let i = 0; i < alt; i++) {
-        barH = arr[i] + 20;
+        barH = arr[i] + 30;
         canvasCtx.fillStyle = '#bce5ef';
         canvasCtx.fillRect(x, h / 2 - barH / 8, barW, barH / 4);
         x += barW + 3;

@@ -54,6 +54,32 @@ body {
   }
 }
 
+.transparent_button {
+  font-family: 'SourceHanSansCN-Light';
+  position: relative;
+  line-height: 1.2;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #c6c9ce !important;
+  }
+
+  &:hover.hover_pointer {
+    cursor: pointer;
+  }
+
+  &.active {
+    color: #c6c9ce !important;
+  }
+
+  &.disabled {
+    color: rgb(95, 88, 88) !important;
+    cursor: default !important;
+  }
+}
+
 .f1 {
   flex: 1;
 }

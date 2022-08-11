@@ -9,11 +9,11 @@ export default [
         path: '/',
         component: '@/pages/IndexPage',
       },
-      // {
-      //   exact: true,
-      //   path: '/list',
-      //   component: '@/pages/ListPage'
-      // }
+      {
+        exact: true,
+        path: '/SongList',
+        component: '@/pages/SongListPage',
+      },
     ],
   },
 ];

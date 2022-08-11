@@ -2,6 +2,7 @@ import * as React from 'react';
 import './index.scss';
 import { connect } from 'react-redux';
 import { Modal, message } from 'antd';
+import { Link, NavLink } from 'umi';
 
 import TransparentButton from '@/components/transparentButton';
 import Logout from '@/components/Logout';
@@ -27,12 +28,16 @@ class RightNav extends React.Component<RightNavProps, RightNavState> {
   render() {
     return (
       <div className="right_nav">
-        <TransparentButton>
-          <span className="content">主页</span>
-        </TransparentButton>
-        <TransparentButton>
-          <span className="content">音乐</span>
-        </TransparentButton>
+        <Link to="/" className="transparent_button">
+          主页
+        </Link>
+        <NavLink
+          to="/SongList"
+          activeClassName="transparent_button active"
+          className="transparent_button"
+        >
+          音乐
+        </NavLink>
         <TransparentButton>
           <span className="content">设置</span>
         </TransparentButton>

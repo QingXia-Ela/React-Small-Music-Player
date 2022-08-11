@@ -1,22 +1,22 @@
-.transparent_button {
-  font-family: "SourceHanSansCN-Light";
-  position: relative;
-  line-height: 1.2;
-  color: #c6c9ce;
-  text-decoration: none;
-  transition: color .3s ease;
+// .transparent_button {
+//   font-family: "SourceHanSansCN-Light";
+//   position: relative;
+//   line-height: 1.2;
+//   color: #c6c9ce;
+//   text-decoration: none;
+//   transition: color .3s ease;
 
-  &:hover.hover_pointer {
-    color: #ffffff;
-    cursor: pointer;
-  }
+//   &:hover.hover_pointer {
+//     color: #ffffff !important;
+//     cursor: pointer;
+//   }
 
-  &.active {
-    color: #ffffff;
-  }
+//   &.active {
+//     color: #ffffff !important;
+//   }
 
-  &.disabled {
-    color: rgb(95, 88, 88) !important;
-    cursor: default !important;
-  }
-}
+//   &.disabled {
+//     color: rgb(95, 88, 88) !important;
+//     cursor: default !important;
+//   }
+// }

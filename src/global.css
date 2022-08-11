@@ -184,6 +184,27 @@ body {
 .underline_button:hover {
   cursor: pointer;
 }
+.transparent_button {
+  font-family: "SourceHanSansCN-Light";
+  position: relative;
+  line-height: 1.2;
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.transparent_button:hover {
+  color: #c6c9ce !important;
+}
+.transparent_button:hover.hover_pointer {
+  cursor: pointer;
+}
+.transparent_button.active {
+  color: #c6c9ce !important;
+}
+.transparent_button.disabled {
+  color: #5f5858 !important;
+  cursor: default !important;
+}
 .f1 {
   flex: 1;
 }
