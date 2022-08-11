@@ -1,0 +1,11 @@
+.black_list_item_style {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .8rem 0;
+  font-size: 1.2rem;
+  background-color: #00000022;
+  transition: background-color .3s;
+  cursor: default;
+}

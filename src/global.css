@@ -164,6 +164,15 @@
   justify-content: center;
   color: #fff;
 }
+.ant-spin-nested-loading {
+  height: 100%;
+}
+.ant-spin-nested-loading .ant-spin-container {
+  height: 100%;
+}
+.ant-spin-nested-loading .ant-spin-container::after {
+  background: #000;
+}
 * {
   margin: 0;
   padding: 0;
@@ -185,7 +194,7 @@ body {
   cursor: pointer;
 }
 .transparent_button {
-  font-family: "SourceHanSansCN-Light";
+  font-family: 'SourceHanSansCN-Light';
   position: relative;
   line-height: 1.2;
   color: #ffffff;

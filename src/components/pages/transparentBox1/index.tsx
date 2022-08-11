@@ -7,6 +7,7 @@ interface TransparentBox1Props {
   title?: string | undefined;
   children?: any;
   openVT?: boolean | undefined;
+  addClass?: string;
 }
 
 interface TransparentBox1State {}
@@ -21,7 +22,12 @@ class TransparentBox1 extends React.Component<
 
   render() {
     return (
-      <div className="transparent_box1" {...this.props}>
+      <div
+        className={`transparent_box1 ${
+          this.props.addClass ? this.props.addClass : ''
+        }`}
+        {...this.props}
+      >
         <div className="content" ref={this.ele}>
           {this.props.title ? (
             <div className="title">{this.props.title}</div>

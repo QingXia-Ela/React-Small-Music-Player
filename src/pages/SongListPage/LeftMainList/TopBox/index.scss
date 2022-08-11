@@ -1,0 +1,13 @@
+.song_list_page_container {
+  .top_box {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    width: 100%;
+    height: 40%;
+
+    .current_playlist {
+      width: 90%;
+    }
+  }
+}
