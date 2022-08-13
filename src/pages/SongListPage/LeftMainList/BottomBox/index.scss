@@ -1,5 +1,40 @@
 .song_list_page_container {
   .bottom_box {
-    height: 60%;
+    height: 65%;
+
+    .ant-spin-container {
+      display: flex;
+      flex-flow: column nowrap;
+
+      .title {
+        padding: none;
+      }
+
+      .mode_switch {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: .6rem 0;
+        padding: 0 1.8rem;
+        font-size: 1.2rem;
+
+        .switch .anticon {
+          margin: 0 3px;
+        }
+      }
+
+      .bottom_box_list_container {
+        position: relative;
+        flex: 1;
+
+        .login_tip {
+          position: absolute;
+          left: 50%;
+          top: 45%;
+          font-size: 1.4rem;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
   }
 }

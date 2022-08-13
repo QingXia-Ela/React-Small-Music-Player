@@ -1,11 +1,42 @@
 .black_list_item_style {
   position: relative;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
   padding: .8rem 0;
   font-size: 1.2rem;
-  background-color: #00000022;
-  transition: background-color .3s;
+  background-color: transparent;
+  transition: background-color .3s, transform .1s;
   cursor: default;
+
+  .anticon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    margin: 0 5px;
+    transform: translateY(-50%);
+  }
+
+  .black_list_item_content {
+    padding-left: 55px;
+  }
+
+  &.active {
+    &::before {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background-color: #fff;
+      box-shadow: 0 0 6px #fff;
+    }
+  }
+
+  &:hover {
+    background-color: #ffffff22;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 }

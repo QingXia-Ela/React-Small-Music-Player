@@ -1,24 +1,50 @@
-import TransparentBox1 from '@/components/pages/transparentBox1';
 import * as React from 'react';
+import { connect } from 'react-redux';
 import './index.scss';
 
+import TransparentBox1 from '@/components/pages/transparentBox1';
 import LeftMainList from './LeftMainList';
 import RightDetailList from './RightDetailList';
 
-interface SongListPageProps {}
+interface SongListPageProps {
+  userInfo: {
+    [propName: string]: any;
+  };
+}
 
-interface SongListPageState {}
+interface SongListPageState {
+  ListId: string | number;
+}
 
 class SongListPage extends React.Component<
   SongListPageProps,
   SongListPageState
 > {
-  state = {};
+  state = {
+    ListId: 'current',
+  };
+  changeShowList = (id: string | number) => {
+    this.setState({
+      ListId: id,
+    });
+    if (typeof id === 'string') {
+      switch (id) {
+        case 'current':
+          break;
+        case 'myfavorite':
+          break;
+        case 'search':
+          break;
+        default:
+          break;
+      }
+    }
+  };
   render() {
     return (
-      <TransparentBox1 addClass="song_list_page">
+      <TransparentBox1 addclass="song_list_page">
         <div className="song_list_page_container">
-          <LeftMainList />
+          <LeftMainList currentId={this.state.ListId} />
           <RightDetailList />
         </div>
       </TransparentBox1>
@@ -26,4 +52,6 @@ class SongListPage extends React.Component<
   }
 }
 
-export default SongListPage;
+export default connect((state: { [propName: string]: any }) => ({
+  userInfo: state.Login.userInfo,
+}))(SongListPage);

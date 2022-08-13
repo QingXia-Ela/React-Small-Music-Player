@@ -39,3 +39,9 @@ export const SHOWLOGOUTMODAL = 'ShowLogoutModal';
  * 获取天气操作方法
  */
 export const GETWEATHER = 'GetWeather';
+
+/**
+ * 歌曲列表操作方法
+ */
+export const CHANGESONGLISTID = 'ChangeSongListId';
+export const UPDATEUSERSONGSHEET = 'UpdateUserSongSheet';
