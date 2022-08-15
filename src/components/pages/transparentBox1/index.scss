@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
 
-  .content {
+  &>.content {
     font-family: 'SourceHanSans-Light';
     display: flex;
     justify-content: center;
@@ -28,14 +28,14 @@
       box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.3);
     }
 
-    .title {
+    &>.title {
       width: 100%;
       text-align: center;
       font-size: 1.5rem;
       padding-top: 1rem;
     }
 
-    .real_content {
+    &>.real_content {
       width: 100%;
       flex: 1;
       text-align: center;

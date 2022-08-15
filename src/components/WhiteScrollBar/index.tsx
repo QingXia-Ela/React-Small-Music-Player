@@ -9,7 +9,7 @@ function WhiteScrollBar(props: { [propName: string]: any }) {
       renderThumbVertical={(props) => (
         <div {...props} className="white_scroll_thumb-vertical" />
       )}
-      className="right_play_list white_scroll"
+      className="white_scroll"
     >
       {props.children}
     </Scrollbars>

@@ -1,25 +1,25 @@
 .white_scroll {
   .white_scroll_track-vertical {
     right: 0.5rem;
-    // right: 0;
     width: 8px !important;
     height: 100%;
     background-color: transparent;
     transition: background-color 0.5s;
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
   }
 
   .white_scroll_thumb-vertical {
-    // width: 8px !important;
     background-color: transparent;
     transition: background-color 0.5s, box-shadow 0.5s;
+  }
 
-    &:hover {
+  &:hover {
+    .white_scroll_thumb-vertical {
       box-shadow: 0 0 5px 1px #ffffff4f;
       background-color: #ffffff7e;
+    }
+
+    .white_scroll_track-vertical {
+      background-color: rgba(255, 255, 255, 0.3);
     }
   }
 }

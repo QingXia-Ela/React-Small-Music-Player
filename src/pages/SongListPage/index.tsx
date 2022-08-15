@@ -53,5 +53,7 @@ class SongListPage extends React.Component<
 }
 
 export default connect((state: { [propName: string]: any }) => ({
-  userInfo: state.Login.userInfo,
+  currentDetailListLoading: state.SongList.currentDetailListLoading,
+  currentDetailListInfo: state.SongList.currentDetailListInfo,
+  currentDetailList: state.SongList.currentDetailList,
 }))(SongListPage);

@@ -45,3 +45,4 @@ export const GETWEATHER = 'GetWeather';
  */
 export const CHANGESONGLISTID = 'ChangeSongListId';
 export const UPDATEUSERSONGSHEET = 'UpdateUserSongSheet';
+export const CHANGESHOWSUBSCRIBELIST = 'ChangeShowSubscribeList';

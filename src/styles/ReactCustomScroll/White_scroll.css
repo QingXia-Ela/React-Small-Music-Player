@@ -5,14 +5,14 @@
   background-color: transparent;
   transition: background-color 0.5s;
 }
-.white_scroll .white_scroll_track-vertical:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-}
 .white_scroll .white_scroll_thumb-vertical {
   background-color: transparent;
   transition: background-color 0.5s, box-shadow 0.5s;
 }
-.white_scroll .white_scroll_thumb-vertical:hover {
+.white_scroll:hover .white_scroll_thumb-vertical {
   box-shadow: 0 0 5px 1px #ffffff4f;
   background-color: #ffffff7e;
+}
+.white_scroll:hover .white_scroll_track-vertical {
+  background-color: rgba(255, 255, 255, 0.3);
 }

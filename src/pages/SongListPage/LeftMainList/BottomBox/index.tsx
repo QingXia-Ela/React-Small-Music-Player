@@ -14,6 +14,7 @@ import { showLoginModal, showLogoutModal } from '@/redux/modules/Login/action';
 import {
   updateUserSongSheet,
   changeSongListId,
+  changeShowSubscribeList,
 } from '@/redux/modules/SongList/action';
 
 import WhiteScrollBar from '@/components/WhiteScrollBar';
@@ -21,11 +22,13 @@ import BlackListItem from '@/components/BlackListItem';
 
 interface BottomBoxProps {
   isLogin: boolean;
+  showSubscribeList: boolean;
   currentListId: string | number;
   showLoginModal: Function;
   showLogoutModal: Function;
   updateUserSongSheet: Function;
   changeSongListId: Function;
+  changeShowSubscribeList: Function;
   userInfo: { [propName: string]: any };
   selfCreateList: { [propName: string]: any }[];
   subscribeList: { [propName: string]: any }[];
@@ -42,12 +45,10 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
     spinning: false,
   };
   changeShowListMode = () => {
-    this.setState({
-      showSubscribeList: !this.state.showSubscribeList,
-    });
+    this.props.changeShowSubscribeList();
   };
   judgeShowList = () => {
-    const list = this.state.showSubscribeList
+    const list = this.props.showSubscribeList
       ? this.props.subscribeList
       : this.props.selfCreateList;
     return list.map((val) => (
@@ -92,7 +93,7 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
           <div className="title">我的网易云播放列表</div>
           <div className="mode_switch">
             <div className="mode_text">
-              {this.state.showSubscribeList ? '我订阅的歌单' : '我创建的歌单'}
+              {this.props.showSubscribeList ? '我订阅的歌单' : '我创建的歌单'}
             </div>
             <div className="switch">
               <ReloadOutlined onClick={() => this.getSongList()} />
@@ -106,8 +107,8 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
               <div className="login_tip">
                 <span className="underline_button" onClick={this.judgeModal}>
                   登陆
-                </span>{' '}
-                获取更多信息
+                </span>
+                &nbsp;获取更多信息
               </div>
             )}
           </div>
@@ -132,11 +133,13 @@ export default connect(
     selfCreateList: state.SongList.selfCreateList,
     subscribeList: state.SongList.subscribeList,
     currentListId: state.SongList.currentListId,
+    showSubscribeList: state.SongList.showSubscribeList,
   }),
   {
     showLoginModal,
     showLogoutModal,
     updateUserSongSheet,
     changeSongListId,
+    changeShowSubscribeList,
   },
 )(BottomBox);

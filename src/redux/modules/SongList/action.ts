@@ -1,4 +1,8 @@
-import { CHANGESONGLISTID, UPDATEUSERSONGSHEET } from '@/redux/constant';
+import {
+  CHANGESHOWSUBSCRIBELIST,
+  CHANGESONGLISTID,
+  UPDATEUSERSONGSHEET,
+} from '@/redux/constant';
 
 /**
  * 改变右侧播放列表
@@ -6,10 +10,12 @@ import { CHANGESONGLISTID, UPDATEUSERSONGSHEET } from '@/redux/constant';
  *
  * 字符串 `current` 代表当前播放列表，`myfavorite` 代表我喜爱的音乐，`search` 代表搜索列表
  */
-export const changeSongListId = (data: string | number) => ({
-  type: CHANGESONGLISTID,
-  data,
-});
+export const changeSongListId = (data: string | number) => {
+  return {
+    type: CHANGESONGLISTID,
+    data,
+  };
+};
 
 /**
  * 更新用户歌单
@@ -17,5 +23,10 @@ export const changeSongListId = (data: string | number) => ({
  */
 export const updateUserSongSheet = (data: object[]) => ({
   type: UPDATEUSERSONGSHEET,
+  data,
+});
+
+export const changeShowSubscribeList = (data: boolean) => ({
+  type: CHANGESHOWSUBSCRIBELIST,
   data,
 });

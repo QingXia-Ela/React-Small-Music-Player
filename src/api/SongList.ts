@@ -4,6 +4,6 @@ export function getUserMusicList(uid: number) {
   return request({
     method: 'GET',
     url: '/user/playlist',
-    params: { uid },
+    params: { uid, limit: 100 },
   });
 }
