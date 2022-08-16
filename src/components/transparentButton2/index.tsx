@@ -2,7 +2,10 @@ import React, { Fragment, ReactNode, cloneElement } from 'react';
 
 import './index.scss';
 
-interface TransparentButton2Props extends HTMLDivElement {}
+interface TransparentButton2Props {
+  iconBefore?: JSX.Element;
+  children: any;
+}
 
 interface TransparentButton2State {}
 
@@ -17,7 +20,8 @@ class TransparentButton2 extends React.Component<
   render() {
     return (
       <div className="transparent_button2">
-        {cloneElement(<>{this.props.children}</>)}
+        <div className="icon_before_container">{this.props.iconBefore}</div>
+        {this.props.children}
       </div>
     );
   }

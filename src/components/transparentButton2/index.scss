@@ -1,1 +1,15 @@
-.transparent_button2 {}
+.transparent_button2 {
+  display: flex;
+  padding: .3rem 1rem;
+  border-radius: 100vh;
+  transition: background-color .3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ffffff3c;
+  }
+
+  .icon_before_container {
+    padding: 0 5px;
+  }
+}

@@ -4,7 +4,7 @@ import {
   UPDATEUSERSONGSHEET,
 } from '@/redux/constant';
 
-let initState = {
+let initState: { [propName: string]: any } = {
   currentListId: 'current',
   selfCreateList: <any>[],
   subscribeList: <any>[],
@@ -33,6 +33,15 @@ function SongListReducer(prevState = initState, action: any) {
         });
         // 有结果了
         if (res) newState.currentDetailListInfo = res;
+      } else {
+        if (data === 'myfavorite') {
+          newState.currentDetailListInfo = newState.favoriteMusic;
+        } else if (data === 'current') {
+          newState.currentDetailListInfo = {
+            id: -1,
+            name: '当前播放列表',
+          };
+        }
       }
       break;
 
