@@ -66,7 +66,10 @@ class RightPlayList extends React.Component<
                         {...provided.dragHandleProps}
                         onDoubleClick={() => this.props.changeSong(val.id)}
                         className={`right_play_list_item ${
-                          val.id == this.props.currentSong.id ? 'active' : ''
+                          this.props.currentSong &&
+                          val.id == this.props.currentSong.id
+                            ? 'active'
+                            : ''
                         } ${val.invalid ? 'invalid' : ''}`}
                       >
                         <span className="song_title">{val.name}</span>

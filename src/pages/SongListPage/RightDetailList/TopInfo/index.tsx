@@ -25,8 +25,6 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
           id: -1,
           name: '当前播放列表',
         };
-    if (typeof this.props.currentListId === 'string') {
-    }
     return (
       <TransitionGroup
         className="h30 por"
@@ -34,7 +32,7 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
           React.cloneElement(child, { classNames: 'info' })
         }
       >
-        <CSSTransition key={+new Date()} timeout={1200}>
+        <CSSTransition key={+new Date()} timeout={1200} appear={true}>
           <div className="top_info">
             <SongListCoverImg
               style={{ backgroundImage: `url(${_.coverImgUrl})` }}

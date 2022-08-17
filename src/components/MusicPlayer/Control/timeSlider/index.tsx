@@ -73,6 +73,12 @@ class TimeSlider extends React.Component<TimeSliderProps> {
     );
   }
 
+  componentWillUnmount() {
+    this.setState = () => {
+      return;
+    };
+  }
+
   formatTime = (n: number) => {
     let min: string | number = Math.floor(n / 60) + '';
     let sec: string | number = Math.floor(n % 60);

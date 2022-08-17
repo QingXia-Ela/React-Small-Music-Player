@@ -2,9 +2,8 @@ import React, { Fragment, ReactNode, cloneElement } from 'react';
 
 import './index.scss';
 
-interface TransparentButton2Props {
+interface TransparentButton2Props extends React.HTMLAttributes<HTMLDivElement> {
   iconBefore?: JSX.Element;
-  children: any;
 }
 
 interface TransparentButton2State {}

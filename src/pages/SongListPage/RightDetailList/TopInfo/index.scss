@@ -48,7 +48,8 @@
     }
 
     &.info-enter-done,
-    &.info-enter-active {
+    &.info-enter-active,
+    &.info-appear-active {
       opacity: 1;
       transform: translateX(0) scale(1);
     }

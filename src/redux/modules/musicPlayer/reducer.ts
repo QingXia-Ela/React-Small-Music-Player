@@ -75,6 +75,48 @@ import additionReducer from './additionReducer';
  */
 import store from '@/redux/index';
 import { random, throttle } from 'lodash';
+import { changeSong } from './actions';
+
+// 播放器专用方法
+/**
+ * 设置播放器目前播放歌曲
+ * @param data 传入歌曲数据
+ */
+const setAudioSource = (data: {
+  id: number | string;
+  url: string;
+  img?: string;
+}) => {
+  initAudio.currentSong = data;
+  audioObj.src = data.url;
+  // 修改背景
+  // store.dispatch({
+  //   type: CHANGEBG,
+  //   data: data.img ? data.img : initAudio.currentSong.img,
+  // });
+};
+
+/**
+ * 纯切换播放状态，不改变 redux 中的显示
+ * @param data 传入 boolean 代表是否播放，不传入则自行切换
+ */
+let PlayPauseCouldOperate = true;
+const changePlayerState = async (data?: boolean) => {
+  let choose = null;
+  if (typeof data != 'undefined') choose = data;
+  else choose = !initAudio.isPlay;
+
+  try {
+    choose ? await audioObj.play() : audioObj.pause();
+  } catch (err) {
+    console.log(err);
+    message.error('工口发生，可能是网络问题');
+    choose = false;
+  } finally {
+    PlayPauseCouldOperate = true;
+  }
+};
+
 audioObj.addEventListener('ended', (e) => {
   switch (initAudio.playMode) {
     case 0:
@@ -116,10 +158,12 @@ audioObj.addEventListener('ended', (e) => {
  * 监听播放器 开始暂停 事件，修复通过耳机控制播放器播放时状态未改变的情况
  */
 audioObj.addEventListener('play', (e) => {
-  store.dispatch({ type: SWITCHPLAYSTATE, data: true });
+  if (PlayPauseCouldOperate)
+    store.dispatch({ type: SWITCHPLAYSTATE, data: true });
 });
 audioObj.addEventListener('pause', (e) => {
-  store.dispatch({ type: SWITCHPLAYSTATE, data: false });
+  if (PlayPauseCouldOperate)
+    store.dispatch({ type: SWITCHPLAYSTATE, data: false });
 });
 
 /**
@@ -164,6 +208,14 @@ const changePlayState = async (
   callback && callback();
 };
 
+/**
+ * 强制触发 action 中的 changeSong 事件，发送网络请求更换歌曲
+ * @param id 要切换歌曲的id
+ */
+function forceDispatchChangeMusic(id: number | null) {
+  changeSong(id)();
+}
+
 // 开启时间轴变化监听
 audioObj.addEventListener(
   'timeupdate',
@@ -199,54 +251,46 @@ export default function AudioReducer(
       newState.currentSong = null;
       return;
     }
-
-    newState.currentSong = newState.playQueue.length
-      ? { ...newState.playQueue[newState.currentSongIndex] }
-      : null;
   };
 
   switch (type) {
     case PLAY:
       newState.isLoading = true;
       /**
-       * 第一次播放从头开始
-       */
-      if (newState.currentSong === null) {
-        if (newState.playQueue.length) {
-          newState.currentSong = { ...newState.playQueue[0] };
-        }
-      }
-
-      /**
        * 如果有传入指定歌曲数据
        */
       if (data) {
         let songIndex = -1;
         newState.playQueue.forEach((val: singleSongStructure, i: number) => {
-          if (val.id == data.id) songIndex = i;
+          if (val.id == data.handleInfo.id) songIndex = i;
         });
-        if (songIndex == -1) newState.playQueue.push({ ...data });
+        if (songIndex == -1)
+          newState.playQueue.push({ ...data.SongDetailsInfo });
 
-        newState.currentSong = { ...data };
+        newState.currentSong = { ...data.handleInfo };
+
         songIndex != -1
           ? changeSong(songIndex)
           : changeSong(newState.playQueue.length - 1);
+
+        setAudioSource(data.handleInfo);
+        changePlayerState(true);
       }
-      if (!newState.currentSong.invalid)
-        changePlayState(true, newState.currentSong).catch((res) => {
-          console.log(res);
-        });
-      // 找一首能播的进行播放
-      else {
-        for (let i = 0; i < newState.playQueue.length; i++) {
-          const val = newState.playQueue[i];
-          if (!val.invalid) {
-            newState.currentSong = { ...val };
-            changePlayState(true, newState.currentSong);
-            break;
-          }
-        }
-      }
+      // if (!newState.currentSong.invalid)
+      //   changePlayState(true, newState.currentSong).catch((res) => {
+      //     console.log(res);
+      //   });
+      // // 找一首能播的进行播放
+      // else {
+      //   for (let i = 0; i < newState.playQueue.length; i++) {
+      //     const val = newState.playQueue[i];
+      //     if (!val.invalid) {
+      //       newState.currentSong = { ...val };
+      //       changePlayState(true, newState.currentSong);
+      //       break;
+      //     }
+      //   }
+      // }
       break;
     case SUCCESSTOLOADSONG:
       newState.isLoading = false;
@@ -272,16 +316,9 @@ export default function AudioReducer(
       break;
 
     case SWITCHPLAYSTATE:
-      if (newState.currentSong !== null && newState.canPlay) {
-        if (typeof data != 'undefined') {
-          changePlayState(data);
-          newState.isPlay = data;
-        } else {
-          if (newState.isPlay) changePlayState(false);
-          else changePlayState(true);
-          newState.isPlay = !newState.isPlay;
-        }
-      }
+      if (typeof data != 'undefined') newState.isPlay = data;
+      else newState.isPlay = !newState.isPlay;
+      changePlayerState(data);
       break;
 
     case CHANGEVOLUME:
@@ -297,6 +334,27 @@ export default function AudioReducer(
 
     case NEXTSONG:
       if (newState.playQueue.length && newState.currentSong) {
+        let changeSongIndex = 0;
+
+        for (let i = 0; i < newState.playQueue.length; i++) {
+          const val = newState.playQueue[i];
+          if (val.id == newState.currentSong.id) {
+            changeSongIndex = i;
+            break;
+          }
+        }
+
+        // 队尾
+        if (changeSongIndex == newState.playQueue.length - 1)
+          changeSongIndex = 0;
+        else changeSongIndex++;
+
+        forceDispatchChangeMusic(newState.playQueue[changeSongIndex].id);
+      }
+      break;
+
+    case PREVSONG:
+      if (newState.playQueue.length && newState.currentSong) {
         // 随机模式
         if (newState.playMode == 3 || data) {
           let info = null;
@@ -308,59 +366,28 @@ export default function AudioReducer(
                 ...newState.playQueue[random(0, newState.playQueue.length - 1)],
               };
           }
-          newState.currentSong = info;
-          changePlayState(true, info);
+          forceDispatchChangeMusic(info.id);
           break;
         }
 
-        let allInvalid = true;
-        let changeSongIndex = -1;
-        let nextTempSongIndex = -1;
+        let changeSongIndex = 0;
 
-        newState.playQueue.forEach((val: singleSongStructure, i: number) => {
-          if (!val.invalid) {
-            allInvalid = false;
-            if (nextTempSongIndex == -1) nextTempSongIndex = i;
-
-            if (changeSongIndex == -1 && newState.currentSongIndex < i) {
-              changeSongIndex = i;
-              changeSong(i);
-            }
-          }
-        });
-        // 没有一首歌能播的
-        if (allInvalid) break;
-        // 队尾
-        if (changeSongIndex == -1) changeSong(nextTempSongIndex);
-        changePlayState(true, newState.currentSong);
-      }
-      break;
-
-    case PREVSONG:
-      if (newState.playQueue.length && newState.currentSong) {
-        let allInvalid = true;
-        let changeSongIndex = -1;
-        let prevTempSongIndex = -1;
-
-        for (let i = newState.playQueue.length - 1; i >= 0; i--) {
+        for (let i = 0; i < newState.playQueue.length; i++) {
           const val = newState.playQueue[i];
-
-          if (!val.invalid) {
-            allInvalid = false;
-            if (prevTempSongIndex == -1) prevTempSongIndex = i;
-            if (newState.currentSongIndex > i) {
-              changeSongIndex = 0;
-              changeSong(i);
-              break;
-            }
+          if (val.id == newState.currentSong.id) {
+            changeSongIndex = i;
+            break;
           }
         }
-        // 没有一首歌能播的
-        if (allInvalid) break;
-        // 队头
-        if (changeSongIndex == -1) changeSong(prevTempSongIndex);
-        changePlayState(true, newState.currentSong);
+
+        // 队尾
+        if (changeSongIndex == 0)
+          changeSongIndex = newState.playQueue.length - 1;
+        else changeSongIndex--;
+
+        forceDispatchChangeMusic(newState.playQueue[changeSongIndex].id);
       }
+
       break;
 
     /**
@@ -472,9 +499,6 @@ export default function AudioReducer(
           break;
         }
         newState.playQueue = [...data];
-        newState.currentSong = { ...newState.playQueue[0] };
-        changePlayState(true, newState.currentSong);
-        newState.isPlay = true;
       } else if (typeof action.newList != 'undefined') {
         /**
          * 调整了播放顺序，没更新列表

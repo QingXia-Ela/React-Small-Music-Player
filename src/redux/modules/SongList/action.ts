@@ -1,8 +1,14 @@
+import { getSongByID } from '@/api/music';
+import { getDetailList } from '@/api/SongList';
 import {
   CHANGESHOWSUBSCRIBELIST,
   CHANGESONGLISTID,
   UPDATEUSERSONGSHEET,
 } from '@/redux/constant';
+import { message } from 'antd';
+import { changeAllQueue } from '../musicPlayer/actions';
+
+import store from '@/redux';
 
 /**
  * 改变右侧播放列表
@@ -11,6 +17,15 @@ import {
  * 字符串 `current` 代表当前播放列表，`myfavorite` 代表我喜爱的音乐，`search` 代表搜索列表
  */
 export const changeSongListId = (data: string | number) => {
+  if (typeof data === 'number') {
+    getDetailList(data)
+      .then((res: any) => {
+        store.dispatch(changeAllQueue(res.songs, true));
+      })
+      .catch(() => {
+        message.error('获取歌单详情失败');
+      });
+  }
   return {
     type: CHANGESONGLISTID,
     data,

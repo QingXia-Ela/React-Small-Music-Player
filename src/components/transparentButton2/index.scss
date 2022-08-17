@@ -6,7 +6,11 @@
   cursor: pointer;
 
   &:hover {
-    background-color: #ffffff3c;
+    background-color: #ffffff20;
+  }
+
+  &:active {
+    background-color: #ffffff44;
   }
 
   .icon_before_container {

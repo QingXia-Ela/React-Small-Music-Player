@@ -24,10 +24,16 @@ function SongListReducer(prevState = initState, action: any) {
       newState.currentListId = data;
       // 在 List 中查找信息
       if (typeof data === 'number') {
-        let res = null,
-          searchList = newState.showSubscribeList
-            ? newState.subscribeList
-            : newState.selfCreateList;
+        let res = null;
+
+        if (newState.favoriteMusic && newState.favoriteMusic.id === data) {
+          newState.currentDetailListInfo = newState.favoriteMusic;
+          break;
+        }
+
+        let searchList = newState.showSubscribeList
+          ? newState.subscribeList
+          : newState.selfCreateList;
         searchList.forEach((val: any) => {
           if (data === val.id) res = val;
         });

@@ -16,6 +16,7 @@ interface TopBoxProps {
   userInfo?: { [propName: string]: any };
   currentListId: string | number;
   changeSongListId: Function;
+  favoriteMusic: { [propName: string]: any } | null;
 }
 
 interface TopBoxState {}
@@ -26,6 +27,8 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
   judgeActive = (id: string): string => {
     const cId = this.props.currentListId;
     if (typeof cId === 'string' && cId === id) return 'active';
+    else if (this.props.favoriteMusic && cId === this.props.favoriteMusic.id)
+      return 'active';
     return '';
   };
 
@@ -43,7 +46,13 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
         <BlackListItem
           iconBefore={<HeartOutlined />}
           className={this.judgeActive('myfavorite')}
-          onClick={() => this.props.changeSongListId('myfavorite')}
+          onClick={() =>
+            this.props.changeSongListId(
+              this.props.favoriteMusic
+                ? this.props.favoriteMusic.id
+                : 'myfavorite',
+            )
+          }
         >
           <span>我喜爱的音乐</span>
         </BlackListItem>
@@ -58,6 +67,7 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
 export default connect(
   (state: { [propName: string]: any }) => ({
     currentListId: state.SongList.currentListId,
+    favoriteMusic: state.SongList.favoriteMusic,
   }),
   {
     changeSongListId,

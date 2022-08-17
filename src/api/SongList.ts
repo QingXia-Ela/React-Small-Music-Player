@@ -7,3 +7,11 @@ export function getUserMusicList(uid: number) {
     params: { uid, limit: 100 },
   });
 }
+
+export function getDetailList(id: number) {
+  return request({
+    method: 'GET',
+    url: '/playlist/track/all',
+    params: { id },
+  });
+}
