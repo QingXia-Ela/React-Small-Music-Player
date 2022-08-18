@@ -91,7 +91,7 @@ export const changeSong = (id: number | null) => {
           .catch((err) => {
             console.log(err);
           });
-      }, 1000);
+      }, 800);
     }
   };
 };
@@ -109,37 +109,16 @@ export const switchPlayMode = (data: number) => ({
   data,
 });
 
-let nextSongDebounceFlag = false;
 /**
  * 下一首
  * @param data 随机播放 flag
  */
-export const nextSong = (data: boolean) => {
-  return (dispatch: any) => {
-    if (!nextSongDebounceFlag) {
-      nextSongDebounceFlag = true;
-      setTimeout(() => {
-        dispatch({ type: NEXTSONG, data });
-        nextSongDebounceFlag = false;
-      }, 1000);
-    }
-  };
-};
+export const nextSong = (data: boolean) => ({ type: NEXTSONG, data });
 
 /**
  * 上一首
  */
-export const prevSong = () => {
-  return (dispatch: any) => {
-    if (!nextSongDebounceFlag) {
-      nextSongDebounceFlag = true;
-      setTimeout(() => {
-        dispatch({ type: PREVSONG });
-        nextSongDebounceFlag = false;
-      }, 1000);
-    }
-  };
-};
+export const prevSong = () => ({ type: PREVSONG });
 
 /**
  * 从队列中移除指定歌曲
@@ -196,10 +175,14 @@ export const getLyric = (id: number) => {
     store.dispatch({ type: SETLYRIC, data: { lyric: -1, id } });
     getLyricByLink(id).then(
       (res: any) => {
-        store.dispatch({
-          type: SETLYRIC,
-          data: { lyric: res.lrc.lyric, id },
-        });
+        if (res.lrc) {
+          store.dispatch({
+            type: SETLYRIC,
+            data: { lyric: res.lrc.lyric, id },
+          });
+        } else {
+          store.dispatch({ type: SETLYRIC, data: { lyric: 0, id } });
+        }
       },
       (err) => {
         console.log(err);

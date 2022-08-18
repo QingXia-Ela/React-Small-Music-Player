@@ -14,7 +14,7 @@ import { changeSongListId } from '@/redux/modules/SongList/action';
 
 interface TopBoxProps {
   userInfo?: { [propName: string]: any };
-  currentListId: string | number;
+  currentListId: string | number | { id: number; type: string };
   changeSongListId: Function;
   favoriteMusic: { [propName: string]: any } | null;
 }
@@ -25,7 +25,11 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
   state = {};
 
   judgeActive = (id: string): string => {
-    const cId = this.props.currentListId;
+    let cId: string | number | { id: number; type: string };
+    if (typeof this.props.currentListId === 'object')
+      cId = this.props.currentListId.type;
+    else cId = this.props.currentListId;
+
     if (typeof cId === 'string' && cId === id) return 'active';
     else if (this.props.favoriteMusic && cId === this.props.favoriteMusic.id)
       return 'active';
@@ -47,11 +51,12 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
           iconBefore={<HeartOutlined />}
           className={this.judgeActive('myfavorite')}
           onClick={() =>
-            this.props.changeSongListId(
-              this.props.favoriteMusic
+            this.props.changeSongListId({
+              id: this.props.favoriteMusic
                 ? this.props.favoriteMusic.id
-                : 'myfavorite',
-            )
+                : undefined,
+              type: 'myfavorite',
+            })
           }
         >
           <span>我喜爱的音乐</span>

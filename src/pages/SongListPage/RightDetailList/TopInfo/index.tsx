@@ -6,8 +6,10 @@ import './index.scss';
 import SongListCoverImg from './CoverImg';
 import TransparentButton2 from '@/components/transparentButton2';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { playSongList } from '@/redux/modules/SongList/action';
 
 interface TopInfoProps {
+  playSongList: Function;
   currentDetailListInfo: { [propName: string]: any };
   name: string;
   description: string;
@@ -42,7 +44,10 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
                 <div className="title">{_.name}</div>
                 <div className="description">{_.description}</div>
               </div>
-              <div className="operation">
+              <div
+                className="operation"
+                onClick={() => this.props.playSongList()}
+              >
                 <TransparentButton2 iconBefore={<PlaySquareOutlined />}>
                   播放该播放列表
                 </TransparentButton2>
@@ -62,5 +67,7 @@ export default connect(
     description: state.SongList.description,
     currentListId: state.SongList.currentListId,
   }),
-  {},
+  {
+    playSongList,
+  },
 )(TopInfo);

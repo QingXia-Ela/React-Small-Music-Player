@@ -63,6 +63,7 @@ import {
   SHOWLYRICS,
   MUTEPLAYER,
   SETLYRIC,
+  SWITCHPLAYSTATEDISPLAY,
 } from '@/redux/constant';
 
 /**
@@ -100,7 +101,7 @@ const setAudioSource = (data: {
  * 纯切换播放状态，不改变 redux 中的显示
  * @param data 传入 boolean 代表是否播放，不传入则自行切换
  */
-let PlayPauseCouldOperate = true;
+
 const changePlayerState = async (data?: boolean) => {
   let choose = null;
   if (typeof data != 'undefined') choose = data;
@@ -113,7 +114,6 @@ const changePlayerState = async (data?: boolean) => {
     message.error('工口发生，可能是网络问题');
     choose = false;
   } finally {
-    PlayPauseCouldOperate = true;
   }
 };
 
@@ -142,10 +142,7 @@ audioObj.addEventListener('ended', (e) => {
             ...initAudio.playQueue[random(0, initAudio.playQueue.length - 1)],
           };
       }
-      store.dispatch({
-        type: PLAY,
-        data: info,
-      });
+      forceDispatchChangeMusic(info.id);
       break;
 
     default:
@@ -158,12 +155,10 @@ audioObj.addEventListener('ended', (e) => {
  * 监听播放器 开始暂停 事件，修复通过耳机控制播放器播放时状态未改变的情况
  */
 audioObj.addEventListener('play', (e) => {
-  if (PlayPauseCouldOperate)
-    store.dispatch({ type: SWITCHPLAYSTATE, data: true });
+  store.dispatch({ type: SWITCHPLAYSTATEDISPLAY, data: true });
 });
 audioObj.addEventListener('pause', (e) => {
-  if (PlayPauseCouldOperate)
-    store.dispatch({ type: SWITCHPLAYSTATE, data: false });
+  store.dispatch({ type: SWITCHPLAYSTATEDISPLAY, data: false });
 });
 
 /**
@@ -315,10 +310,16 @@ export default function AudioReducer(
       newState.isPlay = false;
       break;
 
+    // 仅改变音频播放状态，不改变显示控制
     case SWITCHPLAYSTATE:
       if (typeof data != 'undefined') newState.isPlay = data;
       else newState.isPlay = !newState.isPlay;
       changePlayerState(data);
+      break;
+
+    // 仅改变显示状态，不改变真实音频实例控制
+    case SWITCHPLAYSTATEDISPLAY:
+      newState.isPlay = data;
       break;
 
     case CHANGEVOLUME:
@@ -334,6 +335,13 @@ export default function AudioReducer(
 
     case NEXTSONG:
       if (newState.playQueue.length && newState.currentSong) {
+        // 随机
+        if (newState.playMode == 3) {
+          forceDispatchChangeMusic(
+            newState.playQueue[random(0, newState.playQueue.length - 1)].id,
+          );
+        }
+
         let changeSongIndex = 0;
 
         for (let i = 0; i < newState.playQueue.length; i++) {

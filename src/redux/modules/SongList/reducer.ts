@@ -1,4 +1,5 @@
 import {
+  CHANGEDETAILSONGLIST,
   CHANGESHOWSUBSCRIBELIST,
   CHANGESONGLISTID,
   UPDATEUSERSONGSHEET,
@@ -40,9 +41,9 @@ function SongListReducer(prevState = initState, action: any) {
         // 有结果了
         if (res) newState.currentDetailListInfo = res;
       } else {
-        if (data === 'myfavorite') {
+        if (data.type === 'myfavorite') {
           newState.currentDetailListInfo = newState.favoriteMusic;
-        } else if (data === 'current') {
+        } else if (data.type === 'current') {
           newState.currentDetailListInfo = {
             id: -1,
             name: '当前播放列表',
@@ -66,6 +67,10 @@ function SongListReducer(prevState = initState, action: any) {
     case CHANGESHOWSUBSCRIBELIST:
       if (typeof data === 'boolean') newState.showSubscribeList = data;
       else newState.showSubscribeList = !newState.showSubscribeList;
+      break;
+
+    case CHANGEDETAILSONGLIST:
+      newState.currentDetailList = data;
       break;
 
     default:
