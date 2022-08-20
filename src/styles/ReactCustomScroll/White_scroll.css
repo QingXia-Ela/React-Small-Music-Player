@@ -5,6 +5,9 @@
   background-color: transparent;
   transition: background-color 0.5s;
 }
+.white_scroll .white_scroll_track-vertical.full_height {
+  height: 100%;
+}
 .white_scroll .white_scroll_thumb-vertical {
   background-color: transparent;
   transition: background-color 0.5s, box-shadow 0.5s;

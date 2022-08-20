@@ -53,14 +53,6 @@ class BottomMusicState extends React.Component<
 
         <button onClick={this.prevSong}>prev</button>
         <button onClick={this.nextSong}>next</button>
-        <Slider
-          tipFormatter={null}
-          min={0}
-          max={this.props.totalTime}
-          value={this.state.timeMark}
-          onChange={this.onChange}
-          onAfterChange={this.onAfterChange}
-        ></Slider>
         <button
           onClick={() => {
             getLoginState()

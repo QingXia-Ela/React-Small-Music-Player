@@ -13,7 +13,7 @@ interface TopInfoProps {
   currentDetailListInfo: { [propName: string]: any };
   name: string;
   description: string;
-  currentListId: string;
+  currentListId: string | number | any;
 }
 
 interface TopInfoState {}
@@ -34,7 +34,15 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
           React.cloneElement(child, { classNames: 'info' })
         }
       >
-        <CSSTransition key={+new Date()} timeout={1200} appear={true}>
+        <CSSTransition
+          key={
+            this.props.currentListId.id
+              ? this.props.currentListId.id
+              : this.props.currentListId
+          }
+          timeout={1200}
+          appear={true}
+        >
           <div className="top_info">
             <SongListCoverImg
               style={{ backgroundImage: `url(${_.coverImgUrl})` }}

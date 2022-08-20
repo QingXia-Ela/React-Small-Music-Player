@@ -31,7 +31,11 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
     else cId = this.props.currentListId;
 
     if (typeof cId === 'string' && cId === id) return 'active';
-    else if (this.props.favoriteMusic && cId === this.props.favoriteMusic.id)
+    else if (
+      this.props.favoriteMusic &&
+      cId === this.props.favoriteMusic.id &&
+      id == 'myfavorite'
+    )
       return 'active';
     return '';
   };

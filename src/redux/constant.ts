@@ -49,3 +49,4 @@ export const UPDATEUSERSONGSHEET = 'UpdateUserSongSheet';
 export const CHANGESHOWSUBSCRIBELIST = 'ChangeShowSubscribeList';
 export const CHANGEDETAILSONGLIST = 'ChangeDetailSongList';
 export const PLAYSONGLIST = 'PlaySongList';
+export const CHANGESONGLISTLOADINGSTATE = 'ChangeSongListLoadingState';

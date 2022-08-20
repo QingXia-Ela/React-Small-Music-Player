@@ -3,9 +3,11 @@ import {
   CHANGESHOWSUBSCRIBELIST,
   CHANGESONGLISTID,
   UPDATEUSERSONGSHEET,
+  CHANGESONGLISTLOADINGSTATE,
 } from '@/redux/constant';
 
 let initState: { [propName: string]: any } = {
+  loading: false,
   currentListId: 'current',
   selfCreateList: <any>[],
   subscribeList: <any>[],
@@ -21,6 +23,10 @@ function SongListReducer(prevState = initState, action: any) {
   let newState = { ...prevState };
 
   switch (type) {
+    case CHANGESONGLISTLOADINGSTATE:
+      if (typeof data != 'undefined') newState.loading = data;
+      else newState.loading = !newState.loading;
+      break;
     case CHANGESONGLISTID:
       newState.currentListId = data;
       // 在 List 中查找信息
@@ -40,7 +46,7 @@ function SongListReducer(prevState = initState, action: any) {
         });
         // 有结果了
         if (res) newState.currentDetailListInfo = res;
-      } else {
+      } else if (data) {
         if (data.type === 'myfavorite') {
           newState.currentDetailListInfo = newState.favoriteMusic;
         } else if (data.type === 'current') {

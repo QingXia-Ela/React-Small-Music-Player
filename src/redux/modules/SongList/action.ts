@@ -4,6 +4,7 @@ import {
   CHANGEDETAILSONGLIST,
   CHANGESHOWSUBSCRIBELIST,
   CHANGESONGLISTID,
+  CHANGESONGLISTLOADINGSTATE,
   PLAYSONGLIST,
   UPDATEUSERSONGSHEET,
 } from '@/redux/constant';
@@ -11,6 +12,15 @@ import { message } from 'antd';
 import { changeAllQueue } from '../musicPlayer/actions';
 
 import store from '@/redux';
+
+/**
+ * 设置详细歌单加载状态
+ * @param data 要设置的状态，不传入则对当前状态取反
+ */
+export const changeSongListLoadingState = (data?: boolean) => ({
+  type: CHANGESONGLISTLOADINGSTATE,
+  data,
+});
 
 /**
  * 替换当前详情列表，仅改变 Song List 页面 右下模块的列表，不进行播放
@@ -45,6 +55,7 @@ export const playSongList = (data?: any[]) => {
  */
 export const changeSongListId = (
   data: string | number | { id: number; type: string },
+  offset?: number,
 ) => {
   let target = null;
   if (typeof data === 'number') {
@@ -61,14 +72,19 @@ export const changeSongListId = (
     }
   }
 
-  if (typeof target === 'number')
-    getDetailList(target)
+  if (typeof target === 'number') {
+    store.dispatch(changeSongListLoadingState(true));
+    getDetailList(target!, offset ? offset : 0)
       .then((res: any) => {
         store.dispatch(changeSongDetailList(res.songs));
       })
       .catch(() => {
         message.error('获取歌单详情失败');
+      })
+      .finally(() => {
+        store.dispatch(changeSongListLoadingState(false));
       });
+  }
 
   return {
     type: CHANGESONGLISTID,

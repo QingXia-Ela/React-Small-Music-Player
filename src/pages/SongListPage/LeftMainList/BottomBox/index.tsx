@@ -102,7 +102,7 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
           </div>
           <div className="bottom_box_list_container">
             {this.props.isLogin ? (
-              <WhiteScrollBar>{this.judgeShowList()}</WhiteScrollBar>
+              <WhiteScrollBar fullHeight>{this.judgeShowList()}</WhiteScrollBar>
             ) : (
               <div className="login_tip">
                 <span className="underline_button" onClick={this.judgeModal}>

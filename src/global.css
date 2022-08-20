@@ -142,6 +142,9 @@
   background-color: transparent;
   transition: background-color 0.5s;
 }
+.white_scroll .white_scroll_track-vertical.full_height {
+  height: 100%;
+}
 .white_scroll .white_scroll_thumb-vertical {
   background-color: transparent;
   transition: background-color 0.5s, box-shadow 0.5s;
@@ -173,6 +176,35 @@
 .ant-spin-nested-loading .ant-spin-container::after {
   background: #000;
 }
+.black_pagination.ant-pagination li {
+  height: 100%;
+  width: 2rem;
+  height: 2rem;
+  border-color: #fff;
+  background: transparent;
+  transition: background-color 0.3s;
+}
+.black_pagination.ant-pagination li a,
+.black_pagination.ant-pagination li .ant-pagination-item-link {
+  display: block;
+  height: 100%;
+  line-height: 1.8rem;
+  color: #fff;
+  background: transparent;
+  transition: all 0.3s;
+}
+.black_pagination.ant-pagination li a:hover,
+.black_pagination.ant-pagination li .ant-pagination-item-link:hover {
+  color: #000;
+  background: #fff;
+  border-color: #fff;
+}
+.black_pagination.ant-pagination li.ant-pagination-item-active {
+  background: #fff;
+}
+.black_pagination.ant-pagination li.ant-pagination-item-active a {
+  color: #000;
+}
 * {
   margin: 0;
   padding: 0;
@@ -185,6 +217,11 @@ html {
 body {
   background-color: transparent !important;
   font-size: inherit !important;
+}
+.text_nowrap {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .underline_button {
   text-decoration: underline;

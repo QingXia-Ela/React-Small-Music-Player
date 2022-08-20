@@ -15,6 +15,14 @@
     transform: translateY(-50%);
   }
 
+  &.icon_por {
+    .anticon {
+      position: static;
+      margin: none;
+      transform: none;
+    }
+  }
+
   .black_list_item_content {
     padding-left: 55px;
   }
@@ -38,5 +46,9 @@
 
   &:active {
     transform: scale(0.95);
+  }
+
+  &:nth-child(even).use_zebra {
+    background-color: #ffffff10;
   }
 }

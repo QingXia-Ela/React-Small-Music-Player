@@ -1,17 +1,22 @@
 import { Scrollbars } from 'react-custom-scrollbars';
 
-function WhiteScrollBar(props: { [propName: string]: any }) {
+function WhiteScrollBar(prop: { [propName: string]: any }) {
   return (
     <Scrollbars
       renderTrackVertical={(props) => (
-        <div {...props} className="white_scroll_track-vertical" />
+        <div
+          {...props}
+          className={`white_scroll_track-vertical ${
+            prop.fullHeight ? 'full_height' : ''
+          }`}
+        />
       )}
       renderThumbVertical={(props) => (
         <div {...props} className="white_scroll_thumb-vertical" />
       )}
       className="white_scroll"
     >
-      {props.children}
+      {prop.children}
     </Scrollbars>
   );
 }

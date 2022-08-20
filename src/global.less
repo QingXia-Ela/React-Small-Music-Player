@@ -32,6 +32,12 @@
 // 自定义 Spin
 @import './styles/Antd/Spin.less';
 
+// 自定义 Table
+@import './styles/Antd/Table.less';
+
+// 自定义 Pagination
+@import './styles/Antd/Pagination.less';
+
 * {
   margin: 0;
   padding: 0;
@@ -46,6 +52,12 @@ html {
 body {
   background-color: transparent !important;
   font-size: inherit !important;
+}
+
+.text_nowrap {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .underline_button {
