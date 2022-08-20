@@ -570,7 +570,7 @@ export default function AudioReducer(
       break;
   }
   newState.playQueue = [...newState.playQueue];
-  initAudio = newState;
+  initAudio = { ...newState };
 
   return newState;
 }

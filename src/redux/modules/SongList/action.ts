@@ -76,6 +76,7 @@ export const changeSongListId = (
     store.dispatch(changeSongListLoadingState(true));
     getDetailList(target!, offset ? offset : 0)
       .then((res: any) => {
+        // redux 开发工具爆内存，与 Play 事件共存时触发
         store.dispatch(changeSongDetailList(res.songs));
       })
       .catch(() => {

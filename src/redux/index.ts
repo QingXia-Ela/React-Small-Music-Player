@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 import BG from './modules/layouts/bg/reducer';
 import MusicPlayer from './modules/musicPlayer/reducer';
@@ -16,9 +17,8 @@ const combineReducer = combineReducers({
 
 import reduxThunk from 'redux-thunk';
 
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-export default createStore(
-  combineReducer,
-  composeWithDevTools(applyMiddleware(reduxThunk)),
-);
+export default configureStore({
+  reducer: combineReducer,
+  middleware: [reduxThunk],
+  devTools: true,
+});

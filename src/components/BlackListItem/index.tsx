@@ -19,7 +19,10 @@ class BlackListItem extends React.Component<
       <div
         className={this.props.className + ' black_list_item_style'}
         style={{ textAlign: this.props.align ? this.props.align : 'left' }}
-        onClick={this.props.onClick}
+        onClick={(e) => {
+          e.preventDefault();
+          this.props.onClick!(e);
+        }}
       >
         {this.props.iconBefore}
         <div className="black_list_item_content">{this.props.children}</div>

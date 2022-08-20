@@ -22,6 +22,7 @@
   "dependencies": {
     "@ant-design/pro-components": "^1.1.16",
     "@ant-design/pro-layout": "^6.5.0",
+    "@reduxjs/toolkit": "^1.8.5",
     "@types/lodash": "^4.14.182",
     "@types/react": "^18.0.15",
     "@types/react-addons-css-transition-group": "^15.0.7",

@@ -76,7 +76,7 @@ function SongListReducer(prevState = initState, action: any) {
       break;
 
     case CHANGEDETAILSONGLIST:
-      newState.currentDetailList = data;
+      newState.currentDetailList = [...data];
       break;
 
     default:
