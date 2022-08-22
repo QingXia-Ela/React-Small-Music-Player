@@ -5,11 +5,13 @@ import { PlayCircleOutlined, DownloadOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 
 import BlackTable from '@/pages/SongListPage/RightDetailList/BottomList/BlackTable';
-import BlackInput from '@/components/Input';
 import TransparentButton from '@/components/transparentButton';
+
+import { changeSong } from '@/redux/modules/musicPlayer/actions';
 
 interface BottomListProps {
   currentDetailList: any[];
+  changeSong: Function;
 }
 
 interface BottomListState {}
@@ -43,13 +45,14 @@ class BottomList extends React.Component<BottomListProps, BottomListState> {
         key: 'operation',
       },
     ];
-    let propData = this.props.currentDetailList.map((val: any) => {
+    let propData = JSON.parse(JSON.stringify(this.props.currentDetailList));
+    propData = propData.map((val: any) => {
       val.key = val.id;
       val.ar = val.ar.map((val: any) => `${val.name ? val.name : ''} `);
       val.operation = (
         <Fragment>
           <TransparentButton>
-            <PlayCircleOutlined />
+            <PlayCircleOutlined onClick={() => this.props.changeSong(val.id)} />
           </TransparentButton>
           <TransparentButton>
             <DownloadOutlined />
@@ -75,5 +78,7 @@ export default connect(
   (state: { [propName: string]: any }) => ({
     currentDetailList: state.SongList.currentDetailList,
   }),
-  {},
+  {
+    changeSong,
+  },
 )(BottomList);

@@ -47,10 +47,17 @@ function SongListReducer(prevState = initState, action: any) {
         });
         // 有结果了
         if (res) newState.currentDetailListInfo = res;
-      } else if (data) {
+      } else if (typeof data === 'object') {
         if (data.type === 'myfavorite') {
           newState.currentDetailListInfo = newState.favoriteMusic;
         } else if (data.type === 'current') {
+          newState.currentDetailListInfo = {
+            id: -1,
+            name: '当前播放列表',
+          };
+        }
+      } else if (typeof data === 'string') {
+        if (data === 'current') {
           newState.currentDetailListInfo = {
             id: -1,
             name: '当前播放列表',

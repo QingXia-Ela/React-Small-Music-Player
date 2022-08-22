@@ -50,3 +50,9 @@ export const CHANGESHOWSUBSCRIBELIST = 'ChangeShowSubscribeList';
 export const CHANGEDETAILSONGLIST = 'ChangeDetailSongList';
 export const PLAYSONGLIST = 'PlaySongList';
 export const CHANGESONGLISTLOADINGSTATE = 'ChangeSongListLoadingState';
+
+/**
+ * 音频上下文
+ */
+export const SETAUDIOCONTEXT = 'SetAudioContext';
+export const CONNECT2ELE = 'Connect2Ele';

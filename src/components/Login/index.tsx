@@ -141,6 +141,24 @@ class NeteaseLogin extends React.Component<
     }
   };
 
+  changeState2Dom = () => {
+    getLoginState()
+      .then((res: any) => {
+        if (res.data.account) {
+          localStorage.setItem(ISLOGIN, '1');
+          this.props.setUserInfo(res.data);
+        } else localStorage.setItem(ISLOGIN, '0');
+      })
+      .catch((err) => {
+        localStorage.setItem(ISLOGIN, '0');
+      })
+      .finally(() => {
+        this.props.changeLoginState(
+          Boolean(parseInt(localStorage.getItem(ISLOGIN)!)),
+        );
+      });
+  };
+
   verifyLogin = async () => {
     if (!(this.state.phone + '').length || !this.state.cCode) {
       message.error('请输入完整信息');
@@ -181,9 +199,7 @@ class NeteaseLogin extends React.Component<
           localStorage.setItem('isLogin', 'true');
           this.props.changeLoginState(Boolean(localStorage.getItem(ISLOGIN)));
 
-          getInfo().then((res) => {
-            console.log(res);
-          });
+          this.changeState2Dom();
         },
         (err) => {},
       )
@@ -196,21 +212,7 @@ class NeteaseLogin extends React.Component<
 
   componentDidMount() {
     // 初始化登陆状态
-    getLoginState()
-      .then((res: any) => {
-        if (res.data.account) {
-          localStorage.setItem(ISLOGIN, '1');
-          this.props.setUserInfo(res.data);
-        } else localStorage.setItem(ISLOGIN, '0');
-      })
-      .catch((err) => {
-        localStorage.setItem(ISLOGIN, '0');
-      })
-      .finally(() => {
-        this.props.changeLoginState(
-          Boolean(parseInt(localStorage.getItem(ISLOGIN)!)),
-        );
-      });
+    this.changeState2Dom();
   }
 }
 

@@ -3,6 +3,9 @@ export default function simplifySongListResult(
   filterList: string[],
 ) {
   let newVal: { [propName: string]: any } = {};
-  for (const i of filterList) newVal[i] = val[i];
+  for (let i = 0; i < filterList.length; i++) {
+    const name = filterList[i];
+    newVal[name] = val[name];
+  }
   return newVal;
 }

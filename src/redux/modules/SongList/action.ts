@@ -71,6 +71,8 @@ export const changeSongListId = (
           break;
       }
     }
+  } else if (typeof data === 'string') {
+    target = data;
   }
 
   if (typeof target === 'number') {
@@ -78,8 +80,9 @@ export const changeSongListId = (
     getDetailList(target!, offset ? offset : 0)
       .then((res: any) => {
         const filterList = ['ar', 'name', 'id'];
+
         // redux 开发工具爆内存
-        let data = JSON.parse(JSON.stringify(res.songs)).map((val: any) =>
+        let data = res.songs.map((val: any) =>
           simplifySongListResult(val, filterList),
         );
 
@@ -91,6 +94,17 @@ export const changeSongListId = (
       .finally(() => {
         store.dispatch(changeSongListLoadingState(false));
       });
+  } else if (typeof target === 'string') {
+    switch (target) {
+      case 'current':
+        store.dispatch(
+          changeSongDetailList(store.getState().MusicPlayer.playQueue),
+        );
+        break;
+
+      default:
+        break;
+    }
   }
 
   return {

@@ -8,6 +8,8 @@ import MusicPlayer from './modules/musicPlayer/reducer';
 import Login from './modules/Login/reducer';
 import Weather from './modules/Weather/reducer';
 import SongList from './modules/SongList/reducer';
+import AudioContext from './modules/AudioContext/reducer';
+
 import { CHANGEDETAILSONGLIST } from './constant';
 
 const combineReducer = combineReducers({
@@ -16,6 +18,7 @@ const combineReducer = combineReducers({
   Login,
   Weather,
   SongList,
+  AudioContext,
 });
 
 /* eslint-disable no-underscore-dangle */
@@ -42,7 +45,7 @@ const composeEnhancers = composeWithDevTools({
     let newState: any = {
       ...state,
     };
-    newState.SongList = null;
+    newState.AudioContext = 'audioCtx';
     return newState;
   },
   traceLimit: 2,
