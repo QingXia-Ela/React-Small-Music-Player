@@ -12,6 +12,7 @@ import { message } from 'antd';
 import { changeAllQueue } from '../musicPlayer/actions';
 
 import store from '@/redux';
+import simplifySongListResult from '@/utils/SongList/simplifySongList';
 
 /**
  * 设置详细歌单加载状态
@@ -76,8 +77,13 @@ export const changeSongListId = (
     store.dispatch(changeSongListLoadingState(true));
     getDetailList(target!, offset ? offset : 0)
       .then((res: any) => {
-        // redux 开发工具爆内存，与 Play 事件共存时触发
-        store.dispatch(changeSongDetailList(res.songs));
+        const filterList = ['ar', 'name', 'id'];
+        // redux 开发工具爆内存
+        let data = JSON.parse(JSON.stringify(res.songs)).map((val: any) =>
+          simplifySongListResult(val, filterList),
+        );
+
+        store.dispatch(changeSongDetailList(data));
       })
       .catch(() => {
         message.error('获取歌单详情失败');

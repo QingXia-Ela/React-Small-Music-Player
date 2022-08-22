@@ -19,6 +19,7 @@ import {
 
 import WhiteScrollBar from '@/components/WhiteScrollBar';
 import BlackListItem from '@/components/BlackListItem';
+import simplifySongListResult from '@/utils/SongList/simplifySongList';
 
 interface BottomBoxProps {
   isLogin: boolean;
@@ -71,7 +72,18 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
       getUserMusicList(uid)
         .then((res: any) => {
           if (res.playlist) {
-            this.props.updateUserSongSheet(res.playlist);
+            const filterList = [
+              'description',
+              'id',
+              'name',
+              'coverImgUrl',
+              'subscribed',
+            ];
+            this.props.updateUserSongSheet(
+              res.playlist.map((val: any) =>
+                simplifySongListResult(val, filterList),
+              ),
+            );
           }
         })
         .finally(() => {

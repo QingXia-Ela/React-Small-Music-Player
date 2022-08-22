@@ -570,7 +570,8 @@ export default function AudioReducer(
       break;
   }
   newState.playQueue = [...newState.playQueue];
-  initAudio = { ...newState };
+  initAudio = JSON.parse(JSON.stringify(newState));
+  initAudio.audioEle = audioObj;
 
   return newState;
 }

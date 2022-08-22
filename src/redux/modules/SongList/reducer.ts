@@ -28,6 +28,7 @@ function SongListReducer(prevState = initState, action: any) {
       else newState.loading = !newState.loading;
       break;
     case CHANGESONGLISTID:
+      if (newState.currentListId == data) break;
       newState.currentListId = data;
       // 在 List 中查找信息
       if (typeof data === 'number') {

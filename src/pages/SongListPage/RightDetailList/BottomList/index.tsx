@@ -40,13 +40,13 @@ class BottomList extends React.Component<BottomListProps, BottomListState> {
       {
         title: '过滤',
         className: 'w20',
-        key: 'filter',
+        key: 'operation',
       },
     ];
     let propData = this.props.currentDetailList.map((val: any) => {
       val.key = val.id;
       val.ar = val.ar.map((val: any) => `${val.name ? val.name : ''} `);
-      val.filter = (
+      val.operation = (
         <Fragment>
           <TransparentButton>
             <PlayCircleOutlined />
