@@ -78,6 +78,7 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
               'name',
               'coverImgUrl',
               'subscribed',
+              'trackCount',
             ];
             this.props.updateUserSongSheet(
               res.playlist.map((val: any) =>

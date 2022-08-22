@@ -8,6 +8,8 @@ import BlackTable from '@/pages/SongListPage/RightDetailList/BottomList/BlackTab
 import TransparentButton from '@/components/transparentButton';
 
 import { changeSong } from '@/redux/modules/musicPlayer/actions';
+import DownloadAudio from '@/utils/SongList/downloadAudio';
+import { debounce, throttle } from 'lodash';
 
 interface BottomListProps {
   currentDetailList: any[];
@@ -27,7 +29,6 @@ interface SongListDataType {
 class BottomList extends React.Component<BottomListProps, BottomListState> {
   state = {};
   render() {
-    // this.props.currentDetailList.map((val: any) => val)
     const columns = [
       {
         title: '歌曲名',
@@ -40,7 +41,7 @@ class BottomList extends React.Component<BottomListProps, BottomListState> {
         key: 'ar',
       },
       {
-        title: '过滤',
+        title: '操作',
         className: 'w20',
         key: 'operation',
       },
@@ -55,7 +56,9 @@ class BottomList extends React.Component<BottomListProps, BottomListState> {
             <PlayCircleOutlined onClick={() => this.props.changeSong(val.id)} />
           </TransparentButton>
           <TransparentButton>
-            <DownloadOutlined />
+            <DownloadOutlined
+              onClick={() => debounce(DownloadAudio, 2000)(val)}
+            />
           </TransparentButton>
         </Fragment>
       );

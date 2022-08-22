@@ -25,6 +25,7 @@ interface BlackTableProps {
 
 interface BlackTableState {
   page: number;
+  listId: any;
 }
 
 interface colStruct {
@@ -35,6 +36,7 @@ interface colStruct {
 class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
   state = {
     page: 1,
+    listId: '',
   };
 
   changeDetailListPage = (page: number, pageSize: number) => {
@@ -48,6 +50,15 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
       this.props.changeSongListId(this.props.currentListId.id, page * pageSize);
     }
   };
+
+  static getDerivedStateFromProps(
+    props: BlackTableProps,
+    state: BlackTableState,
+  ) {
+    if (props.currentListId != state.listId)
+      return { page: 1, listId: props.currentListId };
+    return null;
+  }
 
   render() {
     let keyMap: colStruct[] = [];
