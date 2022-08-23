@@ -24,8 +24,9 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
     const _ = this.props.currentDetailListInfo
       ? this.props.currentDetailListInfo
       : {
-          id: -1,
-          name: '当前播放列表',
+          id: -2,
+          name: '搜索关键词',
+          cancelRenderOperation: true,
         };
     return (
       <TransitionGroup
@@ -54,11 +55,13 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
               </div>
               <div
                 className="operation"
-                onClick={() => this.props.playSongList()}
+                onClick={() => this.props.playSongList(undefined, _.id)}
               >
-                <TransparentButton2 iconBefore={<PlaySquareOutlined />}>
-                  播放该播放列表
-                </TransparentButton2>
+                {_.cancelRenderOperation ? undefined : (
+                  <TransparentButton2 iconBefore={<PlaySquareOutlined />}>
+                    播放该播放列表
+                  </TransparentButton2>
+                )}
               </div>
             </div>
           </div>

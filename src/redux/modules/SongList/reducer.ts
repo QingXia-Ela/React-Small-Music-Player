@@ -4,11 +4,12 @@ import {
   CHANGESONGLISTID,
   UPDATEUSERSONGSHEET,
   CHANGESONGLISTLOADINGSTATE,
+  SYNCSEARCHWORD,
 } from '@/redux/constant';
 
 let initState: { [propName: string]: any } = {
   loading: false,
-  currentListId: 'current',
+  currentListId: 'search',
   selfCreateList: <any>[],
   subscribeList: <any>[],
   favoriteMusic: null,
@@ -16,6 +17,7 @@ let initState: { [propName: string]: any } = {
   currentDetailListInfo: null,
   currentDetailList: <any>[],
   showSubscribeList: false,
+  searchWord: {},
 };
 
 function SongListReducer(prevState = initState, action: any) {
@@ -50,17 +52,21 @@ function SongListReducer(prevState = initState, action: any) {
       } else if (typeof data === 'object') {
         if (data.type === 'myfavorite') {
           newState.currentDetailListInfo = newState.favoriteMusic;
-        } else if (data.type === 'current') {
-          newState.currentDetailListInfo = {
-            id: -1,
-            name: '当前播放列表',
-          };
+        } else if (data.type === 'search') {
+          newState.currentDetailListInfo = data.data
+            ? data.data
+            : {
+                id: -2,
+                name: '搜索关键词',
+                cancelRenderOperation: true,
+              };
         }
       } else if (typeof data === 'string') {
-        if (data === 'current') {
+        if (data === 'search') {
           newState.currentDetailListInfo = {
-            id: -1,
-            name: '当前播放列表',
+            id: -2,
+            name: '搜索关键词',
+            cancelRenderOperation: true,
           };
         }
       }
@@ -85,6 +91,10 @@ function SongListReducer(prevState = initState, action: any) {
 
     case CHANGEDETAILSONGLIST:
       newState.currentDetailList = [...data];
+      break;
+
+    case SYNCSEARCHWORD:
+      newState.searchWord = { ...data };
       break;
 
     default:

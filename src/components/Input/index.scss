@@ -18,10 +18,11 @@
 }
 
 // 保证其下所有的 input 也是统一样式，解决增加左右按钮时背景问题
-.black_input_son {
+.black_input_addon {
   width: 80%;
   height: 2.4em;
   margin: .6em 0;
+  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
   text-align: center;
 
   input {
@@ -29,20 +30,19 @@
     border: none;
     color: #adadad;
     background-color: transparent;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     caret-color: #a2a6ae;
     text-align: center;
-    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
     box-sizing: border-box;
     outline: 0;
 
-
     &:focus {
-      box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.6);
+      box-shadow: none;
     }
   }
 
   .ant-input-group-addon {
+    color: #fff;
     background-color: transparent;
     border: none;
   }

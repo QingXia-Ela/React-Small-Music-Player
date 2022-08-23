@@ -46,8 +46,11 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
 
     if (typeof cId == 'number') {
       this.props.changeSongListId(this.props.currentListId, page * pageSize);
-    } else if (cId.id) {
-      this.props.changeSongListId(this.props.currentListId.id, page * pageSize);
+    } else if (cId.type) {
+      this.props.changeSongListId(
+        this.props.currentListId.type,
+        page * pageSize,
+      );
     }
   };
 
@@ -55,9 +58,11 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
     props: BlackTableProps,
     state: BlackTableState,
   ) {
-    if (props.currentListId != state.listId)
-      return { page: 1, listId: props.currentListId };
-    return null;
+    if (props.currentListId == state.listId) return null;
+    else if (props.currentListId.type == state.listId) return null;
+    else if (props.currentListId.type)
+      return { page: 1, listId: props.currentListId.type };
+    else return { page: 1, listId: props.currentListId };
   }
 
   render() {

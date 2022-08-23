@@ -11,8 +11,8 @@ function DownloadAudio(audioInfo: any) {
         method: 'GET',
         responseType: 'blob',
         withCredentials: false,
-      }).then((res) => {
-        let blob = new Blob([res.data]);
+      }).then((res: any) => {
+        let blob = new Blob([res]);
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
         a.href = url;

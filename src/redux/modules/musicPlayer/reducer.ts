@@ -77,6 +77,7 @@ import additionReducer from './additionReducer';
 import store from '@/redux/index';
 import { random, throttle } from 'lodash';
 import { changeSong } from './actions';
+import simplifySongListResult from '@/utils/SongList/simplifySongList';
 
 // 播放器专用方法
 /**
@@ -506,7 +507,10 @@ export default function AudioReducer(
           changePlayState(false);
           break;
         }
-        newState.playQueue = [...data];
+        const filterList = ['id', 'name', 'ar'];
+        newState.playQueue = data.map((val: any) =>
+          simplifySongListResult(val, filterList),
+        );
       } else if (typeof action.newList != 'undefined') {
         /**
          * 调整了播放顺序，没更新列表

@@ -1,11 +1,12 @@
 import { getSongByID } from '@/api/music';
-import { getDetailList } from '@/api/SongList';
+import { getDetailList, searchSong } from '@/api/SongList';
 import {
   CHANGEDETAILSONGLIST,
   CHANGESHOWSUBSCRIBELIST,
   CHANGESONGLISTID,
   CHANGESONGLISTLOADINGSTATE,
   PLAYSONGLIST,
+  SYNCSEARCHWORD,
   UPDATEUSERSONGSHEET,
 } from '@/redux/constant';
 import { message } from 'antd';
@@ -33,16 +34,71 @@ export const changeSongDetailList = (data: any[]) => ({
 });
 
 /**
+ * 搜索歌曲
+ * @param data 搜索关键字
+ * @param type 类型，默认1，搜索歌曲
+ */
+export const filteringSearchResult = (
+  data: string,
+  type:
+    | 1
+    | 10
+    | 100
+    | 1000
+    | 1002
+    | 1004
+    | 1006
+    | 1099
+    | 1014
+    | 1018
+    | 2000 = 1,
+  offset?: number,
+  limit?: number,
+) => {
+  store.dispatch(changeSongListLoadingState(true));
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      store.dispatch(changeSongListLoadingState(false));
+    }, 800);
+    if (data && data.length) {
+      searchSong(data, type, offset, limit)
+        .then((res: any) => {
+          let resobj = res.result;
+          if (resobj.songCount > 300) resobj.songCount = 300;
+          resobj.songs = resobj.songs.map((val: any) => {
+            const filterList = ['ar', 'id', 'name'];
+            val.ar = val.artists;
+            return simplifySongListResult(val, filterList);
+          });
+          return resolve(res);
+        })
+        .catch((err) => {
+          return reject(err);
+        });
+    } else {
+      return reject({ message: '搜索关键词不能为空' });
+    }
+  });
+};
+
+/**
  * 播放当前选中的播放列表，也可以传入指定播放列表进行播放
  * @param data 指定播放的列表，不传入则播放状态中 current Detail List 内的歌曲
  */
-export const playSongList = (data?: any[]) => {
+export const playSongList = (data?: any[], id?: number) => {
   return () => {
     if (data) store.dispatch(changeAllQueue(data, true));
     else {
-      let SongListData = store.getState().SongList.currentDetailList;
-      if (SongListData && SongListData.length) {
-        store.dispatch(changeAllQueue(SongListData, true));
+      let SongListData: any;
+      if (id) {
+        getDetailList(id, 0, 200).then((res: any) => {
+          if (res.songs) store.dispatch(changeAllQueue(res.songs, true));
+        });
+      } else {
+        SongListData = store.getState().SongList.currentDetailList;
+        if (SongListData && SongListData.length) {
+          store.dispatch(changeAllQueue(SongListData, true));
+        }
       }
     }
   };
@@ -55,14 +111,14 @@ export const playSongList = (data?: any[]) => {
  * 字符串 `current` 代表当前播放列表，`myfavorite` 代表我喜爱的音乐，`search` 代表搜索列表
  */
 export const changeSongListId = (
-  data: string | number | { id: number; type: string },
+  data: string | number | { id: number; type: string; data?: any },
   offset?: number,
 ) => {
   let target = null;
-  if (typeof data === 'number') {
+  if (typeof data === 'number' && data >= 0) {
     target = data;
   } else if (typeof data == 'object') {
-    if (data.id) {
+    if (data.id && data.id >= 0) {
       switch (data.type) {
         case 'myfavorite':
           target = data.id;
@@ -81,7 +137,6 @@ export const changeSongListId = (
       .then((res: any) => {
         const filterList = ['ar', 'name', 'id'];
 
-        // redux 开发工具爆内存
         let data = res.songs.map((val: any) =>
           simplifySongListResult(val, filterList),
         );
@@ -100,6 +155,41 @@ export const changeSongListId = (
         store.dispatch(
           changeSongDetailList(store.getState().MusicPlayer.playQueue),
         );
+        break;
+      case 'search':
+        const { searchWord } = store.getState().SongList;
+        if (searchWord && searchWord.keywords) {
+          filteringSearchResult(
+            searchWord.keywords,
+            searchWord.type,
+            offset,
+          ).then((res: any) => {
+            if (res && res.result) {
+              store.dispatch(
+                changeSongListId({
+                  id: -2,
+                  type: 'search',
+                  data: {
+                    name: '搜索结果',
+                    trackCount: res.result.songCount,
+                    id: -2,
+                    cancelRenderOperation: true,
+                  },
+                }),
+              );
+              store.dispatch(changeSongDetailList(res.result.songs));
+            }
+          });
+        } else {
+          store.dispatch(
+            changeSongListId({
+              id: -2,
+              type: 'search',
+              data: { name: '左侧输入关键词进行搜索', id: -2 },
+            }),
+          );
+          store.dispatch(changeSongDetailList([]));
+        }
         break;
 
       default:
@@ -123,9 +213,37 @@ export const updateUserSongSheet = (data: object[]) => ({
 });
 
 /**
- * @param data `boolean` 改变正在展示的播放列表
+ * @param data `boolean` 改变订阅的歌单
  */
 export const changeShowSubscribeList = (data: boolean) => ({
   type: CHANGESHOWSUBSCRIBELIST,
   data,
 });
+
+/**
+ * 同步搜索关键字到全局，当搜索列表翻页时会根据同步的关键字进行偏移
+ * @param data 搜索关键字和类型
+ */
+export const syncSearchWord = (data: {
+  keywords: string;
+  type: 1 | 10 | 100 | 1000 | 1002 | 1004 | 1006 | 1099 | 1014 | 1018 | 2000;
+}) => {
+  filteringSearchResult(data.keywords, data.type).then((res: any) => {
+    if (res && res.result) {
+      store.dispatch(
+        changeSongListId({
+          id: -2,
+          type: 'search',
+          data: {
+            name: '搜索结果',
+            trackCount: res.result.songCount,
+            id: -2,
+            cancelRenderOperation: true,
+          },
+        }),
+      );
+      store.dispatch(changeSongDetailList(res.result.songs));
+    }
+  });
+  return { type: SYNCSEARCHWORD, data };
+};

@@ -1,21 +1,26 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Input } from 'antd';
+import { Input, InputRef } from 'antd';
 import './index.scss';
 
 import {
   UnorderedListOutlined,
   CaretRightOutlined,
   HeartOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 
 import BlackListItem from '@/components/BlackListItem';
-import { changeSongListId } from '@/redux/modules/SongList/action';
+import {
+  changeSongListId,
+  syncSearchWord,
+} from '@/redux/modules/SongList/action';
 
 interface TopBoxProps {
   userInfo?: { [propName: string]: any };
   currentListId: string | number | { id: number; type: string };
   changeSongListId: Function;
+  syncSearchWord: Function;
   favoriteMusic: { [propName: string]: any } | null;
 }
 
@@ -23,6 +28,8 @@ interface TopBoxState {}
 
 class TopBox extends React.Component<TopBoxProps, TopBoxState> {
   state = {};
+
+  InputRef: React.RefObject<InputRef> | null = React.createRef<InputRef>();
 
   judgeActive = (id: string): string => {
     let cId: string | number | { id: number; type: string };
@@ -43,13 +50,27 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
   render() {
     return (
       <div className="top_box">
-        <Input className="black_input" placeholder="搜索..."></Input>
+        <Input
+          className="black_input_addon"
+          placeholder="搜索..."
+          ref={this.InputRef}
+          addonAfter={
+            <SearchOutlined
+              onClick={() =>
+                this.props.syncSearchWord({
+                  keywords: this.InputRef?.current!.input!.value,
+                  type: 1,
+                })
+              }
+            />
+          }
+        ></Input>
         <BlackListItem
-          iconBefore={<UnorderedListOutlined />}
-          className={this.judgeActive('current')}
-          onClick={() => this.props.changeSongListId('current')}
+          iconBefore={<SearchOutlined />}
+          className={this.judgeActive('search')}
+          onClick={() => this.props.changeSongListId('search')}
         >
-          <span>当前播放列表</span>
+          <span>搜索歌曲</span>
         </BlackListItem>
         <BlackListItem
           iconBefore={<HeartOutlined />}
@@ -80,5 +101,6 @@ export default connect(
   }),
   {
     changeSongListId,
+    syncSearchWord,
   },
 )(TopBox);
