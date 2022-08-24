@@ -4,7 +4,6 @@ import { Input, InputRef } from 'antd';
 import './index.scss';
 
 import {
-  UnorderedListOutlined,
   CaretRightOutlined,
   HeartOutlined,
   SearchOutlined,
@@ -47,6 +46,13 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
     return '';
   };
 
+  goSearch = () => {
+    this.props.syncSearchWord({
+      keywords: this.InputRef?.current!.input!.value,
+      type: 1,
+    });
+  };
+
   render() {
     return (
       <div className="top_box">
@@ -54,16 +60,10 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
           className="black_input_addon"
           placeholder="搜索..."
           ref={this.InputRef}
-          addonAfter={
-            <SearchOutlined
-              onClick={() =>
-                this.props.syncSearchWord({
-                  keywords: this.InputRef?.current!.input!.value,
-                  type: 1,
-                })
-              }
-            />
-          }
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') this.goSearch();
+          }}
+          addonAfter={<SearchOutlined onClick={() => this.goSearch()} />}
         ></Input>
         <BlackListItem
           iconBefore={<SearchOutlined />}

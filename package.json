@@ -35,6 +35,7 @@
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "node-sass": "^7.0.1",
+    "pubsub-js": "^1.9.4",
     "react": "17.x",
     "react-addons-css-transition-group": "^15.6.2",
     "react-beautiful-dnd": "^13.1.0",
@@ -49,6 +50,7 @@
     "vanilla-tilt": "^1.7.2"
   },
   "devDependencies": {
+    "@types/pubsub-js": "^1.8.3",
     "@types/react": "^17.0.0",
     "@types/react-custom-scrollbars": "^4.0.10",
     "@types/react-dom": "^17.0.0",

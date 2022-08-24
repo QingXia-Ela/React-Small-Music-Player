@@ -70,10 +70,6 @@ import {
  * 额外扩展
  */
 import additionReducer from './additionReducer';
-
-/**
- * 监听播放结束触发 PlayEnd 事件
- */
 import store from '@/redux/index';
 import { random, throttle } from 'lodash';
 import { changeSong } from './actions';
@@ -117,6 +113,10 @@ const changePlayerState = async (data?: boolean) => {
   } finally {
   }
 };
+
+/**
+ * 监听播放结束触发 PlayEnd 事件
+ */
 
 audioObj.addEventListener('ended', (e) => {
   switch (initAudio.playMode) {
@@ -220,7 +220,7 @@ audioObj.addEventListener(
       type: CHANGECURRENTTIME,
       data: [audioObj.currentTime, audioObj.duration],
     });
-  }, 500),
+  }, 800),
 );
 
 export default function AudioReducer(
@@ -271,22 +271,7 @@ export default function AudioReducer(
 
         setAudioSource(data.handleInfo);
         changePlayerState(true);
-      }
-      // if (!newState.currentSong.invalid)
-      //   changePlayState(true, newState.currentSong).catch((res) => {
-      //     console.log(res);
-      //   });
-      // // 找一首能播的进行播放
-      // else {
-      //   for (let i = 0; i < newState.playQueue.length; i++) {
-      //     const val = newState.playQueue[i];
-      //     if (!val.invalid) {
-      //       newState.currentSong = { ...val };
-      //       changePlayState(true, newState.currentSong);
-      //       break;
-      //     }
-      //   }
-      // }
+      } else changePlayerState(true);
       break;
     case SUCCESSTOLOADSONG:
       newState.isLoading = false;
