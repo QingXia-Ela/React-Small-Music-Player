@@ -1,45 +1,25 @@
 import { useRef, useState } from 'react';
 import { Modal, message } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
 import './index.scss';
 
-import { showLyrics } from '@/redux/modules/musicPlayer/actions';
+import { showLyrics, clearQueue } from '@/redux/modules/musicPlayer/actions';
 import { connect } from 'react-redux';
 
 import TransparentButton from '@/components/transparentButton';
-import BlackInput from '@/components/Input';
-import { addPlayList } from '@/api/music';
 
 function RightMusicStateBar(props: { [propName: string]: any }) {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-
-  const name = useRef();
 
   const showModal = () => {
     setVisible(true);
   };
 
   const handleOk = async () => {
-    const ele: HTMLInputElement | undefined = name.current;
-    const val = ele!.value;
-
-    if (!props.playQueue.length) message.error('歌单不能为空');
-    else if (!val.length) message.error('请输入歌单名字');
-    else {
-      setConfirmLoading(true);
-
-      await addPlayList({
-        name: val,
-        list: JSON.stringify(props.playQueue),
-      }).then((res) => {
-        message.success('添加成功');
-      });
-
-      ele!.value = '';
-      setConfirmLoading(false);
-      setVisible(false);
-    }
+    props.clearQueue();
+    setVisible(false);
   };
 
   return (
@@ -47,7 +27,7 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
       <span className="left_title">{props.lyrics ? 'LYRICS' : 'PLAYLIST'}</span>
       <div className="right_switch">
         <TransparentButton>
-          <i onClick={showModal} className="iconfont icon-24gl-floppyDisk"></i>
+          <i className="iconfont icon-24gl-trash2" onClick={showModal}></i>
         </TransparentButton>
         <div onClick={() => props.showLyrics(!props.lyrics)}>
           <TransparentButton>
@@ -60,7 +40,7 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
         </div>
       </div>
       <Modal
-        title="设置歌单名称"
+        title="清空播放列表"
         visible={visible}
         centered
         className="black_modal"
@@ -78,7 +58,9 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
         onOk={handleOk}
         onCancel={() => setVisible(false)}
       >
-        <BlackInput ref={name} />
+        <span style={{ color: '#fff', fontSize: '1.6rem' }}>
+          确认清空当前播放列表吗
+        </span>
       </Modal>
     </div>
   );
@@ -91,5 +73,6 @@ export default connect(
   }),
   {
     showLyrics,
+    clearQueue,
   },
 )(RightMusicStateBar);

@@ -27,6 +27,7 @@ interface RightPlayListProps {
   playQueue: any;
   currentSong: { [propName: string]: any };
   hideButton?: boolean;
+  disabledDragable?: boolean;
 }
 
 interface RightPlayListState {}
@@ -57,7 +58,12 @@ class RightPlayList extends React.Component<
                 {...provided.droppableProps}
               >
                 {this.props.playQueue.map((val: any, i: number) => (
-                  <Draggable draggableId={val.name} index={i} key={val.id}>
+                  <Draggable
+                    draggableId={val.name}
+                    index={i}
+                    key={val.id}
+                    isDragDisabled={this.props.disabledDragable}
+                  >
                     {(provided) => (
                       <li
                         key={val.id}

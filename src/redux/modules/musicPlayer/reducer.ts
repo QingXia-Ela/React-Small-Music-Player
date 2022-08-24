@@ -426,15 +426,23 @@ export default function AudioReducer(
       /**
        * 当前正在播放的歌曲
        */
+      let temp = -1;
+      newState.playQueue.forEach((val: singleSongStructure, i: number) => {
+        if (val.id == data) temp = i;
+      });
       if (data === newState.currentSong.id) {
         // 长度不为1
         if (newState.playQueue.length != 1) {
-          changeSong(
-            newState.currentSongIndex == newState.playQueue.length - 1
-              ? 0
-              : newState.currentSongIndex + 1,
-          );
-          changePlayState(true, newState.currentSong);
+          if (temp == -1) break;
+          const nextSongInfo =
+            temp == newState.playQueue.length - 1
+              ? { ...newState.playQueue[0] }
+              : { ...newState.playQueue[temp + 1] };
+          const nextSongIndex =
+            temp == newState.playQueue.length - 1 ? 0 : temp + 1;
+          newState.currentSong = nextSongInfo;
+          newState.currentSongIndex = nextSongIndex;
+          forceDispatchChangeMusic(nextSongInfo.id);
         }
         // 清空队列
         else {
@@ -447,10 +455,6 @@ export default function AudioReducer(
           break;
         }
       }
-      let temp = -1;
-      newState.playQueue.forEach((val: singleSongStructure, i: number) => {
-        if (val.id == data) temp = i;
-      });
       if (temp != -1) newState.playQueue.splice(temp, 1);
       break;
 
