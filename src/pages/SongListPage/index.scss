@@ -10,7 +10,6 @@
 
   &.page-exit-active {
     opacity: 0;
-    transform: scale(1.2);
     transition: opacity .5s, transform .5s;
   }
 

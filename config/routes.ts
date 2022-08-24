@@ -14,6 +14,11 @@ export default [
         path: '/SongList',
         component: '@/pages/SongListPage',
       },
+      {
+        exact: true,
+        path: '/music/:id',
+        component: '@/pages/DetailsPage',
+      },
     ],
   },
 ];

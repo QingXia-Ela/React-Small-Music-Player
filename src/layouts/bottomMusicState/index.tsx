@@ -68,6 +68,7 @@ class BottomMusicState extends React.Component<
         >
           getloginmsg
         </button>
+        <button onClick={() => history.push('/music/0')}>MusicDetail</button>
       </div>
     );
   }
