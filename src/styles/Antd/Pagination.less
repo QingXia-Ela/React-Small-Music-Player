@@ -7,6 +7,20 @@
     background: transparent;
     transition: background-color 0.3s;
 
+    // 省略按钮
+    &.ant-pagination-jump-next,
+    &.ant-pagination-jump-prev {
+      .ant-pagination-item-link .ant-pagination-item-container {
+        .anticon {
+          color: #000;
+        }
+
+        .ant-pagination-item-ellipsis {
+          color: #fff;
+        }
+      }
+    }
+
     a,
     .ant-pagination-item-link {
       display: block;

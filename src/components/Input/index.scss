@@ -22,7 +22,6 @@
   width: 80%;
   height: 2.4em;
   margin: .6em 0;
-  box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
   text-align: center;
 
   input {
@@ -33,6 +32,7 @@
     font-size: 1.2rem;
     caret-color: #a2a6ae;
     text-align: center;
+    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
     box-sizing: border-box;
     outline: 0;
 

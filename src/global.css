@@ -184,6 +184,14 @@
   background: transparent;
   transition: background-color 0.3s;
 }
+.black_pagination.ant-pagination li.ant-pagination-jump-next .ant-pagination-item-link .ant-pagination-item-container .anticon,
+.black_pagination.ant-pagination li.ant-pagination-jump-prev .ant-pagination-item-link .ant-pagination-item-container .anticon {
+  color: #000;
+}
+.black_pagination.ant-pagination li.ant-pagination-jump-next .ant-pagination-item-link .ant-pagination-item-container .ant-pagination-item-ellipsis,
+.black_pagination.ant-pagination li.ant-pagination-jump-prev .ant-pagination-item-link .ant-pagination-item-container .ant-pagination-item-ellipsis {
+  color: #fff;
+}
 .black_pagination.ant-pagination li a,
 .black_pagination.ant-pagination li .ant-pagination-item-link {
   display: block;

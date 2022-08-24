@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './index.scss';
-import { Modal, message, Button } from 'antd';
+import { Modal, message, Button, Input } from 'antd';
 import { connect } from 'react-redux';
 
 import BlackInput from '@/components/Input';
@@ -76,8 +76,8 @@ class NeteaseLogin extends React.Component<
             placeholder="手机号"
             maxLength={11}
           />
-          <BlackInput
-            className="black_input_son"
+          <Input
+            className="black_input_addon"
             value={this.state.cCode}
             onChange={this.changeCaptchaCode}
             placeholder="验证码"
