@@ -220,7 +220,7 @@ audioObj.addEventListener(
       type: CHANGECURRENTTIME,
       data: [audioObj.currentTime, audioObj.duration],
     });
-  }, 800),
+  }, 500),
 );
 
 export default function AudioReducer(
@@ -255,7 +255,7 @@ export default function AudioReducer(
       /**
        * 如果有传入指定歌曲数据
        */
-      if (data) {
+      if (data && data.handleInfo && data.SongDetailsInfo) {
         let songIndex = -1;
         newState.playQueue.forEach((val: singleSongStructure, i: number) => {
           if (val.id == data.handleInfo.id) songIndex = i;
@@ -271,7 +271,9 @@ export default function AudioReducer(
 
         setAudioSource(data.handleInfo);
         changePlayerState(true);
-      } else changePlayerState(true);
+      } else if (newState.currentSong) {
+        changePlayerState(true);
+      }
       break;
     case SUCCESSTOLOADSONG:
       newState.isLoading = false;

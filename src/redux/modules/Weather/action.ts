@@ -31,7 +31,7 @@ export const getWeather = () => {
       };
       dispatch({ type: GETWEATHER, data: info });
     } catch (err) {
-      console.log(err);
+      console.log('获取天气出错');
     }
   };
 };

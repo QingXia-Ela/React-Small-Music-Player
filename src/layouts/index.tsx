@@ -53,7 +53,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
               React.cloneElement(child, { classNames: 'page' })
             }
           >
-            <CSSTransition key={location.pathname} timeout={800}>
+            <CSSTransition key={location.pathname.split('/')[1]} timeout={800}>
               {this.props.children}
             </CSSTransition>
           </TransitionGroup>
@@ -70,6 +70,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   }
   componentDidMount() {
     const { history } = this.props;
+
     this.SwitchBG();
     history.listen((location) => {
       if (this.props.location.pathname !== location.pathname) {

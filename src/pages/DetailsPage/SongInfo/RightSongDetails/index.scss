@@ -1,0 +1,25 @@
+.song_details_page .song_details_container .song_info {
+  .right_song_details {
+    flex: 1;
+    height: 100%;
+    padding: 0 2rem;
+
+    .info_container {
+      height: 20%;
+
+      .title {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+
+      .author {
+        font-size: 1.2rem;
+      }
+    }
+
+    .lyric_container {
+      position: relative;
+      height: 80%;
+    }
+  }
+}

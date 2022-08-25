@@ -16,7 +16,7 @@ export default [
       },
       {
         exact: true,
-        path: '/music/:id',
+        path: '/music/:id?',
         component: '@/pages/DetailsPage',
       },
     ],

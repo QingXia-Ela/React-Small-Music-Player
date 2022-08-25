@@ -8,6 +8,7 @@ interface RightMusicLyricProps {
   currentTime?: number;
   lyric: string | number | undefined;
   songID: number;
+  keepShow?: boolean;
 }
 
 interface RightMusicLyricState {}
@@ -18,7 +19,15 @@ class RightMusicLyric extends React.Component<
 > {
   state = {};
   render() {
-    return <div className="right_music_lyric">{this.showLyric()}</div>;
+    return (
+      <div
+        className={`right_music_lyric ${
+          this.props.keepShow ? 'keep_show' : ''
+        }`}
+      >
+        {this.showLyric()}
+      </div>
+    );
   }
 
   showLyric = () => {

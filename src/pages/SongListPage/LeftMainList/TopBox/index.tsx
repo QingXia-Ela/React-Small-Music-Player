@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Input, InputRef } from 'antd';
+import { history } from 'umi';
 import './index.scss';
 
 import {
@@ -20,6 +21,7 @@ interface TopBoxProps {
   currentListId: string | number | { id: number; type: string };
   changeSongListId: Function;
   syncSearchWord: Function;
+  currentSong: Function;
   favoriteMusic: { [propName: string]: any } | null;
 }
 
@@ -86,7 +88,12 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
         >
           <span>我喜爱的音乐</span>
         </BlackListItem>
-        <BlackListItem iconBefore={<CaretRightOutlined />}>
+        <BlackListItem
+          iconBefore={<CaretRightOutlined />}
+          onClick={() => {
+            if (this.props.currentSong) history.push('/music');
+          }}
+        >
           <span>正在播放</span>
         </BlackListItem>
       </div>
@@ -98,6 +105,7 @@ export default connect(
   (state: { [propName: string]: any }) => ({
     currentListId: state.SongList.currentListId,
     favoriteMusic: state.SongList.favoriteMusic,
+    currentSong: state.MusicPlayer.currentSong,
   }),
   {
     changeSongListId,

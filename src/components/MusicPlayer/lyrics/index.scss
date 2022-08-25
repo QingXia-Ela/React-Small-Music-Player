@@ -1,6 +1,5 @@
 .right_music_lyric {
   visibility: hidden;
-  z-index: 200;
   position: absolute;
   top: 0;
   left: 0;
@@ -9,6 +8,11 @@
   opacity: 0;
   mask: linear-gradient(transparent, rgb(255, 255, 255) 10%, rgb(255, 255, 255) 90%, transparent 100%) center top;
   transition: opacity .6s;
+
+  &.keep_show {
+    visibility: visible;
+    opacity: 1;
+  }
 
   .lrc {
     height: 100%;

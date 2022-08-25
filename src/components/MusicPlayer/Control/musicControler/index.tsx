@@ -26,6 +26,7 @@ interface MusicControlerProps {
   switchPlayState: Function;
   mutePlayer: Function;
   switchPlayMode: Function;
+  showSongName?: boolean;
 }
 
 interface MusicControlerState {}
@@ -34,13 +35,21 @@ class MusicControler extends React.Component<
   MusicControlerProps,
   MusicControlerState
 > {
+  static defaultProps = {
+    showSongName: true,
+  };
+
   volEle: RefObject<HTMLDivElement> = createRef();
 
   render() {
     return (
       <Fragment>
         <p className="song_name">
-          {this.props.name ? this.props.name : '_(:з」∠)_'}
+          {this.props.showSongName
+            ? this.props.name
+              ? this.props.name
+              : '_(:з」∠)_'
+            : undefined}
         </p>
         <div className="music_controler">
           <TransparentButton closeHoverPointer={true}>
