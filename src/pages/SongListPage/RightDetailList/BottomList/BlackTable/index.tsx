@@ -8,6 +8,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import WhiteScrollBar from '../../../../../components/WhiteScrollBar';
 import { changeSong } from '@/redux/modules/musicPlayer/actions';
 import { changeSongListId } from '@/redux/modules/SongList/action';
+import { history } from 'umi';
 
 interface BlackTableProps {
   columns: any[];
@@ -54,6 +55,12 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
     }
   };
 
+  changeSong = (id: number) => {
+    this.props.changeSong(id, () => {
+      history.replace('/music/' + id);
+    });
+  };
+
   static getDerivedStateFromProps(
     props: BlackTableProps,
     state: BlackTableState,
@@ -92,7 +99,7 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
                     : ''
                 }`}
                 key={val.id}
-                onDoubleClick={() => this.props.changeSong(val.id)}
+                onDoubleClick={() => this.changeSong(val.id)}
               >
                 {keyMap.map((i) => (
                   <div

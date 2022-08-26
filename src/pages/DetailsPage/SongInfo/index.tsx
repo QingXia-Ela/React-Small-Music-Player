@@ -23,13 +23,18 @@ class SongInfo extends React.Component<SongInfoProps, SongInfoState> {
 
   judgeId = () => {
     let id = parseInt(this.props.match.params.id);
+    console.log(id);
 
-    let needRequest = false;
     // 路径有 id 且合法
     if (typeof id === 'number' && !isNaN(id)) {
       if (this.props.currentSong?.id == id) return;
       // 俩 id 不匹配就去请求传入 id 的歌曲
-      else needRequest = true;
+      else {
+        if (this.props.currentSong) {
+          id = this.props.currentSong.id;
+          history.replace('/music/' + id);
+        } else this.props.changeSong(id);
+      }
     }
     // 路径没有传入 id
     else {
@@ -38,10 +43,6 @@ class SongInfo extends React.Component<SongInfoProps, SongInfoState> {
         history.replace('/music/' + id);
         return;
       }
-    }
-
-    if (needRequest) {
-      this.props.changeSong(id);
     }
   };
 

@@ -52,7 +52,7 @@ let changeSongDebounceFlag = false;
  * @param id 歌曲id，先向服务器发请求，成功后调用 Play action
  * @returns
  */
-export const changeSong = (id: number | null) => {
+export const changeSong = (id: number | null, callback?: Function) => {
   return () => {
     if (typeof id === 'number' && !changeSongDebounceFlag) {
       changeSongDebounceFlag = true;
@@ -90,6 +90,9 @@ export const changeSong = (id: number | null) => {
           })
           .catch((err) => {
             console.log(err);
+          })
+          .finally(() => {
+            callback && callback();
           });
       }, 800);
     }

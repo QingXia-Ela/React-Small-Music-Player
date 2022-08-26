@@ -64,7 +64,8 @@ export const filteringSearchResult = (
       searchSong(data, type, offset, limit)
         .then((res: any) => {
           let resobj = res.result;
-          if (resobj.songCount > 300) resobj.songCount = 300;
+          if (resobj.songCount == 0) resobj.songs = [];
+          else if (resobj.songCount > 300) resobj.songCount = 300;
           resobj.songs = resobj.songs.map((val: any) => {
             const filterList = ['ar', 'id', 'name'];
             val.ar = val.artists;

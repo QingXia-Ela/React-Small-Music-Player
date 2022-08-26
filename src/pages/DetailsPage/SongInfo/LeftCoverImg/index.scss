@@ -1,9 +1,42 @@
 .song_details_page .song_details_container .song_info {
   .left_cover_img {
+    position: relative;
     width: 30rem;
     height: 30rem;
     margin: 0 2rem;
-    background-size: cover;
-    background-position: center;
+
+    .img_box {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      animation: .8s SongDetailsPageLeftImg;
+
+
+      &.img-enter,
+      &.img-exit {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .3s;
+      }
+
+      &.img-exit-active {
+        opacity: 0;
+        transform: scale(0.9) translateX(-5%);
+      }
+    }
+  }
+}
+
+@keyframes SongDetailsPageLeftImg {
+  0% {
+    opacity: 0;
+    transform: scale(1.1) translateX(5%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }

@@ -10,6 +10,7 @@ import TransparentButton from '@/components/transparentButton';
 import { changeSong } from '@/redux/modules/musicPlayer/actions';
 import DownloadAudio from '@/utils/SongList/downloadAudio';
 import { debounce, throttle } from 'lodash';
+import { history } from 'umi';
 
 interface BottomListProps {
   currentDetailList: any[];
@@ -28,6 +29,12 @@ interface SongListDataType {
 
 class BottomList extends React.Component<BottomListProps, BottomListState> {
   state = {};
+
+  changeSong = (id: number) => {
+    this.props.changeSong(id, () => {
+      history.replace('/music/' + id);
+    });
+  };
   render() {
     const columns = [
       {
@@ -53,7 +60,7 @@ class BottomList extends React.Component<BottomListProps, BottomListState> {
       val.operation = (
         <Fragment>
           <TransparentButton>
-            <PlayCircleOutlined onClick={() => this.props.changeSong(val.id)} />
+            <PlayCircleOutlined onClick={() => changeSong(val.id)} />
           </TransparentButton>
           <TransparentButton>
             <DownloadOutlined
