@@ -1,9 +1,7 @@
-import './index.scss'
+import './index.scss';
 
 function Loading() {
-  return (
-    <div>Loading...</div>
-  );
+  return <div className="loading_mask">Loading...</div>;
 }
 
 export default Loading;

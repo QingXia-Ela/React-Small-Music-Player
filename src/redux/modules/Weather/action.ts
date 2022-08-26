@@ -1,4 +1,5 @@
 import { ThunkActionDispatch } from 'redux-thunk';
+import { message } from 'antd';
 
 import { getWeatherInfo } from '@/api/weather';
 import { GETWEATHER } from '@/redux/constant';
@@ -31,7 +32,7 @@ export const getWeather = () => {
       };
       dispatch({ type: GETWEATHER, data: info });
     } catch (err) {
-      console.log('获取天气出错');
+      message.error('获取天气出错');
     }
   };
 };

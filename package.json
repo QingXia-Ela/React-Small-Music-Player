@@ -35,6 +35,7 @@
     "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "node-sass": "^7.0.1",
+    "nprogress": "^0.2.0",
     "pubsub-js": "^1.9.4",
     "react": "17.x",
     "react-addons-css-transition-group": "^15.6.2",
