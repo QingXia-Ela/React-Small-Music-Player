@@ -44,3 +44,10 @@ export function searchSong(
     params: { keywords, type, offset, limit },
   });
 }
+
+export function getPersonalFMList() {
+  return request({
+    method: 'GET',
+    url: '/personal_fm',
+  });
+}

@@ -7,6 +7,8 @@ import TimeSlider from '@/components/MusicPlayer/Control/timeSlider';
 
 import { showLoginModal, showLogoutModal } from '@/redux/modules/Login/action';
 import { Fragment } from 'react';
+import { getPersonalFMList } from '@/api/SongList';
+import { changeAllQueue } from '@/redux/modules/musicPlayer/actions';
 
 function MiddleGreeting(props: { [propName: string]: any }) {
   const greeting = () => {
@@ -15,6 +17,17 @@ function MiddleGreeting(props: { [propName: string]: any }) {
     else if (h >= 11 && h < 14) return '中午好';
     else if (h >= 14 && h < 18) return '下午好';
     else return '晚上好';
+  };
+
+  const getPersonalFM = () => {
+    getPersonalFMList().then(({ data }) => {
+      if (data && data.length) {
+        data.forEach((val: any) => {
+          val.ar = val.artists;
+        });
+        props.changeAllQueue(data, true);
+      }
+    });
   };
 
   return (
@@ -36,7 +49,12 @@ function MiddleGreeting(props: { [propName: string]: any }) {
         <div className="random_song">
           {props.isLogin ? (
             <Fragment>
-              <span className="underline_button">获取每日推荐歌单</span>
+              <span
+                className="underline_button"
+                onClick={() => getPersonalFM()}
+              >
+                获取私人雷达歌单
+              </span>
               <span
                 className="underline_button"
                 onClick={() => props.showLogoutModal(true)}
@@ -69,5 +87,6 @@ export default connect(
   {
     showLoginModal,
     showLogoutModal,
+    changeAllQueue,
   },
 )(MiddleGreeting);

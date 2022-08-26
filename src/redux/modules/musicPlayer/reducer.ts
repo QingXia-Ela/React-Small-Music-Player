@@ -511,7 +511,7 @@ export default function AudioReducer(
         newState.playQueue = [...data];
         let newIndex = -1;
         data.forEach((val: any, i: number) => {
-          if (val.id == newState.currentSong.id) {
+          if (val.id == newState.currentSong?.id) {
             newIndex = i;
           }
         });
