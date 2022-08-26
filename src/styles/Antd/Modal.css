@@ -2,6 +2,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 .black_modal .ant-modal-content {
+  color: #fff;
   background-color: #00000088;
 }
 .black_modal .ant-modal-content .ant-modal-close {
@@ -33,7 +34,14 @@
   box-sizing: border-box;
   flex-direction: column;
   min-height: 120px;
-  padding: 1em 0;
+  padding: 1.5em 0;
+}
+.black_modal .ant-modal-content .ant-modal-body .illustration {
+  margin: 1em 0;
+  padding: 0 2em;
+  color: #fff;
+  font-size: 1.2em;
+  text-align: center;
 }
 .black_modal .ant-modal-content .ant-modal-footer {
   background-color: hsla(0, 0%, 45%, 0.8);

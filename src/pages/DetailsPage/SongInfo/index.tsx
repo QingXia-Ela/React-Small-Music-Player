@@ -23,8 +23,6 @@ class SongInfo extends React.Component<SongInfoProps, SongInfoState> {
 
   judgeId = () => {
     let id = parseInt(this.props.match.params.id);
-    console.log(id);
-
     // 路径有 id 且合法
     if (typeof id === 'number' && !isNaN(id)) {
       if (this.props.currentSong?.id == id) return;
