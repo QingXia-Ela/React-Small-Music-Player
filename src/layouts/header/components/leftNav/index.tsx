@@ -1,5 +1,6 @@
 import TransparentButton from '@/components/transparentButton';
-import * as React from 'react';
+import React, { Fragment } from 'react';
+import { Link, NavLink } from 'umi';
 
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
@@ -22,13 +23,17 @@ class HeaderRouterButtons extends React.Component<
   };
   render() {
     return (
-      <div className="router_button">
-        <TransparentButton disabled={this.state.historyPos <= 1}>
-          <LeftOutlined size={20} onClick={this.back} />
-        </TransparentButton>
-        <TransparentButton disabled={this.state.historyPos >= history.length}>
-          <RightOutlined onClick={this.go} />
-        </TransparentButton>
+      <div className="left_nav">
+        <Link to="/" className="transparent_button">
+          <div className="content">主页</div>
+        </Link>
+        <NavLink
+          to="/SongList"
+          activeClassName="transparent_button active"
+          className="transparent_button"
+        >
+          <div className="content">音乐</div>
+        </NavLink>
       </div>
     );
   }

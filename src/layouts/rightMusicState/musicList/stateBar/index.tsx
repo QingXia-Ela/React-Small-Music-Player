@@ -14,7 +14,7 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
   const [confirmLoading, setConfirmLoading] = useState(false);
 
   const showModal = () => {
-    setVisible(true);
+    if (props.playQueue?.length) setVisible(true);
   };
 
   const handleOk = async () => {

@@ -1,0 +1,16 @@
+.left_nav {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: right;
+  align-items: center;
+  font-family: 'SourceHanSans-Light';
+  font-size: 1.2rem;
+  text-shadow: 2px 1px .3em #000;
+  white-space: pre-wrap;
+  font-weight: 700;
+
+  .transparent_button {
+    font-size: 1.2rem;
+    margin: 0 1em;
+  }
+}

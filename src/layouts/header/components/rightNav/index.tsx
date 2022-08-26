@@ -12,8 +12,6 @@ import {
   changeLoginState,
   showLogoutModal,
 } from '@/redux/modules/Login/action';
-import { logout } from '@/api/login';
-import { ISLOGIN } from '@/constant/LocalStorage';
 
 interface RightNavProps {
   showLoginModal: Function;
@@ -28,16 +26,6 @@ class RightNav extends React.Component<RightNavProps, RightNavState> {
   render() {
     return (
       <div className="right_nav">
-        <Link to="/" className="transparent_button">
-          主页
-        </Link>
-        <NavLink
-          to="/SongList"
-          activeClassName="transparent_button active"
-          className="transparent_button"
-        >
-          音乐
-        </NavLink>
         <TransparentButton>
           <span className="content">设置</span>
         </TransparentButton>

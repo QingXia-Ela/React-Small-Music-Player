@@ -300,9 +300,11 @@ export default function AudioReducer(
 
     // 仅改变音频播放状态，不改变显示控制
     case SWITCHPLAYSTATE:
-      if (typeof data != 'undefined') newState.isPlay = data;
-      else newState.isPlay = !newState.isPlay;
-      changePlayerState(data);
+      if (newState.currentSong) {
+        if (typeof data != 'undefined') newState.isPlay = data;
+        else newState.isPlay = !newState.isPlay;
+        changePlayerState(data);
+      }
       break;
 
     // 仅改变显示状态，不改变真实音频实例控制
