@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Slider } from 'antd';
+import './index.scss';
 import {
   play,
   switchPlayState,
@@ -10,11 +10,6 @@ import {
   removeFromQueue,
 } from '@/redux/modules/musicPlayer/actions';
 import { connect } from 'react-redux';
-import { throttle } from 'lodash';
-
-import { history, Link } from 'umi';
-import { getInfo } from '@/api/music';
-import { getLoginState } from '@/api/login';
 
 interface BottomMusicStateProps {
   play: Function;
@@ -39,89 +34,31 @@ class BottomMusicState extends React.Component<
   state = {
     timeMark: 0,
   };
-  private changingTime = false;
-  playId: any = React.createRef();
+
   render() {
     return (
       <div className="bottom_music_state">
-        <button onClick={this.switchPlayState}>
-          {this.props.isPlay ? 'pause' : 'play'}
-        </button>
-        <button onClick={this.changeSong}>change</button>
-        <button onClick={this.removeFromQueue}>remove</button>
-        <input ref={this.playId} type="text" placeholder="test" />
-
-        <button onClick={this.prevSong}>prev</button>
-        <button onClick={this.nextSong}>next</button>
-        <button
-          onClick={() => {
-            getLoginState()
-              .then((res) => {
-                console.log(res);
-              })
-              .finally(() => {
-                getInfo().then((res) => {
-                  console.log(res);
-                });
-              });
-          }}
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+          粤ICP备2022085367号
+        </a>
+        Copyright © Shiina - All Rights reserved. Website Powered by
+        <a
+          href="https://v3.umijs.org/zh-CN"
+          target="_blank"
+          rel="noopener"
+          className="text_underline_decoration"
         >
-          getloginmsg
-        </button>
-        <button onClick={() => history.push({ pathname: '/music/0' })}>
-          MusicDetail
-        </button>
+          UmiJS
+        </a>
+        <a
+          href="https://github.com/Binaryify/NeteaseCloudMusicApi"
+          target="_blank"
+          rel="noopener"
+          className="text_underline_decoration"
+        >
+          NeteaseCloudMusicApi
+        </a>
       </div>
-    );
-  }
-  // 路由跳转
-
-  switchPlayState = () => {
-    this.props.switchPlayState();
-  };
-  changeSong = () => {
-    this.props.changeSong(
-      this.playId.current.value.length
-        ? parseInt(this.playId.current.value)
-        : 490182455,
-    );
-  };
-  nextSong = () => {
-    this.props.nextSong();
-  };
-  prevSong = () => {
-    this.props.prevSong();
-  };
-
-  changeTimeMark = (n: number) => {
-    this.setState({ timeMark: n });
-  };
-
-  removeFromQueue = () => {
-    this.props.removeFromQueue(
-      this.playId.current.value.length
-        ? parseInt(this.playId.current.value)
-        : 490182455,
-    );
-  };
-
-  onChange = (n: number) => {
-    this.changingTime = true;
-    this.changeTimeMark(n);
-  };
-  onAfterChange = (n: number) => {
-    this.changingTime = false;
-    this.changeTimeMark(n);
-    this.props.setCurrentTime(n);
-  };
-
-  componentDidMount() {
-    const ele = this.props.audioEle;
-    ele.addEventListener(
-      'timeupdate',
-      throttle(() => {
-        if (!this.changingTime) this.changeTimeMark(this.props.currentTime);
-      }, 1000),
     );
   }
 }
