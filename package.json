@@ -29,6 +29,7 @@
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-transition-group": "^4.4.5",
     "@umijs/plugin-sass": "^1.1.1",
+    "NeteaseCloudMusicApi": "^4.6.7",
     "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "better-scroll": "^2.4.2",
@@ -51,6 +52,7 @@
     "vanilla-tilt": "^1.7.2"
   },
   "devDependencies": {
+    "@types/nprogress": "^0.2.0",
     "@types/pubsub-js": "^1.8.3",
     "@types/react": "^17.0.0",
     "@types/react-custom-scrollbars": "^4.0.10",

@@ -38,7 +38,12 @@ class BottomMusicState extends React.Component<
   render() {
     return (
       <div className="bottom_music_state">
-        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">
+        <a
+          href="https://beian.miit.gov.cn/"
+          target="_blank"
+          rel="noopener"
+          className="text_underline_decoration"
+        >
           粤ICP备2022085367号
         </a>
         Copyright © Shiina - All Rights reserved. Website Powered by

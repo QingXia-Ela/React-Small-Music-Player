@@ -11,15 +11,12 @@ import BottomMusicState from '@/layouts/bottomMusicState';
 import 'antd/dist/antd.min.css';
 import './index.scss';
 import 'animate.css';
+
 import RightMusicState from './rightMusicState';
-
 import NeteaseLogin from '@/components/Login';
-import { SWITCHFILTER, SWITCHMASK } from '@/redux/constant';
+import Loading from '@/components/loading';
 
-const ANIMATION_MAP: any = {
-  PUSH: 'forward',
-  POP: 'back',
-};
+import { SWITCHFILTER, SWITCHMASK } from '@/redux/constant';
 
 interface LayoutProps extends IRouteComponentProps {}
 
@@ -43,33 +40,42 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   render() {
     return (
       <Provider store={store}>
-        <div className="layout">
-          <div className="header">
-            <Header></Header>
-          </div>
-          <TransitionGroup
-            className="middle_content"
-            childFactory={(child) =>
-              React.cloneElement(child, { classNames: 'page' })
-            }
-          >
-            <CSSTransition key={location.pathname.split('/')[1]} timeout={800}>
-              {this.props.children}
-            </CSSTransition>
-          </TransitionGroup>
-          <div className="footer">
-            <BottomMusicState />
-          </div>
-          <RightMusicState></RightMusicState>
-        </div>
-        <BG></BG>
-        {/* 登录框 */}
-        <NeteaseLogin></NeteaseLogin>
+        <Loading />
+        <TransitionGroup className="main-wrapper">
+          <CSSTransition key={0} timeout={3000}>
+            <div className="layout">
+              <div className="header">
+                <Header></Header>
+              </div>
+              <TransitionGroup
+                className="middle_content"
+                childFactory={(child) =>
+                  React.cloneElement(child, { classNames: 'page' })
+                }
+              >
+                <CSSTransition
+                  key={location.pathname.split('/')[1]}
+                  timeout={800}
+                >
+                  {this.props.children}
+                </CSSTransition>
+              </TransitionGroup>
+              <div className="footer">
+                <BottomMusicState />
+              </div>
+              <RightMusicState></RightMusicState>
+              <BG></BG>
+              {/* 登录框 */}
+              <NeteaseLogin></NeteaseLogin>
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
       </Provider>
     );
   }
   componentDidMount() {
     const { history } = this.props;
+    console.log('layout mount');
 
     this.SwitchBG();
     history.listen((location) => {

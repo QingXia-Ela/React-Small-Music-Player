@@ -9,9 +9,7 @@ export default defineConfig({
     type: 'browser',
   },
   routes,
-  dynamicImport: {
-    loading: '@/components/loading',
-  },
+  dynamicImport: {},
   antd: false,
   proxy: {
     '/weather': {

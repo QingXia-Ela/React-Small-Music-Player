@@ -9,6 +9,7 @@ import Login from './modules/Login/reducer';
 import Weather from './modules/Weather/reducer';
 import SongList from './modules/SongList/reducer';
 import AudioContext from './modules/AudioContext/reducer';
+import pageInit from './modules/pageInit/reducer';
 
 import { CHANGEDETAILSONGLIST } from './constant';
 
@@ -19,10 +20,10 @@ const combineReducer = combineReducers({
   Weather,
   SongList,
   AudioContext,
+  pageInit,
 });
 
 /* eslint-disable no-underscore-dangle */
-
 const middleware = [reduxThunk];
 const actionSanitizer = (action: any) => {
   let newAction = { ...action };
