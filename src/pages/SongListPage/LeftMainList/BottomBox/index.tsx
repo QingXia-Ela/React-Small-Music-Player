@@ -64,11 +64,11 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
     ));
   };
   getSongList = () => {
-    this.setState({
-      spinning: true,
-    });
     if (this.props.userInfo && this.props.userInfo.profile) {
       const uid = this.props.userInfo.profile.userId;
+      this.setState({
+        spinning: true,
+      });
       getUserMusicList(uid)
         .then((res: any) => {
           if (res.playlist) {

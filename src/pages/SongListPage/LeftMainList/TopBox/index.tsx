@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Input, InputRef } from 'antd';
+import { Input, InputRef, message } from 'antd';
 import { history } from 'umi';
 import './index.scss';
 
@@ -49,10 +49,14 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
   };
 
   goSearch = () => {
-    this.props.syncSearchWord({
-      keywords: this.InputRef?.current!.input!.value,
-      type: 1,
-    });
+    if (this.InputRef?.current!.input!.value.length) {
+      this.props.syncSearchWord({
+        keywords: this.InputRef?.current!.input!.value,
+        type: 1,
+      });
+    } else {
+      message.warning('搜索关键词不能为空');
+    }
   };
 
   render() {

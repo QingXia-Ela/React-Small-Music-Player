@@ -12,6 +12,7 @@ import AudioContext from './modules/AudioContext/reducer';
 import pageInit from './modules/pageInit/reducer';
 
 import { CHANGEDETAILSONGLIST } from './constant';
+import { cloneDeep } from 'lodash';
 
 const combineReducer = combineReducers({
   BG,
@@ -43,9 +44,7 @@ const actionSanitizer = (action: any) => {
 const composeEnhancers = composeWithDevTools({
   actionSanitizer,
   stateSanitizer: (state) => {
-    let newState: any = {
-      ...state,
-    };
+    let newState: any = cloneDeep(state);
     newState.AudioContext = 'audioCtx';
     return newState;
   },

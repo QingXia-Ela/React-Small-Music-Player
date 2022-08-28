@@ -65,8 +65,9 @@ function RightFunctionList(props: { [propName: string]: any }) {
         >
           <BlackUpload />
           <span className="illustration">
-            说明：图片存储在本地存储中，不建议上传过大的图片，推荐在 1MB
-            以内，最大 1.5MB，可以通过下方按钮清除图片
+            说明：图片存储在浏览器本地存储中，不建议上传过大的图片，推荐在 1MB
+            以内，最大
+            1.5MB，可以通过下方按钮清除图片，如果遇到上传图片后白屏或黑屏可以尝试刷新网页
           </span>
           <Popconfirm
             placement="left"

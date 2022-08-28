@@ -1,7 +1,7 @@
 import { BACKGROUND } from '@/constant/LocalStorage';
-import ImageBase64ToBlob from '@/utils/ImageBase64ToBlob';
+import ImageBase64ToBlobServer from '@/utils/ImageBase64ToBlobServer';
 
-const initUrl = localStorage.getItem(BACKGROUND);
+const initUrl = ImageBase64ToBlobServer(localStorage.getItem(BACKGROUND));
 const initImg = require('@/assets/images/bg/bg.jpg');
 
 const initState = {
@@ -28,11 +28,7 @@ export default function ChangeBG(
       } else {
         const localImg = localStorage.getItem(BACKGROUND);
         if (localImg) {
-          let blob = ImageBase64ToBlob(localImg);
-          if (blob) {
-            let url = window.URL.createObjectURL(blob);
-            newState.bgPath = url;
-          }
+          newState.bgPath = ImageBase64ToBlobServer(localImg);
         } else {
           newState.bgPath = initImg;
         }

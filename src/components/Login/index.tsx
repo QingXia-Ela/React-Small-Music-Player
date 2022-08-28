@@ -82,6 +82,8 @@ class NeteaseLogin extends React.Component<
             onChange={this.changeCaptchaCode}
             placeholder="验证码"
             type="password"
+            max={4}
+            maxLength={4}
             addonAfter={this.sendMsgButton()}
           />
         </Modal>
@@ -124,15 +126,12 @@ class NeteaseLogin extends React.Component<
     if (this.state.phone) {
       this.setState({ cCodeLoading: true });
       getCaptchaCode(this.state.phone)
-        .then(
-          (res: any) => {
-            if (res && res.data) {
-              message.success('验证码已发送！，请注意查收');
-              this.oneMinDisabled();
-            }
-          },
-          () => {},
-        )
+        .then((res: any) => {
+          if (res && res.data) {
+            message.success('验证码已发送！，请注意查收');
+            this.oneMinDisabled();
+          }
+        })
         .finally(() => {
           this.setState({ cCodeLoading: false });
         });

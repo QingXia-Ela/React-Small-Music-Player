@@ -1,5 +1,5 @@
-export default function ImageBase64ToBlob(dataurl: string) {
-  if (!dataurl.length) return null;
+export default function ImageBase64ToBlob(dataurl: string | null) {
+  if (!dataurl || !dataurl.length) return null;
   var arr = dataurl.split(',');
   //注意base64的最后面中括号和引号是不转译的
   var _arr = arr[1].substring(0, arr[1].length - 2);
@@ -10,7 +10,12 @@ export default function ImageBase64ToBlob(dataurl: string) {
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n);
   }
-  return new Blob([u8arr], {
+  const blobObj = new Blob([u8arr], {
     type: mime,
   });
+  if (blobObj) {
+    let url = window.URL.createObjectURL(blobObj);
+    return url;
+  }
+  return null;
 }

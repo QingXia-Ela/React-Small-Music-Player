@@ -49,6 +49,8 @@ axios.interceptors.response.use(
           default:
             break;
         }
+      } else {
+        message.error('请求超时，请稍后重试');
       }
     } else {
       //服务器没有返回结果 分两种情况 断网  服务器崩了
@@ -56,8 +58,8 @@ axios.interceptors.response.use(
         //断网处理：跳转到断网页面
         return;
       }
+      // 服务器崩了
       message.error('工口发生，可能是网络问题');
-
       return Promise.reject(error);
     }
   },

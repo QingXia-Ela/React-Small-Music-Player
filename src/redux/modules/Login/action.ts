@@ -1,11 +1,9 @@
-import { getLoginState } from '@/api/login';
 import {
   CHANGELOGINSTATE,
   SHOWLOGINMODAL,
   SETUSERINFO,
   SHOWLOGOUTMODAL,
 } from '@/redux/constant';
-import { ThunkActionDispatch } from 'redux-thunk';
 
 /**
  * 修改登陆状态

@@ -38,31 +38,36 @@ class BottomMusicState extends React.Component<
   render() {
     return (
       <div className="bottom_music_state">
-        <a
-          href="https://beian.miit.gov.cn/"
-          target="_blank"
-          rel="noopener"
-          className="text_underline_decoration"
-        >
-          粤ICP备2022085367号
-        </a>
-        Copyright © Shiina - All Rights reserved. Website Powered by
-        <a
-          href="https://v3.umijs.org/zh-CN"
-          target="_blank"
-          rel="noopener"
-          className="text_underline_decoration"
-        >
-          UmiJS
-        </a>
-        <a
-          href="https://github.com/Binaryify/NeteaseCloudMusicApi"
-          target="_blank"
-          rel="noopener"
-          className="text_underline_decoration"
-        >
-          NeteaseCloudMusicApi
-        </a>
+        <div>
+          <a
+            href="https://beian.miit.gov.cn/"
+            target="_blank"
+            rel="noopener"
+            className="text_underline_decoration"
+          >
+            粤ICP备2022085367号
+          </a>
+          Copyright © Shiina - All Rights reserved. Website Powered by
+          <a
+            href="https://v3.umijs.org/zh-CN"
+            target="_blank"
+            rel="noopener"
+            className="text_underline_decoration"
+          >
+            UmiJS
+          </a>
+          <a
+            href="https://github.com/Binaryify/NeteaseCloudMusicApi"
+            target="_blank"
+            rel="noopener"
+            className="text_underline_decoration"
+          >
+            NeteaseCloudMusicApi
+          </a>
+        </div>
+        <div>
+          本站为公共站点，为维护歌曲版权，本站不提供歌曲下载服务；本站无法保证后台API的稳定性和安全性，如有需要稳定的服务请自行搭建
+        </div>
       </div>
     );
   }
