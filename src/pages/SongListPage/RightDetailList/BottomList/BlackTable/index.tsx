@@ -41,18 +41,13 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
   };
 
   changeDetailListPage = (page: number, pageSize: number) => {
-    this.setState({ page });
-    page--;
-    const cId = this.props.currentListId;
+    let finalPage = page;
 
-    if (typeof cId == 'number') {
-      this.props.changeSongListId(this.props.currentListId, page * pageSize);
-    } else if (cId.type) {
-      this.props.changeSongListId(
-        this.props.currentListId.type,
-        page * pageSize,
-      );
-    }
+    this.setState({ page: finalPage });
+    if (finalPage > 0) finalPage--;
+    console.log(this.props.currentListId, finalPage * pageSize);
+
+    this.props.changeSongListId(this.props.currentListId, finalPage * pageSize);
   };
 
   changeSong = (id: number) => {
@@ -126,7 +121,7 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
         total={
           this.props.currentDetailListInfo
             ? this.props.currentDetailListInfo.trackCount
-            : 0
+            : 40
         }
         pageSize={20}
         showSizeChanger={false}

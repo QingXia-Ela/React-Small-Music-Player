@@ -25,7 +25,7 @@ class TopInfo extends React.Component<TopInfoProps, TopInfoState> {
       ? this.props.currentDetailListInfo
       : {
           id: -2,
-          name: '搜索关键词',
+          name: '搜索结果',
           cancelRenderOperation: true,
         };
     return (

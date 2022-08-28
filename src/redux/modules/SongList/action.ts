@@ -14,6 +14,12 @@ import { changeAllQueue } from '../musicPlayer/actions';
 
 import store from '@/redux';
 import simplifySongListResult from '@/utils/SongList/simplifySongList';
+import {
+  MY_FAVORITE,
+  NORMAL_SONGLIST,
+  SEARCH_KEYWORD,
+  SongListId,
+} from './constant';
 
 /**
  * 设置详细歌单加载状态
@@ -109,93 +115,79 @@ export const playSongList = (data?: any[], id?: number) => {
  * 改变右侧播放列表简略信息
  * @param data 传入标识，如果为数字 id 代表网易云歌单，如果是字符串就是上方的俩列表
  *
- * 字符串 `current` 代表当前播放列表，`myfavorite` 代表我喜爱的音乐，`search` 代表搜索列表
+ * 标识统一格式：`{ type: 类型, id: 数字 }`
  */
-export const changeSongListId = (
-  data: string | number | { id: number; type: string; data?: any },
-  offset?: number,
-) => {
-  let target = null;
-  if (typeof data === 'number' && data >= 0) {
-    target = data;
-  } else if (typeof data == 'object') {
-    if (data.id && data.id >= 0) {
-      switch (data.type) {
-        case 'myfavorite':
-          target = data.id;
-          break;
-        default:
-          break;
-      }
-    }
-  } else if (typeof data === 'string') {
-    target = data;
-  }
+export const changeSongListId = (data: SongListId, offset?: number) => {
+  const { id, type } = data;
 
-  if (typeof target === 'number') {
-    store.dispatch(changeSongListLoadingState(true));
-    getDetailList(target!, offset ? offset : 0)
-      .then((res: any) => {
-        const filterList = ['ar', 'name', 'id'];
+  switch (type) {
+    case NORMAL_SONGLIST:
+      store.dispatch(changeSongListLoadingState(true));
+      getDetailList(id, offset ? offset : 0)
+        .then((res: any) => {
+          const filterList = ['ar', 'name', 'id'];
 
-        let data = res.songs.map((val: any) =>
-          simplifySongListResult(val, filterList),
-        );
-
-        store.dispatch(changeSongDetailList(data));
-      })
-      .catch(() => {
-        message.error('获取歌单详情失败');
-      })
-      .finally(() => {
-        store.dispatch(changeSongListLoadingState(false));
-      });
-  } else if (typeof target === 'string') {
-    switch (target) {
-      case 'current':
-        store.dispatch(
-          changeSongDetailList(store.getState().MusicPlayer.playQueue),
-        );
-        break;
-      case 'search':
-        const { searchWord } = store.getState().SongList;
-        if (searchWord && searchWord.keywords) {
-          filteringSearchResult(
-            searchWord.keywords,
-            searchWord.type,
-            offset,
-          ).then((res: any) => {
-            if (res && res.result) {
-              store.dispatch(
-                changeSongListId({
-                  id: -2,
-                  type: 'search',
-                  data: {
-                    name: '搜索结果',
-                    trackCount: res.result.songCount,
-                    id: -2,
-                    cancelRenderOperation: true,
-                  },
-                }),
-              );
-              store.dispatch(changeSongDetailList(res.result.songs));
-            }
-          });
-        } else {
-          store.dispatch(
-            changeSongListId({
-              id: -2,
-              type: 'search',
-              data: { name: '左侧输入关键词进行搜索', id: -2 },
-            }),
+          let data = res.songs.map((val: any) =>
+            simplifySongListResult(val, filterList),
           );
-          store.dispatch(changeSongDetailList([]));
-        }
-        break;
 
-      default:
-        break;
-    }
+          store.dispatch(changeSongDetailList(data));
+        })
+        .catch(() => {
+          message.error('获取歌单详情失败');
+        })
+        .finally(() => {
+          store.dispatch(changeSongListLoadingState(false));
+        });
+      break;
+
+    case MY_FAVORITE:
+      store.dispatch(changeSongListLoadingState(true));
+      getDetailList(id, offset ? offset : 0)
+        .then((res: any) => {
+          const filterList = ['ar', 'name', 'id'];
+
+          let data = res.songs.map((val: any) =>
+            simplifySongListResult(val, filterList),
+          );
+
+          store.dispatch(changeSongDetailList(data));
+        })
+        .catch(() => {
+          message.error('获取歌单详情失败');
+        })
+        .finally(() => {
+          store.dispatch(changeSongListLoadingState(false));
+        });
+      break;
+
+    case SEARCH_KEYWORD:
+      const { searchWord } = store.getState().SongList;
+
+      if (searchWord && searchWord.keywords) {
+        filteringSearchResult(
+          searchWord.keywords,
+          searchWord.type,
+          offset,
+        ).then((res: any) => {
+          if (res && res.result) {
+            data.data = {
+              name: '搜索结果',
+              trackCount: res.result.songCount,
+              id: -2,
+              cancelRenderOperation: true,
+            };
+            store.dispatch(changeSongDetailList(res.result.songs));
+          }
+        });
+      } else {
+        data.data = { name: '左侧输入关键词进行搜索', id: -2 };
+        store.dispatch(changeSongDetailList([]));
+      }
+      break;
+
+    default:
+      break;
   }
 
   return {
@@ -234,7 +226,7 @@ export const syncSearchWord = (data: {
       store.dispatch(
         changeSongListId({
           id: -2,
-          type: 'search',
+          type: SEARCH_KEYWORD,
           data: {
             name: '搜索结果',
             trackCount: res.result.songCount,

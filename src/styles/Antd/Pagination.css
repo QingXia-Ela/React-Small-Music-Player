@@ -8,7 +8,7 @@
 }
 .black_pagination.ant-pagination li.ant-pagination-jump-next .ant-pagination-item-link .ant-pagination-item-container .anticon,
 .black_pagination.ant-pagination li.ant-pagination-jump-prev .ant-pagination-item-link .ant-pagination-item-container .anticon {
-  color: #000;
+  color: #000 !important;
 }
 .black_pagination.ant-pagination li.ant-pagination-jump-next .ant-pagination-item-link .ant-pagination-item-container .ant-pagination-item-ellipsis,
 .black_pagination.ant-pagination li.ant-pagination-jump-prev .ant-pagination-item-link .ant-pagination-item-container .ant-pagination-item-ellipsis {
@@ -25,7 +25,7 @@
 }
 .black_pagination.ant-pagination li a:hover,
 .black_pagination.ant-pagination li .ant-pagination-item-link:hover {
-  color: #000;
+  color: #000 !important;
   background: #fff;
   border-color: #fff;
 }
@@ -33,5 +33,5 @@
   background: #fff;
 }
 .black_pagination.ant-pagination li.ant-pagination-item-active a {
-  color: #000;
+  color: #000 !important;
 }

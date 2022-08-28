@@ -20,11 +20,12 @@ import {
 import WhiteScrollBar from '@/components/WhiteScrollBar';
 import BlackListItem from '@/components/BlackListItem';
 import simplifySongListResult from '@/utils/SongList/simplifySongList';
+import { NORMAL_SONGLIST, SongListId } from '@/redux/modules/SongList/constant';
 
 interface BottomBoxProps {
   isLogin: boolean;
   showSubscribeList: boolean;
-  currentListId: string | number;
+  currentListId: SongListId;
   showLoginModal: Function;
   showLogoutModal: Function;
   updateUserSongSheet: Function;
@@ -56,8 +57,12 @@ class BottomBox extends React.Component<BottomBoxProps, BottomBoxState> {
       <BlackListItem
         key={val.id}
         iconBefore={<PlaySquareOutlined />}
-        onClick={() => this.props.changeSongListId(val.id)}
-        className={this.props.currentListId === val.id ? 'active' : undefined}
+        onClick={() =>
+          this.props.changeSongListId({ type: NORMAL_SONGLIST, id: val.id })
+        }
+        className={
+          this.props.currentListId.id === val.id ? 'active' : undefined
+        }
       >
         <span>{val.name}</span>
       </BlackListItem>

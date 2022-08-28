@@ -5,13 +5,18 @@ import './index.scss';
 import TransparentBox1 from '@/components/pages/transparentBox1';
 import { throttle } from 'lodash';
 import { switchPlayState } from '@/redux/modules/musicPlayer/actions';
-import { setConnect2Ele } from '@/redux/modules/AudioContext/action';
+import {
+  setConnect2Ele,
+  finishDraw,
+} from '@/redux/modules/AudioContext/action';
 
 interface TopLeftSpectrumProps {
   ele: HTMLMediaElement;
   switchPlayState: Function;
   setConnect2Ele: Function;
+  finishDraw: Function;
   isPlay: boolean;
+  hasDraw: boolean;
   analyser: null | AnalyserNode;
 }
 
@@ -25,6 +30,7 @@ class TopLeftSpectrum extends React.Component<
   private hasInit = false;
   private canvasCtx: CanvasRenderingContext2D | null | undefined;
   private drawVisual: number = 0;
+  private timer: NodeJS.Timer | undefined;
 
   private myFftSize: 256 = 256;
 
@@ -55,23 +61,25 @@ class TopLeftSpectrum extends React.Component<
         new Uint8Array(this.myFftSize / 2).fill(0),
       );
     }
-    if (this.props.analyser) this.draw(this.props.analyser);
+    if (this.props.analyser && !this.props.hasDraw) {
+      this.draw(this.props.analyser);
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.timer) clearInterval(this.timer);
   }
 
   draw = (analyser: AnalyserNode) => {
     const alt = analyser.frequencyBinCount;
-    let array = new Uint8Array(alt);
 
     // 绘制函数
-    let drawToCanvas = throttle(() => {
-      this.drawVisual = requestAnimationFrame(drawToCanvas);
-      // 获取频域数据
+    this.timer = setInterval(() => {
+      let array = new Uint8Array(alt);
       analyser.getByteFrequencyData(array);
       if (this.IndexCanvas.current)
         this.drawToDom(this.IndexCanvas.current, array);
-    }, 20);
-
-    drawToCanvas();
+    }, 30);
   };
 
   drawToDom = (canvas: HTMLCanvasElement, arr: Uint8Array) => {
@@ -103,9 +111,11 @@ export default connect(
     ele: state.MusicPlayer.audioEle,
     isPlay: state.MusicPlayer.isPlay,
     analyser: state.AudioContext.analyser,
+    hasDraw: state.AudioContext.hasDraw,
   }),
   {
     switchPlayState,
     setConnect2Ele,
+    finishDraw,
   },
 )(TopLeftSpectrum);

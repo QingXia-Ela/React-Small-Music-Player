@@ -1,10 +1,11 @@
-import { CONNECT2ELE, SETAUDIOCONTEXT } from '@/redux/constant';
+import { CONNECT2ELE, FINISHDRAW, SETAUDIOCONTEXT } from '@/redux/constant';
 
 interface AudioContextReducerInitState {
   AudioCtx: AudioContext;
   eleSource?: MediaElementAudioSourceNode;
   analyser?: AnalyserNode;
   finishInit: boolean;
+  hasDraw: boolean;
 }
 
 let initState: AudioContextReducerInitState = {
@@ -12,6 +13,7 @@ let initState: AudioContextReducerInitState = {
   eleSource: undefined,
   analyser: undefined,
   finishInit: false,
+  hasDraw: false,
 };
 
 function AudioContextReducer(prevState = initState, action: any) {
@@ -34,6 +36,10 @@ function AudioContextReducer(prevState = initState, action: any) {
         newState.analyser.fftSize = 256;
         newState.finishInit = true;
       }
+      break;
+
+    case FINISHDRAW:
+      newState.hasDraw = true;
       break;
 
     default:

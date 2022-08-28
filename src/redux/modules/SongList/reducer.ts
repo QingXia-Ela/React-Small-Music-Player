@@ -6,6 +6,7 @@ import {
   CHANGESONGLISTLOADINGSTATE,
   SYNCSEARCHWORD,
 } from '@/redux/constant';
+import { SEARCH_KEYWORD } from './constant';
 
 let initState: { [propName: string]: any } = {
   loading: false,
@@ -33,10 +34,11 @@ function SongListReducer(prevState = initState, action: any) {
       if (newState.currentListId == data) break;
       newState.currentListId = data;
       // 在 List 中查找信息
-      if (typeof data === 'number') {
+      const { type, id } = data;
+      if (typeof id === 'number' && id > 0) {
         let res = null;
 
-        if (newState.favoriteMusic && newState.favoriteMusic.id === data) {
+        if (newState.favoriteMusic && newState.favoriteMusic.id === id) {
           newState.currentDetailListInfo = newState.favoriteMusic;
           break;
         }
@@ -45,29 +47,18 @@ function SongListReducer(prevState = initState, action: any) {
           ? newState.subscribeList
           : newState.selfCreateList;
         searchList.forEach((val: any) => {
-          if (data === val.id) res = val;
+          if (id === val.id) res = val;
         });
         // 有结果了
         if (res) newState.currentDetailListInfo = res;
-      } else if (typeof data === 'object') {
-        if (data.type === 'myfavorite') {
-          newState.currentDetailListInfo = newState.favoriteMusic;
-        } else if (data.type === 'search') {
-          newState.currentDetailListInfo = data.data
-            ? data.data
-            : {
-                id: -2,
-                name: '搜索关键词',
-                cancelRenderOperation: true,
-              };
-        }
-      } else if (typeof data === 'string') {
-        if (data === 'search') {
-          newState.currentDetailListInfo = {
-            id: -2,
-            name: '搜索关键词',
-            cancelRenderOperation: true,
-          };
+      } else {
+        switch (type) {
+          case SEARCH_KEYWORD:
+            newState.currentDetailListInfo = data.data;
+            break;
+
+          default:
+            break;
         }
       }
       break;

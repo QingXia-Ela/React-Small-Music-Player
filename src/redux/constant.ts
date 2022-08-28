@@ -57,6 +57,7 @@ export const SYNCSEARCHWORD = 'SyncSearchWord';
  */
 export const SETAUDIOCONTEXT = 'SetAudioContext';
 export const CONNECT2ELE = 'Connect2Ele';
+export const FINISHDRAW = 'FinishDraw';
 
 /**
  * 初始化相关操作

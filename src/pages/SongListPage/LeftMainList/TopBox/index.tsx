@@ -15,10 +15,15 @@ import {
   changeSongListId,
   syncSearchWord,
 } from '@/redux/modules/SongList/action';
+import {
+  MY_FAVORITE,
+  SEARCH_KEYWORD,
+  SongListId,
+} from '@/redux/modules/SongList/constant';
 
 interface TopBoxProps {
   userInfo?: { [propName: string]: any };
-  currentListId: string | number | { id: number; type: string };
+  currentListId: SongListId;
   changeSongListId: Function;
   syncSearchWord: Function;
   currentSong: Function;
@@ -33,19 +38,8 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
   InputRef: React.RefObject<InputRef> | null = React.createRef<InputRef>();
 
   judgeActive = (id: string): string => {
-    let cId: string | number | { id: number; type: string };
-    if (typeof this.props.currentListId === 'object')
-      cId = this.props.currentListId.type;
-    else cId = this.props.currentListId;
-
-    if (typeof cId === 'string' && cId === id) return 'active';
-    else if (
-      this.props.favoriteMusic &&
-      cId === this.props.favoriteMusic.id &&
-      id == 'myfavorite'
-    )
-      return 'active';
-    return '';
+    let cId = this.props.currentListId;
+    return cId.type === id ? 'active' : '';
   };
 
   goSearch = () => {
@@ -73,20 +67,20 @@ class TopBox extends React.Component<TopBoxProps, TopBoxState> {
         ></Input>
         <BlackListItem
           iconBefore={<SearchOutlined />}
-          className={this.judgeActive('search')}
-          onClick={() => this.props.changeSongListId('search')}
+          className={this.judgeActive(SEARCH_KEYWORD)}
+          onClick={() => this.props.changeSongListId({ type: SEARCH_KEYWORD })}
         >
           <span>搜索歌曲</span>
         </BlackListItem>
         <BlackListItem
           iconBefore={<HeartOutlined />}
-          className={this.judgeActive('myfavorite')}
+          className={this.judgeActive(MY_FAVORITE)}
           onClick={() =>
             this.props.changeSongListId({
               id: this.props.favoriteMusic
                 ? this.props.favoriteMusic.id
                 : undefined,
-              type: 'myfavorite',
+              type: MY_FAVORITE,
             })
           }
         >

@@ -8,7 +8,11 @@ export function getUserMusicList(uid: number) {
   });
 }
 
-export function getDetailList(id: number, offset?: number, limit: number = 20) {
+export function getDetailList(
+  id: number | string,
+  offset?: number,
+  limit: number = 20,
+) {
   return request({
     method: 'GET',
     url: '/playlist/track/all',
