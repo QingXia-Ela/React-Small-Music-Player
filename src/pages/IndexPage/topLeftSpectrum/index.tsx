@@ -5,11 +5,14 @@ import './index.scss';
 import TransparentBox1 from '@/components/pages/transparentBox1';
 import { throttle } from 'lodash';
 import { switchPlayState } from '@/redux/modules/musicPlayer/actions';
+import { setConnect2Ele } from '@/redux/modules/AudioContext/action';
 
 interface TopLeftSpectrumProps {
   ele: HTMLMediaElement;
   switchPlayState: Function;
+  setConnect2Ele: Function;
   isPlay: boolean;
+  analyser: null | AnalyserNode;
 }
 
 interface TopLeftSpectrumState {}
@@ -43,7 +46,8 @@ class TopLeftSpectrum extends React.Component<
   }
 
   componentDidMount() {
-    this.canvasCtx = this.IndexCanvas.current?.getContext('2d');
+    if (this.props.ele.src.length) this.props.setConnect2Ele(this.props.ele);
+
     // 初始化频域图
     if (this.IndexCanvas.current) {
       this.drawToDom(
@@ -51,24 +55,7 @@ class TopLeftSpectrum extends React.Component<
         new Uint8Array(this.myFftSize / 2).fill(0),
       );
     }
-  }
-
-  componentDidUpdate() {
-    // 未初始化且无资源
-    if (!this.hasInit && this.props.ele.src.length) {
-      let audioContext = new window.AudioContext();
-      let eleSource = audioContext.createMediaElementSource(this.props.ele);
-      let analyser = audioContext.createAnalyser();
-
-      analyser.fftSize = this.myFftSize;
-
-      eleSource.connect(analyser);
-      analyser.connect(audioContext.destination);
-
-      this.hasInit = true;
-
-      this.draw(analyser);
-    }
+    if (this.props.analyser) this.draw(this.props.analyser);
   }
 
   draw = (analyser: AnalyserNode) => {
@@ -115,8 +102,10 @@ export default connect(
   (state: { [propName: string]: any }) => ({
     ele: state.MusicPlayer.audioEle,
     isPlay: state.MusicPlayer.isPlay,
+    analyser: state.AudioContext.analyser,
   }),
   {
     switchPlayState,
+    setConnect2Ele,
   },
 )(TopLeftSpectrum);

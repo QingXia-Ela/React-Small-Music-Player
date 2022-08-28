@@ -1,9 +1,17 @@
 import { CONNECT2ELE, SETAUDIOCONTEXT } from '@/redux/constant';
 
-let initState: {
-  AudioCtx: AudioContext | undefined;
-  connect2Ele: boolean | undefined;
-  analyser: any;
+interface AudioContextReducerInitState {
+  AudioCtx: AudioContext;
+  eleSource?: MediaElementAudioSourceNode;
+  analyser?: AnalyserNode;
+  finishInit: boolean;
+}
+
+let initState: AudioContextReducerInitState = {
+  AudioCtx: new window.AudioContext(),
+  eleSource: undefined,
+  analyser: undefined,
+  finishInit: false,
 };
 
 function AudioContextReducer(prevState = initState, action: any) {
@@ -11,11 +19,21 @@ function AudioContextReducer(prevState = initState, action: any) {
   let newState = { ...prevState };
   switch (type) {
     case SETAUDIOCONTEXT:
-      newState.AudioCtx = data;
       break;
 
     case CONNECT2ELE:
-      newState.connect2Ele = data;
+      if (!newState.finishInit) {
+        let eleSrc = newState.AudioCtx.createMediaElementSource(data);
+        let analyser = newState.AudioCtx.createAnalyser();
+
+        eleSrc.connect(analyser);
+        analyser.connect(newState.AudioCtx.destination);
+        newState.eleSource = eleSrc;
+        newState.analyser = analyser;
+
+        newState.analyser.fftSize = 256;
+        newState.finishInit = true;
+      }
       break;
 
     default:
