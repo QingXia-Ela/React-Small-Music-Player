@@ -143,6 +143,10 @@ export const changeSongListId = (data: SongListId, offset?: number) => {
       break;
 
     case MY_FAVORITE:
+      if (!id) {
+        message.warning('歌单ID为空，请按下左下角模块尝试刷新获取歌单信息');
+        break;
+      }
       store.dispatch(changeSongListLoadingState(true));
       getDetailList(id, offset ? offset : 0)
         .then((res: any) => {
@@ -182,7 +186,11 @@ export const changeSongListId = (data: SongListId, offset?: number) => {
           }
         });
       } else {
-        data.data = { name: '左侧输入关键词进行搜索', id: -2 };
+        data.data = {
+          name: '左侧输入关键词进行搜索',
+          id: -2,
+          cancelRenderOperation: true,
+        };
         store.dispatch(changeSongDetailList([]));
       }
       break;

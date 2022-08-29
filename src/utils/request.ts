@@ -4,7 +4,7 @@ import { message } from 'antd';
 
 switch (process.env.NODE_ENV) {
   case 'build':
-    axios.defaults.baseURL = '';
+    axios.defaults.baseURL = 'http://localhost:3000';
     break;
 
   default:
