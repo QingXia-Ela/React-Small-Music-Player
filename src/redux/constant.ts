@@ -51,6 +51,7 @@ export const CHANGEDETAILSONGLIST = 'ChangeDetailSongList';
 export const PLAYSONGLIST = 'PlaySongList';
 export const CHANGESONGLISTLOADINGSTATE = 'ChangeSongListLoadingState';
 export const SYNCSEARCHWORD = 'SyncSearchWord';
+export const CHANGECURRENTLISTPAGE = 'ChangeCurrentListPage';
 
 /**
  * 音频上下文

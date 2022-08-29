@@ -27,9 +27,6 @@ class RightNav extends React.Component<RightNavProps, RightNavState> {
     return (
       <div className="right_nav">
         <TransparentButton>
-          <span className="content">设置</span>
-        </TransparentButton>
-        <TransparentButton>
           <span onClick={this.judgeLoginMode} className="content">
             {this.props.isLogin ? '退出登录' : '登陆'}
           </span>

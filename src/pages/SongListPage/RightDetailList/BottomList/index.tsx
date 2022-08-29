@@ -60,7 +60,13 @@ class BottomList extends React.Component<BottomListProps, BottomListState> {
       val.operation = (
         <Fragment>
           <TransparentButton>
-            <PlayCircleOutlined onClick={() => changeSong(val.id)} />
+            <PlayCircleOutlined
+              onClick={() =>
+                this.props.changeSong(val.id, () => {
+                  history.push('/music/' + val.id);
+                })
+              }
+            />
           </TransparentButton>
           <TransparentButton>
             <DownloadOutlined

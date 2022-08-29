@@ -7,8 +7,12 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 import WhiteScrollBar from '../../../../../components/WhiteScrollBar';
 import { changeSong } from '@/redux/modules/musicPlayer/actions';
-import { changeSongListId } from '@/redux/modules/SongList/action';
+import {
+  changeCurrentListPage,
+  changeSongListId,
+} from '@/redux/modules/SongList/action';
 import { history } from 'umi';
+import { SongListId } from '@/redux/modules/SongList/constant';
 
 interface BlackTableProps {
   columns: any[];
@@ -17,11 +21,13 @@ interface BlackTableProps {
   useHeader?: boolean;
 
   loading: boolean;
-  currentListId: string | number | { id: number; type: string } | any;
+  currentListId: SongListId;
   currentSong?: { [propName: string]: any };
   currentDetailListInfo: { [propName: string]: any };
+  currentDetailListPage: number;
   changeSong: Function;
   changeSongListId: Function;
+  changeCurrentListPage: Function;
 }
 
 interface BlackTableState {
@@ -42,17 +48,17 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
 
   changeDetailListPage = (page: number, pageSize: number) => {
     let finalPage = page;
+    this.props.changeCurrentListPage(finalPage);
 
     this.setState({ page: finalPage });
     if (finalPage > 0) finalPage--;
-    console.log(this.props.currentListId, finalPage * pageSize);
 
     this.props.changeSongListId(this.props.currentListId, finalPage * pageSize);
   };
 
   changeSong = (id: number) => {
     this.props.changeSong(id, () => {
-      history.replace('/music/' + id);
+      history.push('/music/' + id);
     });
   };
 
@@ -60,11 +66,13 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
     props: BlackTableProps,
     state: BlackTableState,
   ) {
-    if (props.currentListId == state.listId) return null;
-    else if (props.currentListId.type == state.listId) return null;
-    else if (props.currentListId.type)
-      return { page: 1, listId: props.currentListId.type };
-    else return { page: 1, listId: props.currentListId };
+    let listId = state.listId;
+    if (props.currentListId.id != state.listId) listId = props.currentListId.id;
+
+    return {
+      page: props.currentDetailListPage,
+      listId,
+    };
   }
 
   render() {
@@ -84,7 +92,10 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
 
     const bodyComponent = (
       <div className="table_body">
-        <WhiteScrollBar fullHeight={true} oo>
+        <WhiteScrollBar
+          fullHeight={true}
+          key={this.state.listId + '' + this.state.page}
+        >
           {this.props.dataSource.map((val: any) => {
             return (
               <div
@@ -121,7 +132,7 @@ class BlackTable extends React.Component<BlackTableProps, BlackTableState> {
         total={
           this.props.currentDetailListInfo
             ? this.props.currentDetailListInfo.trackCount
-            : 40
+            : 0
         }
         pageSize={20}
         showSizeChanger={false}
@@ -151,9 +162,11 @@ export default connect(
     currentDetailListInfo: state.SongList.currentDetailListInfo,
     currentListId: state.SongList.currentListId,
     loading: state.SongList.loading,
+    currentDetailListPage: state.SongList.currentDetailListPage,
   }),
   {
     changeSong,
     changeSongListId,
+    changeCurrentListPage,
   },
 )(BlackTable);

@@ -1,6 +1,7 @@
 import { getSongByID } from '@/api/music';
 import { getDetailList, searchSong } from '@/api/SongList';
 import {
+  CHANGECURRENTLISTPAGE,
   CHANGEDETAILSONGLIST,
   CHANGESHOWSUBSCRIBELIST,
   CHANGESONGLISTID,
@@ -240,3 +241,13 @@ export const syncSearchWord = (data: {
   });
   return { type: SYNCSEARCHWORD, data };
 };
+
+/**
+ * 同步当前歌曲页数到 redux ， 避免路由切换后页数对不上的问题
+ * @param data 要修改的页数
+ * @returns
+ */
+export const changeCurrentListPage = (data: number) => ({
+  type: CHANGECURRENTLISTPAGE,
+  data,
+});

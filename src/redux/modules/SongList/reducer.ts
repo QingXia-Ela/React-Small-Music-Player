@@ -5,6 +5,7 @@ import {
   UPDATEUSERSONGSHEET,
   CHANGESONGLISTLOADINGSTATE,
   SYNCSEARCHWORD,
+  CHANGECURRENTLISTPAGE,
 } from '@/redux/constant';
 import { SEARCH_KEYWORD } from './constant';
 
@@ -16,6 +17,7 @@ let initState: { [propName: string]: any } = {
   favoriteMusic: null,
   currentDetailListLoading: false,
   currentDetailListInfo: null,
+  currentDetailListPage: 1,
   currentDetailList: <any>[],
   showSubscribeList: false,
   searchWord: {},
@@ -30,11 +32,19 @@ function SongListReducer(prevState = initState, action: any) {
       if (typeof data != 'undefined') newState.loading = data;
       else newState.loading = !newState.loading;
       break;
+    case CHANGECURRENTLISTPAGE:
+      if (data) newState.currentDetailListPage = data;
+      else newState.currentDetailListPage = 1;
+      break;
     case CHANGESONGLISTID:
       if (newState.currentListId == data) break;
       newState.currentListId = data;
       // 在 List 中查找信息
       const { type, id } = data;
+      // 如果 id 与上一次的不匹配则列表回滚到第一页
+      if (newState.currentListId && newState.currentListId !== id)
+        newState.currentDetailListPage = 1;
+
       if (typeof id === 'number' && id > 0) {
         let res = null;
 

@@ -61,8 +61,16 @@ class TopLeftSpectrum extends React.Component<
         new Uint8Array(this.myFftSize / 2).fill(0),
       );
     }
+    if (this.props.analyser) {
+      this.draw(this.props.analyser);
+    }
+  }
+
+  // 修复主页面直接开始播放音频时频域图不动的问题
+  componentDidUpdate() {
     if (this.props.analyser && !this.props.hasDraw) {
       this.draw(this.props.analyser);
+      this.props.finishDraw();
     }
   }
 
