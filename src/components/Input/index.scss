@@ -1,11 +1,12 @@
 .black_input {
   width: 80%;
-  height: 2.4em;
+  height: 2.2rem;
   border: none;
-  margin: .6em 0;
+  margin: .6rem 0;
+  padding: 0.3rem 0.8rem;
   color: #adadad;
   background-color: transparent;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   caret-color: #a2a6ae;
   text-align: center;
   box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
@@ -20,30 +21,46 @@
 // 保证其下所有的 input 也是统一样式，解决增加左右按钮时背景问题
 .black_input_addon {
   width: 80%;
-  height: 2.4em;
-  margin: .6em 0;
+  height: 2.2rem;
+  margin: .6rem 0;
   text-align: center;
 
-  input {
+  .ant-input-wrapper {
+    display: flex;
     height: 100%;
-    border: none;
-    color: #adadad;
-    background-color: transparent;
-    font-size: 1.2rem;
-    caret-color: #a2a6ae;
-    text-align: center;
-    box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
-    box-sizing: border-box;
-    outline: 0;
 
-    &:focus {
-      box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.6);
+    input {
+      flex: 1;
+      height: 100%;
+      border: none;
+      color: #adadad;
+      background-color: transparent;
+      font-size: 1.2rem;
+      caret-color: #a2a6ae;
+      text-align: center;
+      box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.4);
+      box-sizing: border-box;
+      outline: 0;
+
+      &:focus {
+        box-shadow: 0 0 5px 1px rgba(255, 255, 255, 0.6);
+      }
     }
-  }
 
-  .ant-input-group-addon {
-    color: #fff;
-    background-color: transparent;
-    border: none;
+    .ant-input-group-addon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: unset;
+      color: #fff;
+      background-color: transparent;
+      border: none;
+
+      .anticon {
+        display: inline-block;
+        font-size: 1.2rem;
+        vertical-align: text-top;
+      }
+    }
   }
 }

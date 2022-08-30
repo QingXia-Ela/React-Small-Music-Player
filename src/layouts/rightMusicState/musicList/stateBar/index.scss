@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   height: 10%;
-  padding: 1.2em 3em;
+  padding: 1.2rem 3rem;
 
   .left_title {
     font-family: 'Orbitron';
@@ -17,15 +17,16 @@
     justify-content: space-between;
     align-items: center;
     width: 20%;
+    height: 1.8rem;
 
     .transparent_button {
+      height: 100%;
       margin: 0;
     }
 
     .iconfont {
-      position: relative;
-      top: 3px;
       font-size: 1.8rem;
+      vertical-align: top;
     }
 
     span {

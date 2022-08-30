@@ -9,6 +9,9 @@
 .ant-modal-root .ant-modal-mask {
   background-color: rgba(0, 0, 0, 0.7);
 }
+.black_modal {
+  width: 42rem !important;
+}
 .black_modal .ant-modal-content {
   color: #fff;
   background-color: #00000088;
@@ -61,7 +64,6 @@
   font-size: 1.5rem;
 }
 .yellow_button {
-  padding: 1em;
   font-family: SourceHanSans-Light;
   align-items: center;
   background: #fdfd1f;
@@ -74,7 +76,7 @@
   cursor: pointer;
   display: inline-flex;
   font-weight: 700;
-  height: 2em;
+  height: 2rem;
   justify-content: center;
   outline: none;
   overflow: hidden;
@@ -211,6 +213,7 @@
   display: block;
   height: 100%;
   line-height: 1.8rem;
+  font-size: 1rem;
   color: #fff;
   background: transparent;
   transition: all 0.3s;
@@ -234,7 +237,6 @@
 html {
   background-color: #191919;
   overflow: hidden;
-  min-width: 1024px;
 }
 body {
   background-color: transparent !important;
@@ -266,6 +268,7 @@ a {
   color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
+  vertical-align: top;
 }
 .transparent_button:hover {
   color: #c6c9ce !important;
@@ -358,4 +361,7 @@ input::-webkit-inner-spin-button {
 }
 input[type='number'] {
   -webkit-appearance: none !important;
+}
+::-webkit-scrollbar {
+  display: none;
 }

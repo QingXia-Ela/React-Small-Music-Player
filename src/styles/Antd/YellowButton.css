@@ -1,5 +1,4 @@
 .yellow_button {
-  padding: 1em;
   font-family: SourceHanSans-Light;
   align-items: center;
   background: #fdfd1f;
@@ -12,16 +11,16 @@
   cursor: pointer;
   display: inline-flex;
   font-weight: 700;
-  height: 2em;
+  height: 2rem;
   justify-content: center;
   outline: none;
   overflow: hidden;
+  margin-left: 1rem !important;
   padding: 0 1em;
   position: relative;
   transition: color 0.3s, background-color 0.3s;
   white-space: nowrap;
   z-index: 1;
-  margin-left: 2em !important;
 }
 .yellow_button:hover,
 .yellow_button:focus {
@@ -42,4 +41,7 @@
 }
 .yellow_button.negative:hover {
   color: #fdfd1f;
+}
+.yellow_button span {
+  font-size: 1rem;
 }

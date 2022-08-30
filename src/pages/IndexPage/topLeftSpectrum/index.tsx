@@ -52,8 +52,6 @@ class TopLeftSpectrum extends React.Component<
   }
 
   componentDidMount() {
-    if (this.props.ele.src.length) this.props.setConnect2Ele(this.props.ele);
-
     // 初始化频域图
     if (this.IndexCanvas.current) {
       this.drawToDom(

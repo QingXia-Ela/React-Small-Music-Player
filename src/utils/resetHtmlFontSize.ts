@@ -6,6 +6,8 @@ function resizeFunc() {
   const newHeightFontSize = ((html!.clientHeight / 930) * 14).toFixed(2);
   const result = newHeightFontSize;
 
+  const hideScrollValue = ((html!.clientHeight / 930) * 14).toFixed(2);
+
   document
     .querySelector('html')!
     .setAttribute('style', 'font-size:' + result + 'px !important');

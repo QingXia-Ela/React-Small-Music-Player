@@ -19,6 +19,8 @@ import Loading from '@/components/loading';
 import { SWITCHFILTER, SWITCHMASK } from '@/redux/constant';
 import ResizeHtmlFontSize from '@/utils/resetHtmlFontSize';
 
+import { setConnect2Ele } from '@/redux/modules/AudioContext/action';
+
 interface LayoutProps extends IRouteComponentProps {}
 
 interface LayoutState {}
@@ -85,6 +87,12 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
         this.SwitchBG();
       }
     });
+  }
+
+  componentDidUpdate() {
+    const storeState = store.getState();
+    const ele = storeState.MusicPlayer.audioEle;
+    if (ele && ele.src.length) store.dispatch(setConnect2Ele(ele));
   }
 }
 

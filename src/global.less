@@ -46,7 +46,6 @@
 html {
   background-color: #191919;
   overflow: hidden;
-  min-width: 1024px;
 }
 
 body {
@@ -85,6 +84,7 @@ a {
   color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
+  vertical-align: top;
 
   &:hover {
     color: #c6c9ce !important;
@@ -211,4 +211,8 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
   -webkit-appearance: none !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

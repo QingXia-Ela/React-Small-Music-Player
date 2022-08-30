@@ -29,10 +29,10 @@ function RightMusicStateBar(props: { [propName: string]: any }) {
         <TransparentButton>
           <i className="iconfont icon-24gl-trash2" onClick={showModal}></i>
         </TransparentButton>
-        <div onClick={() => props.showLyrics(!props.lyrics)}>
+        <div className="h100" onClick={() => props.showLyrics(!props.lyrics)}>
           <TransparentButton>
             {!props.lyrics ? (
-              <span>词</span>
+              <span className="iconfont">词</span>
             ) : (
               <i className="iconfont icon-24gl-playlist2"></i>
             )}

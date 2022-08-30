@@ -11,21 +11,21 @@ export default function IndexPage() {
   return (
     <div className="index_page">
       <Row className="h20 spectrum">
-        <Col lg={12} xl={12} xxl={12}>
+        <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
           <BottomSpectrum />
         </Col>
-        <Col lg={12} xl={12} xxl={12}>
+        <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
           <BottomWeather />
         </Col>
       </Row>
       <Row className="h80">
-        <Col lg={6} xl={6} xxl={6}>
+        <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
           <LeftList />
         </Col>
-        <Col lg={12} xl={12} xxl={12}>
+        <Col xs={12} sm={12} md={12} lg={12} xl={12} xxl={12}>
           <MiddleGreeting />
         </Col>
-        <Col lg={6} xl={6} xxl={6}>
+        <Col xs={6} sm={6} md={6} lg={6} xl={6} xxl={6}>
           <RightFunctionList />
         </Col>
       </Row>
