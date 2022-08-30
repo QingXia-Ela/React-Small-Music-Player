@@ -39,15 +39,23 @@
     }
 
     // 垂直
-    .ant-slider-vertical {
+    &.ant-slider-vertical {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       .ant-slider-rail {
-        width: 0.5rem;
+        width: 0.3rem;
         height: 100%;
+      }
+
+      .ant-slider-track {
+        width: 0.3rem;
       }
 
       .ant-slider-handle {
         top: unset;
-        right: 0.2rem;
+        left: calc(50% - 0.25rem);
         width: 0.5rem;
         height: 0.7rem;
       }
