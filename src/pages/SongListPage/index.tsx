@@ -5,6 +5,7 @@ import './index.scss';
 import TransparentBox1 from '@/components/pages/transparentBox1';
 import LeftMainList from './LeftMainList';
 import RightDetailList from './RightDetailList';
+import setBrowserTitle from '@/utils/setBrowserTitle';
 
 interface SongListPageProps {
   userInfo: {
@@ -49,6 +50,9 @@ class SongListPage extends React.Component<
         </div>
       </TransparentBox1>
     );
+  }
+  componentDidMount() {
+    setBrowserTitle('歌曲列表');
   }
 }
 

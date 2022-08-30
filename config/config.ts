@@ -11,6 +11,7 @@ export default defineConfig({
   routes,
   dynamicImport: {},
   antd: false,
+  title: "Shiina's Music Website",
   proxy: {
     '/weather': {
       target: getWeatherUrl,
