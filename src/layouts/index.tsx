@@ -17,6 +17,7 @@ import NeteaseLogin from '@/components/Login';
 import Loading from '@/components/loading';
 
 import { SWITCHFILTER, SWITCHMASK } from '@/redux/constant';
+import ResizeHtmlFontSize from '@/utils/resetHtmlFontSize';
 
 interface LayoutProps extends IRouteComponentProps {}
 
@@ -74,6 +75,7 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     );
   }
   componentDidMount() {
+    ResizeHtmlFontSize();
     const { history } = this.props;
     console.log('layout mount');
 

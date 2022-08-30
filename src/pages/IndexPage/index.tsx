@@ -18,7 +18,7 @@ export default function IndexPage() {
           <BottomWeather />
         </Col>
       </Row>
-      <Row className="h70">
+      <Row className="h80">
         <Col lg={6} xl={6} xxl={6}>
           <LeftList />
         </Col>

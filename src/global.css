@@ -143,9 +143,13 @@
 .ant-drawer-content-wrapper .ant-drawer-header {
   background-color: transparent;
 }
+.white_scroll > div:first-child {
+  margin-right: -1.5rem !important;
+  margin-bottom: -1.5rem !important;
+}
 .white_scroll .white_scroll_track-vertical {
   right: 0.5rem;
-  width: 8px !important;
+  width: 0.5rem !important;
   height: calc(100% - 2em);
   background-color: transparent;
   transition: background-color 0.5s;
@@ -169,10 +173,12 @@
   padding: 0 2rem;
 }
 .ant-descriptions.transparent_description .ant-descriptions-item-container .ant-descriptions-item-label {
+  font-size: 1rem;
   color: #fff;
 }
 .ant-descriptions.transparent_description .ant-descriptions-item-container .ant-descriptions-item-content {
   justify-content: center;
+  font-size: 1rem;
   color: #fff;
 }
 .ant-spin-nested-loading {
@@ -352,89 +358,4 @@ input::-webkit-inner-spin-button {
 }
 input[type='number'] {
   -webkit-appearance: none !important;
-}
-@media only screen and (max-width: 1366px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  html {
-    font-size: 14px;
-  }
-}
-@media only screen and (max-width: 768px) {
-  html {
-    font-size: 13px;
-  }
-}
-@media only screen and (max-width: 560px) {
-  html {
-    font-size: 12px;
-  }
-}
-@media only screen and (max-width: 480px) {
-  html {
-    font-size: 11px;
-  }
-}
-@media only screen and (max-width: 428px) {
-  html {
-    font-size: 10px;
-  }
-}
-@media only screen and (max-width: 414px) {
-  html {
-    font-size: 9px;
-  }
-}
-@media only screen and (max-width: 375px) {
-  html {
-    font-size: 8px;
-  }
-}
-@media only screen and (max-width: 360px) {
-  html {
-    font-size: 7px;
-  }
-}
-@media only screen and (max-width: 320px) {
-  html {
-    font-size: 6px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 968px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 940px) {
-  html {
-    font-size: 14px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 870px) {
-  html {
-    font-size: 13px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 805px) {
-  html {
-    font-size: 12px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 745px) {
-  html {
-    font-size: 11px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 690px) {
-  html {
-    font-size: 10px;
-  }
-}
-@media screen and (orientation: landscape) and (max-height: 625px) {
-  html {
-    font-size: 9px;
-  }
 }

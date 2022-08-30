@@ -1,7 +1,13 @@
 .white_scroll {
+  & > div:first-child {
+    // 修复调整页面大小时出现原生滚动条的情况
+    margin-right: -1.5rem !important;
+    margin-bottom: -1.5rem !important;
+  }
+
   .white_scroll_track-vertical {
     right: 0.5rem;
-    width: 8px !important;
+    width: 0.5rem !important;
     height: calc(100% - 2em);
     background-color: transparent;
     transition: background-color 0.5s;

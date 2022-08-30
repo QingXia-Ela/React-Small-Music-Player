@@ -3,6 +3,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 function WhiteScrollBar(prop: { [propName: string]: any }) {
   return (
     <Scrollbars
+      style={{ width: '100%', height: '100%' }}
       renderTrackVertical={(props) => (
         <div
           {...props}
@@ -14,6 +15,7 @@ function WhiteScrollBar(prop: { [propName: string]: any }) {
       renderThumbVertical={(props) => (
         <div {...props} className="white_scroll_thumb-vertical" />
       )}
+      key={+new Date()}
       className="white_scroll"
     >
       {prop.children}

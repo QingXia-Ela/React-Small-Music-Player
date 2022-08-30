@@ -1,5 +1,4 @@
 /**
- * 天气 api 网址
+ * 天气 api 网址，生产环境请自行填写
  */
-export const getWeatherUrl =
-  'https://api.msn.cn/weatherfalcon/weather/current?locale=zh-cn&market=zh-cn';
+export const getWeatherUrl = '';

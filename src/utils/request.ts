@@ -3,8 +3,9 @@ import qs from 'querystring';
 import { message } from 'antd';
 
 switch (process.env.NODE_ENV) {
-  case 'build':
-    axios.defaults.baseURL = 'http://localhost:3000';
+  case 'production':
+    // 你的生产环境地址 / Your production mode api
+    axios.defaults.baseURL = '';
     break;
 
   default:

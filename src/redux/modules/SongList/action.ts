@@ -70,15 +70,18 @@ export const filteringSearchResult = (
     if (data && data.length) {
       searchSong(data, type, offset, limit)
         .then((res: any) => {
-          let resobj = res.result;
-          if (resobj.songCount == 0) resobj.songs = [];
-          else if (resobj.songCount > 300) resobj.songCount = 300;
-          resobj.songs = resobj.songs.map((val: any) => {
-            const filterList = ['ar', 'id', 'name'];
-            val.ar = val.artists;
-            return simplifySongListResult(val, filterList);
-          });
-          return resolve(res);
+          if (res && res.result) {
+            let resobj = res.result;
+            if (resobj.songCount == 0) resobj.songs = [];
+            else if (resobj.songCount > 300) resobj.songCount = 300;
+            resobj.songs = resobj.songs.map((val: any) => {
+              const filterList = ['ar', 'id', 'name'];
+              val.ar = val.artists;
+              return simplifySongListResult(val, filterList);
+            });
+            return resolve(res);
+          }
+          return reject(res);
         })
         .catch((err) => {
           return reject(err);
