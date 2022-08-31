@@ -79,8 +79,6 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
   componentDidMount() {
     ResizeHtmlFontSize();
     const { history } = this.props;
-    console.log('layout mount');
-
     this.SwitchBG();
     history.listen((location) => {
       if (this.props.location.pathname !== location.pathname) {

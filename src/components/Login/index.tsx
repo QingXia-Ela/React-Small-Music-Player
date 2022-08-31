@@ -170,8 +170,6 @@ class NeteaseLogin extends React.Component<
     let isLogin = false;
     await getLoginState()
       .then(({ data }) => {
-        console.log(data);
-
         if (data.account) {
           localStorage.setItem(ISLOGIN, 'true');
           message.error('错误：账号已登录');

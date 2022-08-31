@@ -7,6 +7,5 @@ export function render(oldRender: any) {
 
   window.onload = (e: Event) => {
     store.dispatch(finishInit());
-    console.log('finish load time', +new Date() - time);
   };
 }
