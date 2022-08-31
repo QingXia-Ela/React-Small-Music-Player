@@ -10,7 +10,6 @@ import BottomMusicState from '@/layouts/bottomMusicState';
 
 import 'antd/dist/antd.min.css';
 import './index.scss';
-import 'animate.css';
 
 import RightMusicState from './rightMusicState';
 import NeteaseLogin from '@/components/Login';
@@ -44,6 +43,16 @@ class Layout extends React.Component<LayoutProps, LayoutState> {
     return (
       <Provider store={store}>
         <Loading />
+        <div className="phone_mask">
+          <p>:(</p>
+          <span>
+            很抱歉，本站并不支持手机移动端访问，推荐使用 PC 端进行页面访问
+          </span>
+          <span>
+            We're sorry but the website doesn't support mobile phone, please
+            change your device like PC to visit it.
+          </span>
+        </div>
         <TransitionGroup className="main-wrapper">
           <CSSTransition key={0} timeout={3000}>
             <div className="layout">

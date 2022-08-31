@@ -32,3 +32,33 @@
 #mainAudio {
   display: none;
 }
+
+.phone_mask {
+  display: none;
+  text-align: center;
+}
+
+@media screen and (max-width: 992px) {
+  .phone_mask {
+    z-index: 5000;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    color: #fff;
+    font-size: 1.6rem;
+    background-image: linear-gradient(#000, #000);
+
+    p {
+      font-size: 5rem;
+    }
+  }
+}
