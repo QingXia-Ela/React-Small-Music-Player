@@ -1,3 +1,5 @@
+import changeLinkHead2Https from './changeLinkHead2Https';
+
 /**
  * 处理网易云返回信息
  * @param SongFileInfo 包含歌曲 url 的结构
@@ -21,6 +23,6 @@ export function handleSongInfo(
       (val: { [propName: string]: any }) => `${val.name}`,
     ),
     avatar: song.al.picUrl,
-    url: file.url,
+    url: changeLinkHead2Https(file.url),
   };
 }

@@ -3,7 +3,7 @@ import request from '@/utils/request';
 
 function DownloadAudio(audioInfo: any) {
   let audioId = audioInfo.id;
-  if (typeof audioId === 'number') {
+  if (typeof audioId === 'number' && 0) {
     getSongFileUrl(audioId).then(({ data }) => {
       let url = data[0].url;
       request({
