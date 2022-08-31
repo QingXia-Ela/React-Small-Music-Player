@@ -1,69 +1,92 @@
-# umi project
+# React-Small-Music-Player
 
-## Getting Started
+## 前言
 
-Install dependencies,
+这是一个轻量级的 react 音乐播放器，前端使用 [UmiJS](https://v3.umijs.org/zh-CN/docs/getting-started)，后端采用 [网易云音乐 NODEJS API](https://github.com/Binaryify/NeteaseCloudMusicApi) 制作
 
-```bash
-$ yarn
+有 Bug 和建议和其他问题都可以在 issue 提出
+
+本项目开源免费，仅用作学习和交流
+
+## 功能
+
+### 已实现功能
+
+| 已实现功能                                |
+| ----------------------------------------- |
+| 登陆 / 退出个人网易云账号                 |
+| 获取私人雷达歌单                          |
+| 播放歌曲                                  |
+| 播放自己已有的网易云音乐歌单 / 订阅的歌单 |
+| 单曲播放 / 全部循环 / 随机播放            |
+| 搜索歌曲                                  |
+| 背景图切换                                |
+
+### 计划中功能
+
+不知道有没有时间做，先把饼画着罢
+
+- [ ] 音质选择
+- [ ] 歌曲切换 -> 背景图变化
+- [ ] 保存播放列表并同步到网易云
+- [ ] 双语歌词对照
+- [ ] 歌词自定义字体大小
+- [ ] 歌曲查看评论 / 点赞 / 留言
+- [ ] 详情页相似歌曲推荐
+
+## 开始构建使用
+
+### 克隆项目到本地
+
+```
+$ git clone https://github.com/QingXia-Ela/React-Small-Music-Player.git
+cd React-Small-Music-Player
+npm install
 ```
 
-Start the dev server,
+### 设置后台接口地址
 
-```bash
-$ yarn start
-```
+第一个：网易云 NODEJS 服务器，到 `src/utils/request.ts` 将其设置为你的网易云后台 API 地址
+```ts
+switch (process.env.NODE_ENV) {
+  case 'production':
+    // 你的生产环境地址 / Your production mode api
+    axios.defaults.baseURL = '';
+    break;
 
-设置：
-
-背景图片变化
-
-redux 音乐播放器方法：
-
-- `play` :  开始播放音频，播放的是 currentSong 中的歌曲，如果传入歌曲信息则播放指定的歌曲并将其插入到播放队列尾部
-
-- `pause` : 暂停播放
-- `switchPlayState` : 切换播放状态，可以传 bool 控制
-- `changeVolume` : 调整音量大小 `0 ~ 1`
-- `changeSong` : 改变播放的歌曲，传一个 id 并在播放队列里进行查找，如果播放队列没有则将这首歌插入队尾
-- `switchPlayMode` : 调整播放模式，接受一个 num
-- `nextSong` : 下一首
-- `prevSong` : 上一首
-- `removeFromQueue` : 删除队列中的某一首歌
-
-插入播放列表使用：`changeSong` 操作
-
-播放暂停使用：`switchPlayState` 操作
-
-路由动画转场：
-
-入场：
-
-```
-page-enter # 可以在这里写 transition 执行时间
-page-enter-active
-page-enter-done
-```
-
-离场：
-```
-page-exit # 可以在这里写 transition 执行时间
-page-exit-active
-```
-
-通过同级选择器来区分不同的动画
-
-```scss
-// 主页动画
-.index_page.page-enter-active {
-  // ...
-}
-
-.index_page.page-enter-done {
-  // ...
-}
-
-.index_page.page-exit-active {
-  // ...
+  default:
+    // development
+    axios.defaults.baseURL = 'http://localhost:3000';
+    break;
 }
 ```
+第二个：天气地址，到 `src/constant/api/weather.ts` 进行设置，然后到 `src/redux/modules/Weather/action.ts` 下根据你设置的天气接口改变传入数据结构，文件内均有注释
+
+```
+      const info = {
+        // 空气质量
+        airQuailty: dewPt,
+        // 当前气温
+        currentTemp: temp,
+        // 体感气温
+        feelTemp: feels,
+        // 湿度
+        humidity: rh,
+        // 气压
+        baro,
+        // 天气描述，如晴或多云
+        weatherDescription: cap,
+      }
+```
+
+如果想高度自定义样式或内容的话可以到 `src/pages/IndexPage/topRightWeather` 进行调整
+
+### 打包发布
+
+```
+$ npm run build
+```
+
+## License
+
+[LGPL-3.0](https://www.gnu.org/licenses/lgpl-3.0.txt) License
