@@ -1,4 +1,5 @@
 .white_scroll > div:first-child {
+  margin: 0 !important;
   scrollbar-width: none;
 }
 .white_scroll .white_scroll_track-vertical {
