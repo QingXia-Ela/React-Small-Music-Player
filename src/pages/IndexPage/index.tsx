@@ -7,11 +7,11 @@ import MiddleGreeting from './middleGreeting';
 import RightFunctionList from './rightFunctionList';
 import BottomWeather from './topRightWeather';
 import BottomSpectrum from './topLeftSpectrum';
-import setBrowserTitle from '@/utils/setBrowserTitle';
+import judgeBrowserTitle from '@/utils/judgeBrowserTitle';
 
-interface IndexPageProps {}
+interface IndexPageProps { }
 
-interface IndexPageState {}
+interface IndexPageState { }
 
 class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
   render() {
@@ -40,7 +40,7 @@ class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
     );
   }
   componentDidMount() {
-    setBrowserTitle("Shiina's Music Website");
+    judgeBrowserTitle()
   }
 }
 

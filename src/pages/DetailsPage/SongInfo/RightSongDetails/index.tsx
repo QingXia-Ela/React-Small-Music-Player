@@ -7,7 +7,7 @@ interface RightSongDetailsProps {
   currentSong: any;
 }
 
-interface RightSongDetailsState {}
+interface RightSongDetailsState { }
 
 class RightSongDetails extends React.Component<
   RightSongDetailsProps,
@@ -20,7 +20,7 @@ class RightSongDetails extends React.Component<
         <div className="info_container">
           <div className="title">{this.props.currentSong?.name}</div>
           <div className="author">
-            {this.props.currentSong?.ar.map((val: any) => val.name)}
+            {this.props.currentSong?.ar.map((val: any) => `${val.name} `)}
           </div>
         </div>
         <div className="lyric_container">

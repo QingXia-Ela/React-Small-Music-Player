@@ -1,8 +1,7 @@
 .white_scroll {
-  & > div:first-child {
-    // 修复调整页面大小时出现原生滚动条的情况
-    margin-right: -1.5rem !important;
-    margin-bottom: -1.5rem !important;
+  &>div:first-child {
+    // 修复调整页面大小时出现原生滚动条的情况(针对火狐)
+    scrollbar-width: none;
   }
 
   .white_scroll_track-vertical {

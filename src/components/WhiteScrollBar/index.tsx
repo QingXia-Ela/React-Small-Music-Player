@@ -1,6 +1,12 @@
+import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-function WhiteScrollBar(prop: { [propName: string]: any }) {
+
+interface WhiteScrollBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  fullHeight?: boolean
+}
+
+function WhiteScrollBar(prop: WhiteScrollBarProps) {
   return (
     <Scrollbars
       style={{ width: '100%', height: '100%' }}

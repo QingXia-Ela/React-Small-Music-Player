@@ -20,9 +20,9 @@ import ResizeHtmlFontSize from '@/utils/resetHtmlFontSize';
 
 import { setConnect2Ele } from '@/redux/modules/AudioContext/action';
 
-interface LayoutProps extends IRouteComponentProps {}
+interface LayoutProps extends IRouteComponentProps { }
 
-interface LayoutState {}
+interface LayoutState { }
 
 class Layout extends React.Component<LayoutProps, LayoutState> {
   state = {};

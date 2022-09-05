@@ -11,7 +11,7 @@ interface RightMusicLyricProps {
   keepShow?: boolean;
 }
 
-interface RightMusicLyricState {}
+interface RightMusicLyricState { }
 
 class RightMusicLyric extends React.Component<
   RightMusicLyricProps,
@@ -21,9 +21,8 @@ class RightMusicLyric extends React.Component<
   render() {
     return (
       <div
-        className={`right_music_lyric ${
-          this.props.keepShow ? 'keep_show' : ''
-        }`}
+        className={`right_music_lyric ${this.props.keepShow ? 'keep_show' : ''
+          }`}
       >
         {this.showLyric()}
       </div>
@@ -60,7 +59,8 @@ class RightMusicLyric extends React.Component<
           }
           topBlank={true}
           bottomBlank={true}
-          intervalOfRecoveringAutoScrollAfterUserScroll={3000}
+          autoScroll
+          intervalOfRecoveringAutoScrollAfterUserScroll={0}
           className="lrc"
         />
       );

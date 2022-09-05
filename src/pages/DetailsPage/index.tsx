@@ -7,7 +7,7 @@ import MusicControler from '@/components/MusicPlayer/Control/musicControler';
 import TimeSlider from '@/components/MusicPlayer/Control/timeSlider';
 import SongInfo from './SongInfo';
 import { IRouteComponentProps } from 'umi';
-import setBrowserTitle from '@/utils/setBrowserTitle';
+import judgeBrowserTitle from '@/utils/judgeBrowserTitle';
 
 interface SongDetailsPageProps extends IRouteComponentProps {
   match: match<{
@@ -16,13 +16,21 @@ interface SongDetailsPageProps extends IRouteComponentProps {
   info: any;
 }
 
-interface SongDetailsPageState {}
+interface SongDetailsPageState { }
 
 class SongDetailsPage extends React.Component<
   SongDetailsPageProps,
   SongDetailsPageState
 > {
   state = {};
+
+  setTitle = () => {
+    const info = this.props.info;
+    if (this.props.info) {
+      judgeBrowserTitle(info.name + ' - ' + info.ar.map((val: any) => val.name))
+    }
+  }
+
   render() {
     return (
       <div className="song_details_page">
@@ -37,11 +45,20 @@ class SongDetailsPage extends React.Component<
     );
   }
 
+  getSnapshotBeforeUpdate(prevProps: SongDetailsPageProps, prevState: SongDetailsPageState) {
+    // 检测歌曲是否变化
+    if (
+      (prevProps.info && prevProps.info.id === this.props.info.id) ||
+      (!prevProps.info && this.props.info)
+    ) return true
+    return null
+  }
+
   componentDidMount() {
-    const info = this.props.info;
-    if (this.props.info) {
-      setBrowserTitle(info.name + ' - ' + info.ar.map((val: any) => val.name));
-    }
+    this.setTitle()
+  }
+  componentDidUpdate(prevProps: SongDetailsPageProps, prevState: SongDetailsPageState, snapshot: any) {
+    if (snapshot) this.setTitle()
   }
 }
 
