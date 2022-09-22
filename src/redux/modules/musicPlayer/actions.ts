@@ -179,9 +179,14 @@ export const getLyric = (id: number) => {
     getLyricByLink(id).then(
       (res: any) => {
         if (res.lrc) {
+          // mutil-lrc
+          let resLrc: string | string[] = res.lrc.lyric;
+          if (res.tlyric) {
+            resLrc = [res.lrc.lyric, res.tlyric.lyric];
+          }
           store.dispatch({
             type: SETLYRIC,
-            data: { lyric: res.lrc.lyric, id },
+            data: { lyric: resLrc, id },
           });
         } else {
           store.dispatch({ type: SETLYRIC, data: { lyric: 0, id } });

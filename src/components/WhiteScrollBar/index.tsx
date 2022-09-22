@@ -1,9 +1,8 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-
 interface WhiteScrollBarProps extends React.HTMLAttributes<HTMLDivElement> {
-  fullHeight?: boolean
+  fullHeight?: boolean;
 }
 
 function WhiteScrollBar(prop: WhiteScrollBarProps) {
@@ -13,8 +12,9 @@ function WhiteScrollBar(prop: WhiteScrollBarProps) {
       renderTrackVertical={(props) => (
         <div
           {...props}
-          className={`white_scroll_track-vertical ${prop.fullHeight ? 'full_height' : ''
-            }`}
+          className={`white_scroll_track-vertical ${
+            prop.fullHeight ? 'full_height' : ''
+          }`}
         />
       )}
       renderThumbVertical={(props) => (

@@ -466,6 +466,7 @@ export default function AudioReducer(
      * 清空播放队列
      */
     case CLEARQUEUE:
+      audioObj.src = '';
       newState.playQueue = [];
       newState.currentSong = null;
       break;

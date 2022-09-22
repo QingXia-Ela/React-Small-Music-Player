@@ -9,9 +9,9 @@ import BottomWeather from './topRightWeather';
 import BottomSpectrum from './topLeftSpectrum';
 import judgeBrowserTitle from '@/utils/judgeBrowserTitle';
 
-interface IndexPageProps { }
+interface IndexPageProps {}
 
-interface IndexPageState { }
+interface IndexPageState {}
 
 class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
   render() {
@@ -40,7 +40,7 @@ class IndexPage extends React.Component<IndexPageProps, IndexPageState> {
     );
   }
   componentDidMount() {
-    judgeBrowserTitle()
+    judgeBrowserTitle();
   }
 }
 

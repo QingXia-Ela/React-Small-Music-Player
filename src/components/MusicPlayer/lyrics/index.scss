@@ -17,22 +17,28 @@
   .lrc {
     width: 100%;
     height: 100%;
+    scrollbar-width: none;
     overflow: hidden;
 
-    .lyric_item {
-      width: 100%;
+    .lyric_item_group {
       margin: 1em 0;
-      font-size: 1.4rem;
-      text-align: center;
-      opacity: .6;
-      transform: scale(0.8);
-      transition: opacity .5s, transform .5s;
 
-      &.current {
-        opacity: 1;
-        transform: scale(1);
+      .lyric_item {
+        width: 100%;
+        font-size: 1.4rem;
+        text-align: center;
+        opacity: .6;
+        transform: scale(0.8);
+        transition: opacity .5s, transform .5s;
+
+        &.current {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
     }
+
+
   }
 
   .empty_lyric {

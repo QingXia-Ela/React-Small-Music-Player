@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import './index.scss';
-import { Lrc } from 'react-lrc';
+import { Lrc, MultipleLrc } from 'react-lrc';
 
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ interface RightMusicLyricProps {
   keepShow?: boolean;
 }
 
-interface RightMusicLyricState { }
+interface RightMusicLyricState {}
 
 class RightMusicLyric extends React.Component<
   RightMusicLyricProps,
@@ -21,8 +21,9 @@ class RightMusicLyric extends React.Component<
   render() {
     return (
       <div
-        className={`right_music_lyric ${this.props.keepShow ? 'keep_show' : ''
-          }`}
+        className={`right_music_lyric ${
+          this.props.keepShow ? 'keep_show' : ''
+        }`}
       >
         {this.showLyric()}
       </div>
@@ -30,7 +31,7 @@ class RightMusicLyric extends React.Component<
   }
 
   showLyric = () => {
-    const content = this.props.lyric;
+    const content: any = this.props.lyric;
     if (typeof content == 'number') {
       switch (content) {
         case -1:
@@ -48,8 +49,10 @@ class RightMusicLyric extends React.Component<
           key={this.props.songID}
           lrc={content}
           lineRenderer={({ index, active, line }) => (
-            <div className={`lyric_item ${active ? 'current' : ''}`}>
-              {line.content}
+            <div className={`lyric_item_group`}>
+              <div className={`lyric_item ${active ? 'current' : ''}`}>
+                {line.content}
+              </div>
             </div>
           )}
           currentMillisecond={
@@ -57,10 +60,32 @@ class RightMusicLyric extends React.Component<
               ? parseInt(this.props.currentTime! * 1000 + '')
               : 0
           }
-          topBlank={true}
-          bottomBlank={true}
-          autoScroll
-          intervalOfRecoveringAutoScrollAfterUserScroll={0}
+          verticalSpace={true}
+          recoverAutoScrollInterval={5000}
+          className="lrc"
+        />
+      );
+    } else if (content instanceof Array<String>) {
+      return (
+        <MultipleLrc
+          key={this.props.songID}
+          lrcs={content}
+          lineRenderer={({ index, active, line }) => (
+            <div className="lyric_item_group">
+              {line.children.map((val) => (
+                <div className={`lyric_item ${active ? 'current' : ''}`}>
+                  {val.content}
+                </div>
+              ))}
+            </div>
+          )}
+          currentMillisecond={
+            this.props.currentTime
+              ? parseInt(this.props.currentTime! * 1000 + '')
+              : 0
+          }
+          verticalSpace={true}
+          recoverAutoScrollInterval={5000}
           className="lrc"
         />
       );

@@ -16,7 +16,7 @@ interface SongDetailsPageProps extends IRouteComponentProps {
   info: any;
 }
 
-interface SongDetailsPageState { }
+interface SongDetailsPageState {}
 
 class SongDetailsPage extends React.Component<
   SongDetailsPageProps,
@@ -27,9 +27,11 @@ class SongDetailsPage extends React.Component<
   setTitle = () => {
     const info = this.props.info;
     if (this.props.info) {
-      judgeBrowserTitle(info.name + ' - ' + info.ar.map((val: any) => val.name))
+      judgeBrowserTitle(
+        info.name + ' - ' + info.ar.map((val: any) => val.name),
+      );
     }
-  }
+  };
 
   render() {
     return (
@@ -45,20 +47,28 @@ class SongDetailsPage extends React.Component<
     );
   }
 
-  getSnapshotBeforeUpdate(prevProps: SongDetailsPageProps, prevState: SongDetailsPageState) {
+  getSnapshotBeforeUpdate(
+    prevProps: SongDetailsPageProps,
+    prevState: SongDetailsPageState,
+  ) {
     // 检测歌曲是否变化
     if (
       (prevProps.info && prevProps.info.id === this.props.info.id) ||
       (!prevProps.info && this.props.info)
-    ) return true
-    return null
+    )
+      return true;
+    return null;
   }
 
   componentDidMount() {
-    this.setTitle()
+    this.setTitle();
   }
-  componentDidUpdate(prevProps: SongDetailsPageProps, prevState: SongDetailsPageState, snapshot: any) {
-    if (snapshot) this.setTitle()
+  componentDidUpdate(
+    prevProps: SongDetailsPageProps,
+    prevState: SongDetailsPageState,
+    snapshot: any,
+  ) {
+    if (snapshot) this.setTitle();
   }
 }
 

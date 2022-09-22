@@ -52,7 +52,7 @@ class SongListPage extends React.Component<
     );
   }
   componentDidMount() {
-    judgeBrowserTitle()
+    judgeBrowserTitle();
   }
 }
 

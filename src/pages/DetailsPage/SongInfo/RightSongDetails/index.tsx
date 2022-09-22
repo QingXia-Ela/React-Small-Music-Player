@@ -7,7 +7,7 @@ interface RightSongDetailsProps {
   currentSong: any;
 }
 
-interface RightSongDetailsState { }
+interface RightSongDetailsState {}
 
 class RightSongDetails extends React.Component<
   RightSongDetailsProps,
