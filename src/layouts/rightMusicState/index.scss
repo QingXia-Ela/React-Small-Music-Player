@@ -47,3 +47,9 @@
     color: #fff;
   }
 }
+
+.right_main_drawer {
+  .ant-drawer-header {
+    border-bottom: none;
+  }
+}

@@ -41,7 +41,7 @@ class RightMusicState extends React.Component {
         ></div>
         <Drawer
           placement="right"
-          className=""
+          className="right_main_drawer"
           visible={this.state.visible}
           width="35em"
           onClose={this.onClose}
