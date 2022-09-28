@@ -28,7 +28,7 @@ class TimeSlider extends React.Component<TimeSliderProps> {
             : '--:--'}
         </span>
         <WhiteSlider
-          tipFormatter={null}
+         tooltip={{formatter: null}}
           min={0}
           max={this.props.totalTime}
           value={this.state.tempTimeMark}

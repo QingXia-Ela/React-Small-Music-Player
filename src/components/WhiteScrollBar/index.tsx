@@ -1,17 +1,17 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 
-interface WhiteScrollBarProps extends React.HTMLAttributes<HTMLDivElement> {
+interface WhiteScrollBarProps extends React.HTMLProps<Scrollbars> {
   fullHeight?: boolean;
 }
 
-function WhiteScrollBar(prop: WhiteScrollBarProps) {
+function WhiteScrollBar(props: WhiteScrollBarProps) {
   return (
     <Scrollbars
       style={{ width: '100%', height: '100%' }}
-      renderTrackVertical={(props) => (
+      renderTrackVertical={(prop) => (
         <div
-          {...props}
+          {...prop}
           className={`white_scroll_track-vertical ${
             prop.fullHeight ? 'full_height' : ''
           }`}
@@ -22,7 +22,7 @@ function WhiteScrollBar(prop: WhiteScrollBarProps) {
       )}
       className="white_scroll"
     >
-      {prop.children}
+      {props.children}
     </Scrollbars>
   );
 }

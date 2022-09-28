@@ -1,17 +1,11 @@
 import * as React from 'react';
 import { Slider } from 'antd';
+import {SliderSingleProps,SliderTooltipProps} from 'antd/lib/slider'
 import './index.scss';
 
-interface WhiteSliderProps {
-  tipFormatter?: any;
-  min: number;
-  max: number;
-  value: number;
-  onChange?: Function;
-  onAfterChange?: Function;
+interface WhiteSliderProps extends SliderSingleProps {
+  tooltip?: SliderTooltipProps;
   mount?: Function;
-  vertical?: boolean;
-  step?: number;
 }
 
 interface WhiteSliderState {
@@ -27,7 +21,7 @@ class WhiteSlider extends React.Component<WhiteSliderProps, WhiteSliderState> {
     return (
       <div className="white_slider">
         <Slider
-          tipFormatter={this.props.tipFormatter}
+          tooltip={this.props.tooltip}
           min={this.props.min}
           max={this.props.max}
           value={this.state.timeMark}

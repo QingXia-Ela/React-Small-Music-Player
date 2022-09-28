@@ -44,7 +44,7 @@ class RightMusicVolumeControler extends React.Component<
           value={this.state.vol}
           onChange={(n: number) => this.onChange(n)(n)}
           vertical={true}
-          tipFormatter={null}
+         tooltip={{formatter: null}}
         />
       </div>
     );
