@@ -25,7 +25,7 @@ interface BottomMusicStateProps {
   totalTime: number;
 }
 
-interface BottomMusicStateState { }
+interface BottomMusicStateState {}
 
 class BottomMusicState extends React.Component<
   BottomMusicStateProps,
@@ -56,7 +56,6 @@ class BottomMusicState extends React.Component<
           NeteaseCloudMusicApi
         </a>
       </div>
-      </div >
     );
   }
 }
