@@ -55,10 +55,18 @@
 
 ### 克隆项目到本地
 
-```
-$ git clone https://github.com/QingXia-Ela/React-Small-Music-Player.git
+**请注意务必要使用 yarn 作为包管理器！**
+
+```bash
+git clone https://github.com/QingXia-Ela/React-Small-Music-Player.git
 cd React-Small-Music-Player
-npm install
+yarn
+```
+
+### 启动项目
+
+```bash
+yarn start
 ```
 
 ### 设置后台接口地址
